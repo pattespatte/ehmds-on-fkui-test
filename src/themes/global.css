@@ -1,0 +1,17 @@
+/* Import FKUI base styles */
+@import "@fkui/dist/styles.css";
+
+/* Override with ehmds-on-fkui-test custom properties */
+:root {
+	/* The ThemeProvider will dynamically set these variables */
+	/* You can also provide fallback values here */
+	--ehmds-on-fkui-test-color-primary: #0055ff;
+	--ehmds-on-fkui-test-color-secondary: #ff5500;
+	/* etc. */
+}
+
+/* Additional global styles for ehmds-on-fkui-test */
+body {
+	font-family: var(--ehmds-on-fkui-test-typography-fontFamily);
+	background-color: var(--ehmds-on-fkui-test-color-background);
+}
