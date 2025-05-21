@@ -9,7 +9,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "jest"
+    "test": "jest",
+    "update:fkui-deps": "node scripts/update-fkui-deps.js"
   },
   "peerDependencies": {
     "vue": "^3.5.0"

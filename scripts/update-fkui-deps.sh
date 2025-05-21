@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Ensure the script is executed from the repository root.
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/.." || exit
 
 echo "Updating FKUI dependencies..."
 
