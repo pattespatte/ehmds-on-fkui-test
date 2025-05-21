@@ -1,6 +1,9 @@
 /* Import FKUI base styles */
-@import "@fkui/dist/styles.css";
+@import "~@fkui/design/lib/fkui.css";
+@import "~@fkui/design/lib/fonts.css";
+@import "~@fkui/theme-default/dist/fkui-css-variables.css";
 
+/* Rest of your CSS file... */
 /* Override with ehmds-on-fkui-test custom properties */
 :root {
 	/* The ThemeProvider will dynamically set these variables */
@@ -14,4 +17,20 @@
 body {
 	font-family: var(--ehmds-on-fkui-test-typography-fontFamily);
 	background-color: var(--ehmds-on-fkui-test-color-background);
+}
+
+.eh-button--rounded {
+  border-radius: 24px;
+}
+
+.eh-button--elevation-1 {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.eh-button--elevation-2 {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.eh-button--elevation-3 {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
