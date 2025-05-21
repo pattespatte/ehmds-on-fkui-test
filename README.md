@@ -1,6 +1,6 @@
 # EHDS-on-FKUI-Test
 
-A proof-of-concept for creating a design system based on [FKUI](https://github.com/Forsakringskassan/designsystem). This repository demonstrates how to build, package, and distribute a design system that integrates with Vue 2 and FKUI components.
+A proof-of-concept for creating a design system based on [FKUI](https://github.com/Forsakringskassan/designsystem). This repository demonstrates how to build, package, and distribute a design system that integrates with Vue 3 and FKUI components.
 
 ## Table of Contents
 
