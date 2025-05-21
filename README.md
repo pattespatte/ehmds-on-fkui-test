@@ -72,18 +72,23 @@ The build creates the following files:
 For example, to import the `Button` component:
 
 ```js
-// In your Vue application
-import Vue from 'vue';
+// In your Vue 3 application
+import { createApp } from 'vue';
 import { Button, ThemeProvider, defaultTheme } from 'ehmds-on-fkui-test';
+import App from './App.vue';
 
-Vue.component('Button', Button);
+const app = createApp({
+  render() {
+    return h(ThemeProvider, { theme: defaultTheme }, {
+      default: () => h(App)
+    });
+  }
+});
 
-// Optionally wrap your application with ThemeProvider
-new Vue({
-  render: h => h(ThemeProvider, { props: { theme: defaultTheme } }, [
-    h(App)
-  ]),
-}).$mount('#app');
+// Register the Button component globally (optional)
+app.component('Button', Button);
+
+app.mount('#app');
 ```
 
 Make sure your build system can handle Vue single-file components and CSS imports appropriately.

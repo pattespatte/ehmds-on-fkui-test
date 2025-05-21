@@ -15,7 +15,11 @@
     "vue": "^3.5.0"
   },
   "dependencies": {
-    "@fkui/vue": "^x.x.x"
+    "@fkui/date": "^6.8.0",
+    "@fkui/design": "^6.8.0",
+    "@fkui/logic": "^6.8.0",
+    "@fkui/theme-default": "^6.8.0",
+    "@fkui/vue": "^6.8.0"
   },
   "devDependencies": {
     "@rollup/plugin-babel": "6.0.4",
