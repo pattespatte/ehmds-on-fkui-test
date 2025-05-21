@@ -10,6 +10,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "jest",
+    "preview": "npx serve",
     "update:fkui-deps": "node scripts/update-fkui-deps.js"
   },
   "peerDependencies": {

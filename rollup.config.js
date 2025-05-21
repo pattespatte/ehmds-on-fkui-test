@@ -16,6 +16,15 @@ export default {
 			file: 'dist/index.esm.js',
 			format: 'esm',
 		},
+		{
+			file: 'dist/index.umd.js',
+			format: 'umd',
+			name: 'EhmdsOnFkuiTest',
+			globals: {
+				vue: 'Vue',
+				'@fkui/vue': 'FkuiVue'
+			}
+		}
 	],
 	external: ['vue', '@fkui/vue'], // Don't bundle these dependencies
 	plugins: [

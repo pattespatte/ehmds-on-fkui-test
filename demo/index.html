@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System Demo</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- In this scenario, you'd typically bundle your demo app using a bundler like Rollup or Webpack -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="../dist/index.umd.js"></script>
+<script>
+  const { createApp } = Vue;
+  // Replace 'YourComponent' with the actual component from your UMD bundle if needed
+  createApp({ 
+    template: '<div>Hello, Vue 3!</div>' 
+  }).mount('#app');
+</script>
+</body>
+
+</html>
