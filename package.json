@@ -7,10 +7,10 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "build": "vite build",
+    "dev": "vite",
     "test": "jest",
-    "preview": "npx serve",
+    "preview": "vite preview",
     "update:fkui-deps": "node scripts/update-fkui-deps.js"
   },
   "peerDependencies": {
@@ -24,13 +24,8 @@
     "@fkui/vue": "^6.8.0"
   },
   "devDependencies": {
-    "@rollup/plugin-babel": "6.0.4",
-    "@rollup/plugin-commonjs": "28.0.3",
-    "@rollup/plugin-node-resolve": "16.0.1",
-    "rollup": "^2.0.0",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-vue": "6.0.0",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "vite": "^6.3.5",
     "vue-template-compiler": "^0.1.0"
   },
   "publishConfig": {
