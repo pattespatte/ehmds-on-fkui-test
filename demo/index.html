@@ -9,16 +9,19 @@
 
 <body>
   <div id="app"></div>
-  <!-- In this scenario, you'd typically bundle your demo app using a bundler like Rollup or Webpack -->
-<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-<script src="../dist/index.umd.js"></script>
-<script>
-  const { createApp } = Vue;
-  // Replace 'YourComponent' with the actual component from your UMD bundle if needed
-  createApp({ 
-    template: '<div>Hello, Vue 3!</div>' 
-  }).mount('#app');
-</script>
+  <!-- Vue and FKUI Dependencies -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <!--  Important:  Adjust the version to match the @fkui/vue version -->
+  <script src="https://unpkg.com/@fkui/vue@6.8.0/dist/fkui.js"></script>
+  <script src="../dist/index.umd.js"></script>
+  <script>
+    const { createApp } = Vue;
+    const { Button } = EhmdsOnFkuiTest; // Access the component from the UMD bundle
+
+    createApp({
+      template: '<Button variant="primary">Hello Button (UMD)!</Button>'
+    }).mount('#app');
+  </script>
 </body>
 
 </html>

@@ -1,11 +1,7 @@
-import Vue from 'vue';
-import EhmdsOnFkuiTest from 'ehmds-on-fkui-test'; // Make sure this package is installed
-const { Button } = EhmdsOnFkuiTest;
+// main.js
+import { createApp } from 'vue';
+import { Button } from '../dist/index.esm.js'; // Direct import from build
 
-const App = {
-  render() {
-    return Vue.h(Button, { variant: 'primary' }, () => 'Hello Button!');
-  }
-};
-
-Vue.createApp(App).mount('#app');
+createApp({
+  template: '<Button variant="primary">Hello</Button>'
+}).component('Button', Button).mount('#app');
