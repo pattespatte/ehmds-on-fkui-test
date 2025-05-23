@@ -1,135 +1,259 @@
-# EHDS-on-FKUI-Test
+# EHMDS Design System
 
-A proof-of-concept for creating a design system based on [FKUI](https://github.com/Forsakringskassan/designsystem). This repository demonstrates how to build, package, and distribute a design system that integrates with Vue 3 and FKUI components.
+A modern Vue 3 design system built on top of FKUI (Försäkringskassan Design System), powered by Vite for fast development and optimized builds.
 
-## Table of Contents
+## 🚀 Features
 
-- [EHDS-on-FKUI-Test](#ehds-on-fkui-test)
-  - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-  - [Installation](#installation)
-  - [Usage](#usage)
-    - [Build the Package](#build-the-package)
-    - [Import Components](#import-components)
-  - [Development](#development)
-    - [Rollup Configuration](#rollup-configuration)
-  - [Testing](#testing)
-  - [Contributing](#contributing)
-  - [License](#license)
+- **Vue 3 Components**: Modern composition API with full TypeScript support
+- **FKUI Foundation**: Built on the robust FKUI design system
+- **Custom Theming**: Flexible theming system with CSS custom properties
+- **Vite Powered**: Fast development server and optimized production builds
+- **Accessible**: WCAG compliant components with focus management
+- **Responsive**: Mobile-first responsive design patterns
+- **Tree Shakeable**: Import only the components you need
 
-## Features
-
-- **Modular Components:** Export individual components (e.g., `Button`) for targeted usage.
-- **Theme Management:** Built-in support for theming (default theme and a `ThemeProvider`).
-- **Rollup-based Build:** Bundles both CommonJS and ES Module formats.
-- **Vue Integration:** Built and tested using Vue 2 and [FKUI Vue](https://www.npmjs.com/package/@fkui/vue).
-
-## Installation
-
-1. **Clone the Repository**
-
-   ```bash
-   git clone https://github.com/your-username/ehmds-on-fkui-test.git
-   cd ehmds-on-fkui-test
-   ```
-
-2. **Install Dependencies**
-
-   Make sure you have [Node.js](https://nodejs.org/) installed, then run:
-
-   ```bash
-   npm install
-   ```
-
-3. **Peer Dependencies**
-
-   This project requires Vue 2 and FKUI Vue. Ensure you have these installed in your consuming project:
-
-   ```bash
-   npm install vue @fkui/vue
-   ```
-
-## Usage
-
-After building the package, you can import and use the components in your Vue application.
-
-### Build the Package
-
-To create the production build:
+## 📦 Installation
 
 ```bash
-npm run build
+npm install @ehmds/design-system
 ```
 
-The build creates the following files:
+### Peer Dependencies
 
-- `dist/index.js` - CommonJS bundle
-- `dist/index.esm.js` - ES Module bundle
-- `css/styles.css` - Compiled and minified CSS for the design system
+Make sure you have Vue 3 installed:
 
-### Import Components
+```bash
+npm install vue@^3.3.0
+```
 
-For example, to import the `Button` component:
+## 🛠️ Usage
 
-```js
-// In your Vue 3 application
-import { createApp } from 'vue';
-import { Button, ThemeProvider, defaultTheme } from 'ehmds-on-fkui-test';
-import App from './App.vue';
+### Global Installation (Recommended)
 
-const app = createApp({
-  render() {
-    return h(ThemeProvider, { theme: defaultTheme }, {
-      default: () => h(App)
-    });
+```javascript
+import { createApp } from 'vue'
+import EHMDS from '@ehmds/design-system'
+import App from './App.vue'
+
+const app = createApp(App)
+
+// Install EHMDS with default theme
+app.use(EHMDS)
+
+// Or install with custom theme options
+app.use(EHMDS, {
+  theme: {
+    colors: {
+      primary: '#your-brand-color'
+    }
   }
-});
+})
 
-// Register the Button component globally (optional)
-app.component('Button', Button);
-
-app.mount('#app');
+app.mount('#app')
 ```
 
-Make sure your build system can handle Vue single-file components and CSS imports appropriately.
+### Individual Component Imports
 
-## Development
+```javascript
+import { Button } from '@ehmds/design-system'
 
-To start in development mode with live rebuilding:
+export default {
+  components: {
+    Button
+  }
+}
+```
+
+### Using Components
+
+```vue
+<template>
+  <div>
+    <!-- Basic button -->
+    <Button label="Click me" @click="handleClick" />
+    
+    <!-- EHMDS custom variant with enhancements -->
+    <Button 
+      variant="ehmds-primary" 
+      size="large"
+      rounded
+      shadow
+      @click="handleClick"
+    >
+      Enhanced Button
+    </Button>
+    
+    <!-- Full width button -->
+    <Button 
+      label="Full Width"
+      variant="ehmds-accent"
+      full-width
+    />
+  </div>
+</template>
+```
+
+## 🎨 Theming
+
+EHMDS uses CSS custom properties for theming, making it easy to customize colors, typography, and spacing.
+
+### Default Theme
+
+The default theme includes:
+- **Colors**: Primary, secondary, accent, and semantic color palettes
+- **Typography**: Inter font family with responsive type scale
+- **Spacing**: 8px grid system for consistent layouts
+- **Shadows**: Elevation system for depth and hierarchy
+- **Border Radius**: Consistent rounded corner system
+
+### Custom Themes
+
+Create your own theme by extending the default:
+
+```javascript
+import { defaultTheme } from '@ehmds/design-system'
+
+const customTheme = {
+  ...defaultTheme,
+  colors: {
+    ...defaultTheme.colors,
+    primary: '#your-primary-color',
+    secondary: '#your-secondary-color'
+  }
+}
+```
+
+### CSS Custom Properties
+
+All theme values are available as CSS custom properties:
+
+```css
+.my-component {
+  background-color: var(--ehmds-color-primary);
+  padding: var(--ehmds-spacing-4);
+  border-radius: var(--ehmds-border-radius-large);
+  box-shadow: var(--ehmds-shadow-medium);
+}
+```
+
+## 🧩 Components
+
+### Button
+
+Enhanced button component based on FKUI's button with additional EHMDS styling options.
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | String | `'primary'` | Button variant (includes FKUI variants + EHMDS custom variants) |
+| `size` | String | `'medium'` | Button size: `'small'`, `'medium'`, `'large'` |
+| `label` | String | `''` | Button text content |
+| `disabled` | Boolean | `false` | Disabled state |
+| `rounded` | Boolean | `false` | Apply rounded corners (EHMDS enhancement) |
+| `shadow` | Boolean | `false` | Apply shadow effect (EHMDS enhancement) |
+| `fullWidth` | Boolean | `false` | Make button full width |
+
+#### Variants
+
+**FKUI Variants:**
+- `primary`, `secondary`, `tertiary`
+- `success`, `warning`, `error`
+
+**EHMDS Custom Variants:**
+- `ehmds-primary` - EHMDS primary brand color
+- `ehmds-secondary` - EHMDS secondary brand color  
+- `ehmds-accent` - EHMDS accent color
+
+#### Events
+
+| Event | Description |
+|-------|-------------|
+| `click` | Emitted when button is clicked |
+
+## 🏗️ Development
+
+### Prerequisites
+
+- Node.js 16+
+- npm or yarn
+
+### Setup
 
 ```bash
+# Clone the repository
+git clone https://github.com/pattespatte/ehmds-design-system.git
+cd ehmds-design-system
+
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
 ```
 
-This watches for file changes and rebuilds the project automatically using the Rollup configuration.
-
-### Rollup Configuration
-
-The build is configured with Rollup as defined in `rollup.config.js`, which includes:
-
-- **Resolve & CommonJS:** Handling module resolution.
-- **Babel:** Transpiling ES6 code.
-- **Vue plugin:** Processing Vue components (including template compilation and CSS extraction).
-- **PostCSS:** Extracting and minifying CSS.
-- **Terser:** Code minification for production builds.
-
-## Testing
-
-Unit tests are written using [Jest](https://jestjs.io/). To run tests, execute:
+### Available Scripts
 
 ```bash
-npm run test
+# Development
+npm run dev          # Start Vite dev server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run build:watch  # Build in watch mode
+
+# Code Quality
+npm run lint         # Lint code
+npm run lint:fix     # Fix linting issues
 ```
 
-## Contributing
+### Project Structure
 
-Contributions are welcome! If you encounter any bugs or have suggestions to improve the design system, please:
+```
+src/
+├── components/           # Vue components
+│   └── Button.vue       # Enhanced button component
+├── assets/              # Global styles and assets
+│   ├── global.css       # Global CSS with custom properties
+│   └── variables.scss   # SCSS variables and mixins
+├── themes/              # Theme configurations
+│   └── default.js       # Default EHMDS theme
+└── index.js            # Main entry point
+```
 
-1. Open an issue to discuss your idea.
-2. Fork the repository.
-3. Create a feature branch.
-4. Submit a pull request detailing your changes.
+## 🚦 Browser Support
 
-## License
+- Chrome 88+
+- Firefox 85+
+- Safari 14+
+- Edge 88+
 
-This project is open source. See the [LICENSE](LICENSE) file for more information.
+## 📄 License
+
+MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Development Workflow
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Run linting and tests
+6. Submit a pull request
+
+## 📚 Documentation
+
+For detailed documentation and examples, visit our [Storybook](https://pattespatte.github.io/ehmds-design-system).
+
+## 🆘 Support
+
+- [GitHub Issues](https://github.com/pattespatte/ehmds-design-system/issues)
+- [Discussions](https://github.com/pattespatte/ehmds-design-system/discussions)
+- Email: design-system@pattespatte.com
+
+---
+
+Built with ❤️ by the EHMDS Team

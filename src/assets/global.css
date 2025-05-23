@@ -1,0 +1,297 @@
+/**
+ * EHMDS Global Styles
+ * 
+ * This file imports FKUI base styles and defines EHMDS-specific
+ * CSS custom properties and global styles.
+ */
+
+/* Import FKUI base styles */
+@import "@fkui/design/lib/fkui.css";
+
+/* Import FKUI CSS variables if available */
+@import "@fkui/theme-default/dist/fkui-css-variables.css";
+
+/* ============================================================================
+   EHMDS CSS Custom Properties
+   ============================================================================ */
+
+:root {
+  /* Colors - Primary Palette */
+  --ehmds-color-primary: #2563eb;
+  --ehmds-color-primary-light: #3b82f6;
+  --ehmds-color-primary-dark: #1d4ed8;
+  --ehmds-color-primary-contrast: #ffffff;
+  
+  /* Colors - Secondary Palette */
+  --ehmds-color-secondary: #64748b;
+  --ehmds-color-secondary-light: #94a3b8;
+  --ehmds-color-secondary-dark: #475569;
+  --ehmds-color-secondary-contrast: #ffffff;
+  
+  /* Colors - Accent Palette */
+  --ehmds-color-accent: #f59e0b;
+  --ehmds-color-accent-light: #fbbf24;
+  --ehmds-color-accent-dark: #d97706;
+  --ehmds-color-accent-contrast: #ffffff;
+  
+  /* Colors - Semantic */
+  --ehmds-color-success: #10b981;
+  --ehmds-color-success-light: #34d399;
+  --ehmds-color-success-dark: #059669;
+  
+  --ehmds-color-warning: #f59e0b;
+  --ehmds-color-warning-light: #fbbf24;
+  --ehmds-color-warning-dark: #d97706;
+  
+  --ehmds-color-error: #ef4444;
+  --ehmds-color-error-light: #f87171;
+  --ehmds-color-error-dark: #dc2626;
+  
+  /* Colors - Neutral Scale */
+  --ehmds-color-neutral-50: #f8fafc;
+  --ehmds-color-neutral-100: #f1f5f9;
+  --ehmds-color-neutral-200: #e2e8f0;
+  --ehmds-color-neutral-300: #cbd5e1;
+  --ehmds-color-neutral-400: #94a3b8;
+  --ehmds-color-neutral-500: #64748b;
+  --ehmds-color-neutral-600: #475569;
+  --ehmds-color-neutral-700: #334155;
+  --ehmds-color-neutral-800: #1e293b;
+  --ehmds-color-neutral-900: #0f172a;
+  
+  /* Colors - Special */
+  --ehmds-color-focus: #3b82f6;
+  
+  /* Colors - Background */
+  --ehmds-color-background-primary: #ffffff;
+  --ehmds-color-background-secondary: #f8fafc;
+  --ehmds-color-background-tertiary: #f1f5f9;
+  
+  /* Colors - Text */
+  --ehmds-color-text-primary: #0f172a;
+  --ehmds-color-text-secondary: #475569;
+  --ehmds-color-text-tertiary: #64748b;
+  --ehmds-color-text-inverse: #ffffff;
+  
+  /* Typography */
+  --ehmds-font-family-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --ehmds-font-family-mono: "Fira Code", "Monaco", "Cascadia Code", "Roboto Mono", monospace;
+  --ehmds-font-family: var(--ehmds-font-family-primary);
+  
+  --ehmds-font-size-xs: 0.75rem;
+  --ehmds-font-size-sm: 0.875rem;
+  --ehmds-font-size-base: 1rem;
+  --ehmds-font-size-lg: 1.125rem;
+  --ehmds-font-size-xl: 1.25rem;
+  --ehmds-font-size-2xl: 1.5rem;
+  --ehmds-font-size-3xl: 1.875rem;
+  --ehmds-font-size-4xl: 2.25rem;
+  --ehmds-font-size-5xl: 3rem;
+  
+  --ehmds-font-weight-light: 300;
+  --ehmds-font-weight-normal: 400;
+  --ehmds-font-weight-medium: 500;
+  --ehmds-font-weight-semibold: 600;
+  --ehmds-font-weight-bold: 700;
+  
+  --ehmds-line-height-tight: 1.25;
+  --ehmds-line-height-normal: 1.5;
+  --ehmds-line-height-relaxed: 1.75;
+  
+  /* Spacing (8px grid system) */
+  --ehmds-spacing-0: 0;
+  --ehmds-spacing-1: 0.25rem;
+  --ehmds-spacing-2: 0.5rem;
+  --ehmds-spacing-3: 0.75rem;
+  --ehmds-spacing-4: 1rem;
+  --ehmds-spacing-5: 1.25rem;
+  --ehmds-spacing-6: 1.5rem;
+  --ehmds-spacing-8: 2rem;
+  --ehmds-spacing-10: 2.5rem;
+  --ehmds-spacing-12: 3rem;
+  --ehmds-spacing-16: 4rem;
+  --ehmds-spacing-20: 5rem;
+  --ehmds-spacing-24: 6rem;
+  
+  /* Border Radius */
+  --ehmds-border-radius-none: 0;
+  --ehmds-border-radius-small: 0.25rem;
+  --ehmds-border-radius-medium: 0.375rem;
+  --ehmds-border-radius-large: 0.5rem;
+  --ehmds-border-radius-xl: 0.75rem;
+  --ehmds-border-radius-full: 9999px;
+  
+  /* Shadows */
+  --ehmds-shadow-small: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --ehmds-shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --ehmds-shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --ehmds-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Animation */
+  --ehmds-transition-duration: 150ms;
+  --ehmds-transition-duration-fast: 75ms;
+  --ehmds-transition-duration-slow: 300ms;
+  --ehmds-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Z-Index Scale */
+  --ehmds-z-index-hide: -1;
+  --ehmds-z-index-auto: auto;
+  --ehmds-z-index-base: 0;
+  --ehmds-z-index-docked: 10;
+  --ehmds-z-index-dropdown: 1000;
+  --ehmds-z-index-sticky: 1100;
+  --ehmds-z-index-banner: 1200;
+  --ehmds-z-index-overlay: 1300;
+  --ehmds-z-index-modal: 1400;
+  --ehmds-z-index-popover: 1500;
+  --ehmds-z-index-skip-link: 1600;
+  --ehmds-z-index-toast: 1700;
+  --ehmds-z-index-tooltip: 1800;
+}
+
+/* ============================================================================
+   Global Base Styles
+   ============================================================================ */
+
+/* Reset and base styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-family: var(--ehmds-font-family);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--ehmds-color-background-primary);
+  color: var(--ehmds-color-text-primary);
+  font-family: var(--ehmds-font-family);
+  font-size: var(--ehmds-font-size-base);
+  line-height: var(--ehmds-line-height-normal);
+}
+
+/* ============================================================================
+   EHMDS Utility Classes
+   ============================================================================ */
+
+/* Focus utilities for accessibility */
+.ehmds-focus-ring {
+  outline: 2px solid var(--ehmds-color-focus);
+  outline-offset: 2px;
+}
+
+.ehmds-focus-ring-inset {
+  outline: 2px solid var(--ehmds-color-focus);
+  outline-offset: -2px;
+}
+
+/* Screen reader only utility */
+.ehmds-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Spacing utilities */
+.ehmds-mt-auto { margin-top: auto; }
+.ehmds-mr-auto { margin-right: auto; }
+.ehmds-mb-auto { margin-bottom: auto; }
+.ehmds-ml-auto { margin-left: auto; }
+.ehmds-mx-auto { margin-left: auto; margin-right: auto; }
+.ehmds-my-auto { margin-top: auto; margin-bottom: auto; }
+
+/* Text utilities */
+.ehmds-text-center { text-align: center; }
+.ehmds-text-left { text-align: left; }
+.ehmds-text-right { text-align: right; }
+
+.ehmds-font-light { font-weight: var(--ehmds-font-weight-light); }
+.ehmds-font-normal { font-weight: var(--ehmds-font-weight-normal); }
+.ehmds-font-medium { font-weight: var(--ehmds-font-weight-medium); }
+.ehmds-font-semibold { font-weight: var(--ehmds-font-weight-semibold); }
+.ehmds-font-bold { font-weight: var(--ehmds-font-weight-bold); }
+
+/* ============================================================================
+   EHMDS Component Base Classes
+   ============================================================================ */
+
+/* Base interactive element styles */
+.ehmds-interactive {
+  transition: all var(--ehmds-transition-duration) var(--ehmds-transition-timing);
+  cursor: pointer;
+}
+
+.ehmds-interactive:hover {
+  transform: translateY(-1px);
+}
+
+.ehmds-interactive:active {
+  transform: translateY(0);
+}
+
+.ehmds-interactive:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Card component base */
+.ehmds-card {
+  background-color: var(--ehmds-color-background-primary);
+  border-radius: var(--ehmds-border-radius-large);
+  box-shadow: var(--ehmds-shadow-medium);
+  padding: var(--ehmds-spacing-6);
+  transition: box-shadow var(--ehmds-transition-duration) var(--ehmds-transition-timing);
+}
+
+.ehmds-card:hover {
+  box-shadow: var(--ehmds-shadow-large);
+}
+
+/* ============================================================================
+   Dark Mode Support (Optional)
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Override colors for dark mode */
+    --ehmds-color-background-primary: #0f172a;
+    --ehmds-color-background-secondary: #1e293b;
+    --ehmds-color-background-tertiary: #334155;
+    
+    --ehmds-color-text-primary: #f8fafc;
+    --ehmds-color-text-secondary: #cbd5e1;
+    --ehmds-color-text-tertiary: #94a3b8;
+    --ehmds-color-text-inverse: #0f172a;
+  }
+  
+  /* Adjust shadows for dark mode */
+  .ehmds-card {
+    border: 1px solid var(--ehmds-color-neutral-700);
+  }
+}
+
+/* ============================================================================
+   Print Styles
+   ============================================================================ */
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  
+  .ehmds-no-print {
+    display: none !important;
+  }
+}

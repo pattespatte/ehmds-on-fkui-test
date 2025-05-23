@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
-const path = require('path');
-const { execSync } = require('child_process');
+import path from 'path';
+import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Ensure the script is executed from the repository root.
 try {
