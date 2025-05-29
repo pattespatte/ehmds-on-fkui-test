@@ -1,6 +1,39 @@
 # EHMDS Design System
 
-A modern Vue 3 design system built on top of FKUI (Försäkringskassan Design System), powered by Vite for fast development and optimized builds.
+## 📑 Table of Contents
+
+- [EHMDS Design System](#ehmds-design-system)
+  - [📑 Table of Contents](#-table-of-contents)
+  - [🚀 Features](#-features)
+  - [📦 Installation](#-installation)
+    - [Peer Dependencies](#peer-dependencies)
+  - [🛠️ Usage](#️-usage)
+    - [Global Installation (Recommended)](#global-installation-recommended)
+    - [Individual Component Imports](#individual-component-imports)
+    - [Using Components](#using-components)
+  - [🎨 Theming](#-theming)
+    - [Default Theme](#default-theme)
+    - [Custom Themes](#custom-themes)
+    - [CSS Custom Properties](#css-custom-properties)
+  - [🧩 Components](#-components)
+    - [Button](#button)
+      - [Props](#props)
+      - [Variants](#variants)
+      - [Events](#events)
+  - [🏗️ Development](#️-development)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+    - [Available Scripts](#available-scripts)
+    - [Project Structure](#project-structure)
+  - [🚦 Browser Support](#-browser-support)
+  - [📄 License](#-license)
+  - [🤝 Contributing](#-contributing)
+    - [Development Workflow](#development-workflow)
+  - [📚 Documentation](#-documentation)
+  - [🆘 Support](#-support)
+
+> **Note:** EHMDS is built on top of [FKUI, Försäkringskassan Design System](https://github.com/Forsakringskassan/designsystem). For more details about the underlying design principles and components, see the official FKUI repository.
+
 
 ## 🚀 Features
 
@@ -233,7 +266,7 @@ MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions!
 
 ### Development Workflow
 
