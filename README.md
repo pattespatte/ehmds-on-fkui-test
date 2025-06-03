@@ -6,7 +6,6 @@
   - [📑 Table of Contents](#-table-of-contents)
   - [🚀 Features](#-features)
   - [📦 Installation](#-installation)
-    - [Peer Dependencies](#peer-dependencies)
   - [🛠️ Usage](#️-usage)
     - [Global Installation (Recommended)](#global-installation-recommended)
     - [Individual Component Imports](#individual-component-imports)
@@ -34,7 +33,6 @@
 
 > **Note:** EHMDS is built on top of [FKUI, Försäkringskassan Design System](https://github.com/Forsakringskassan/designsystem). For more details about the underlying design principles and components, see the official FKUI repository.
 
-
 ## 🚀 Features
 
 - **Vue 3 Components**: Modern composition API with full TypeScript support
@@ -48,15 +46,7 @@
 ## 📦 Installation
 
 ```bash
-npm install @ehmds/design-system
-```
-
-### Peer Dependencies
-
-Make sure you have Vue 3 installed:
-
-```bash
-npm install vue@^3.3.0
+npm install
 ```
 
 ## 🛠️ Usage
@@ -133,6 +123,7 @@ EHMDS uses CSS custom properties for theming, making it easy to customize colors
 ### Default Theme
 
 The default theme includes:
+
 - **Colors**: Primary, secondary, accent, and semantic color palettes
 - **Typography**: Inter font family with responsive type scale
 - **Spacing**: 8px grid system for consistent layouts
@@ -190,10 +181,12 @@ Enhanced button component based on FKUI's button with additional EHMDS styling o
 #### Variants
 
 **FKUI Variants:**
+
 - `primary`, `secondary`, `tertiary`
 - `success`, `warning`, `error`
 
 **EHMDS Custom Variants:**
+
 - `ehmds-primary` - EHMDS primary brand color
 - `ehmds-secondary` - EHMDS secondary brand color  
 - `ehmds-accent` - EHMDS accent color
@@ -243,14 +236,14 @@ npm run lint:fix     # Fix linting issues
 
 ```
 src/
-├── components/           # Vue components
+├── components/          # Vue components
 │   └── Button.vue       # Enhanced button component
 ├── assets/              # Global styles and assets
 │   ├── global.css       # Global CSS with custom properties
 │   └── variables.scss   # SCSS variables and mixins
 ├── themes/              # Theme configurations
 │   └── default.js       # Default EHMDS theme
-└── index.js            # Main entry point
+└── index.js             # Main entry point
 ```
 
 ## 🚦 Browser Support
@@ -285,7 +278,7 @@ For detailed documentation and examples, visit our [Storybook](https://pattespat
 
 - [GitHub Issues](https://github.com/pattespatte/ehmds-design-system/issues)
 - [Discussions](https://github.com/pattespatte/ehmds-design-system/discussions)
-- Email: design-system@pattespatte.com
+- Email: <design-system@pattespatte.com>
 
 ---
 

@@ -9,7 +9,7 @@
     "dist",
     "src"
   ],
-    "scripts": {
+  "scripts": {
     "build": "vite build",
     "build:watch": "vite build --watch",
     "preview": "vite preview",
@@ -41,11 +41,11 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.4",
-    "@vue/eslint-config-prettier": "8.0.0",
-    "eslint": "9.27.0",
+    "@vue/eslint-config-prettier": "10.2.0",
+    "eslint": "9.28.0",
     "eslint-plugin-vue": "^9.0.0",
     "prettier": "^3.0.0",
-    "sass": "^1.69.0",
+    "sass": "1.89.1",
     "vite": "^6.3.5",
     "vue": "^3.3.0"
   },
