@@ -413,7 +413,7 @@ defineExpose({
 }
 
 /* High contrast mode support */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
   .ehmds-button {
     border-width: 2px;
   }

@@ -269,7 +269,7 @@ const scrollToSection = (sectionId) => {
 .component-nav {
   background: #ffffff;
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   border: 1px solid #e9ecef;
   margin-bottom: 3rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -292,7 +292,7 @@ const scrollToSection = (sectionId) => {
 .component-item {
   background: #f8f9fa;
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   border: 1px solid #dee2e6;
 }
 
@@ -317,7 +317,7 @@ const scrollToSection = (sectionId) => {
 .demo-section {
   background: #f8f9fa;
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   border: 1px solid #e9ecef;
 }
 
@@ -428,7 +428,7 @@ const scrollToSection = (sectionId) => {
 }
 
 /* High contrast mode support */
-@media (prefers-contrast: high) {
+@media (prefers-contrast: more) {
   .demo-section,
   .component-nav,
   .component-item {
