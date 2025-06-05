@@ -17,6 +17,9 @@ import { defaultTheme, generateCSSVariables } from './themes/default.js'
 // Component exports
 export { Button }
 
+import Card from './components/Card.vue';
+export { Card };
+
 // Theme exports
 export { defaultTheme, generateCSSVariables }
 
@@ -39,6 +42,7 @@ export default {
     
     // Register components globally
     app.component('EhmdsButton', Button)
+    app.component('EhmdsCard', Card);
     
     // Provide theme context
     app.provide('ehmdsTheme', theme)

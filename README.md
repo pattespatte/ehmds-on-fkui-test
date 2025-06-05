@@ -19,6 +19,7 @@
       - [Props](#props)
       - [Variants](#variants)
       - [Events](#events)
+    - [Card](#card)
   - [🏗️ Development](#️-development)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
@@ -197,6 +198,10 @@ Enhanced button component based on FKUI's button with additional EHMDS styling o
 |-------|-------------|
 | `click` | Emitted when button is clicked |
 
+### Card
+
+Card component for displaying content with optional header and footer.
+
 ## 🏗️ Development
 
 ### Prerequisites
@@ -238,6 +243,7 @@ npm run lint:fix     # Fix linting issues
 src/
 ├── components/          # Vue components
 │   └── Button.vue       # Enhanced button component
+│   └── Card.vue         # Card component
 ├── assets/              # Global styles and assets
 │   ├── global.css       # Global CSS with custom properties
 │   └── variables.scss   # SCSS variables and mixins
