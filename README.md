@@ -261,13 +261,20 @@ src/
 ### Available Scripts
 
 ```bash
-npm run dev          # Start Vite dev server
-npm run build        # Build for production
-npm run preview      # Preview production build
-npm run build:watch  # Build in watch mode
-npm run lint         # Lint code
-npm run lint:fix     # Fix linting issues
+npm run dev             # Start Vite dev server
+npm run build           # Build for production
+npm run preview         # Preview production build
+npm run build:watch     # Build in watch mode
+npm run lint            # Lint code
+npm run lint:fix        # Fix linting issues
+npm run test            # Run unit tests (if tests are present)
+npm run test:watch      # Run unit tests in watch mode (if tests are present)
+npm run update:fkui     # Update FKUI dependencies (runs scripts/update-fkui-deps.js)
 ```
+
+- **npm run update:fkui**: Updates FKUI dependencies to the latest compatible versions by running `scripts/update-fkui-deps.js`. Use this to keep EHMDS in sync with upstream FKUI changes.
+
+> **Note:** Some scripts (like `test` and `test:watch`) may only be available if test setup exists in your project.
 
 ## Integration Guide
 
