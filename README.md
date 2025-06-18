@@ -349,6 +349,122 @@ app.mount('#app')
 </style>
 ```
 
+## How EHMDS Relies on FKUI
+
+The EHMDS design system has a **minimal dependency** on FKUI, which is primarily **cosmetic and structural** rather than functional:
+
+### 1. **CSS Dependencies Only**
+
+The main FKUI dependencies are in `src/assets/global.css`:
+
+```css
+@import "@fkui/design/lib/fkui.css";
+@import "@fkui/theme-default/dist/fkui-css-variables.css";
+```
+
+### 2. **Design Token Compatibility**
+
+- The Button component defines `FKUI_VARIANTS` that include standard FKUI button variants: `['primary', 'secondary', 'tertiary', 'success', 'warning', 'error']`
+- The theme system is designed to be "FKUI compatible" but uses its own CSS custom properties
+- No actual FKUI components are imported or used in the Vue components
+
+### 3. **Package Dependencies**
+
+The `package.json` includes FKUI packages as dependencies:
+
+- `@fkui/date`, `@fkui/design`, `@fkui/logic`, `@fkui/theme-default`, `@fkui/vue`
+
+## What Happens If You Remove FKUI Entirely?
+
+**The components will continue to work perfectly!** Here's why:
+
+### 1. **Button Component** ✅
+
+- **All styling is self-contained** in the component's `<style scoped>` section
+- Uses EHMDS CSS custom properties (e.g., `--ehmds-color-primary`, `--ehmds-border-radius`)
+- FKUI variants are just string constants for validation
+- **No FKUI imports or dependencies** in the actual component logic
+
+### 2. **Card Component** ✅
+
+- **Completely self-contained** with its own styling
+- Uses EHMDS CSS custom properties
+- **No FKUI dependencies whatsoever**
+
+### 3. **Theme System** ✅
+
+- The `default.js` theme is completely independent
+- Generates EHMDS-specific CSS variables
+- **No FKUI theme imports or dependencies**
+
+## What the Components Will Look Like Without FKUI
+
+### Button Component
+
+```vue
+<!-- This will work exactly the same -->
+<EhmdsButton variant="primary">Primary Button</EhmdsButton>
+<EhmdsButton variant="ehmds-primary">EHMDS Primary</EhmdsButton>
+<EhmdsButton variant="success" rounded shadow>Success Button</EhmdsButton>
+```
+
+**Visual Result**: Identical appearance because:
+
+- All colors are defined in EHMDS CSS variables
+- All styling is in the component's scoped styles
+- FKUI variants just map to the same EHMDS color variables
+
+### Card Component
+
+```vue
+<!-- This will work exactly the same -->
+<EhmdsCard title="My Card">
+  <p>Card content</p>
+</EhmdsCard>
+```
+
+**Visual Result**: Identical appearance because:
+
+- All styling is self-contained
+- Uses EHMDS design tokens
+- No FKUI dependencies
+
+## To Remove FKUI Completely
+
+You would need to:
+
+1. **Remove FKUI imports from `global.css`**:
+
+```css
+/* Remove these lines */
+@import "@fkui/design/lib/fkui.css";
+@import "@fkui/theme-default/dist/fkui-css-variables.css";
+```
+
+2. **Remove FKUI dependencies from `package.json`**:
+
+```json
+// Remove these lines
+"@fkui/date": "^6.9.0",
+"@fkui/design": "^6.9.0", 
+"@fkui/logic": "^6.9.0",
+"@fkui/theme-default": "^6.9.0",
+"@fkui/vue": "^6.9.0"
+```
+
+3. **Update the demo config** to remove FKUI external dependency
+
+## Conclusion
+
+**EHMDS is essentially a standalone design system** that:
+
+- Uses FKUI as a **design inspiration** and **naming convention**
+- Maintains **FKUI compatibility** for easy migration
+- Has **zero functional dependencies** on FKUI components
+- Will work **identically** with or without FKUI installed
+
+The FKUI dependency is more of a **branding and compatibility choice** rather than a technical requirement. Your components will look and function exactly the same if you remove FKUI entirely.
+
 ## Contributing
 
 We welcome contributions! Please follow these steps:
