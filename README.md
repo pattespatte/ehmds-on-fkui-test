@@ -4,7 +4,7 @@
 
 ## 📑 Table of Contents
 
-- [EHM Design System](#ehmds-design-system)
+- [EHM Design System](#ehm-design-system)
   - [📑 Table of Contents](#-table-of-contents)
   - [Overview](#overview)
   - [Features](#features)
@@ -34,6 +34,19 @@
     - [Installing EHMDS](#installing-ehmds)
     - [Configuration](#configuration)
     - [Building Your UI](#building-your-ui)
+  - [How EHMDS Relies on FKUI](#how-ehmds-relies-on-fkui)
+    - [1. **CSS Dependencies Only**](#1-css-dependencies-only)
+    - [2. **Design Token Compatibility**](#2-design-token-compatibility)
+    - [3. **Package Dependencies**](#3-package-dependencies)
+  - [What Happens If You Remove FKUI Entirely?](#what-happens-if-you-remove-fkui-entirely)
+    - [1. **Button Component** ✅](#1-button-component-)
+    - [2. **Card Component** ✅](#2-card-component-)
+    - [3. **Theme System** ✅](#3-theme-system-)
+  - [What the Components Will Look Like Without FKUI](#what-the-components-will-look-like-without-fkui)
+    - [Button Component](#button-component)
+    - [Card Component](#card-component)
+  - [To Remove FKUI Completely](#to-remove-fkui-completely)
+  - [Conclusion](#conclusion)
   - [Contributing](#contributing)
   - [Support](#support)
   - [License](#license)
@@ -261,15 +274,18 @@ src/
 ### Available Scripts
 
 ```bash
-npm run dev             # Start Vite dev server
-npm run build           # Build for production
-npm run preview         # Preview production build
-npm run build:watch     # Build in watch mode
-npm run lint            # Lint code
-npm run lint:fix        # Fix linting issues
-npm run test            # Run unit tests (if tests are present)
-npm run test:watch      # Run unit tests in watch mode (if tests are present)
-npm run update:fkui     # Update FKUI dependencies (runs scripts/update-fkui-deps.js)
+npm run build             # Build for production (Vite)
+npm run build:watch       # Build in watch mode
+npm run preview           # Preview production build
+npm run demo              # Start demo app (Vite, demo config)
+npm run demo:preview      # Preview demo app production build
+npm run lint              # Lint code (ESLint for .vue, .js, .ts)
+npm run lint:fix          # Fix linting issues
+npm run docs:dev          # Start local docs server (VitePress)
+npm run docs:build        # Build documentation (VitePress)
+npm run docs:preview      # Preview built documentation
+npm run docs:deploy       # Deploy documentation to GitHub Pages
+npm run update:fkui-deps  # Update FKUI dependencies (runs scripts/update-fkui-deps.js)
 ```
 
 - **npm run update:fkui**: Updates FKUI dependencies to the latest compatible versions by running `scripts/update-fkui-deps.js`. Use this to keep EHMDS in sync with upstream FKUI changes.
