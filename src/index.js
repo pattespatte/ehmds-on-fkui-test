@@ -1,8 +1,8 @@
 /**
- * EHMDS Design System Entry Point
+ * EHM Design System Entry Point
  * 
  * This file exports all components, themes, and utilities
- * for the EHMDS design system.
+ * for the EHM Design System.
  */
 
 // Import global styles

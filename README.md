@@ -1,10 +1,10 @@
-# EHMDS Design System
+# EHM Design System
 
 > **Note:** EHMDS is built on top of [FKUI, Försäkringskassan Design System](https://github.com/Forsakringskassan/designsystem). For more details about the underlying design principles and components, see the official FKUI repository.
 
 ## 📑 Table of Contents
 
-- [EHMDS Design System](#ehmds-design-system)
+- [EHM Design System](#ehmds-design-system)
   - [📑 Table of Contents](#-table-of-contents)
   - [Overview](#overview)
   - [Features](#features)
@@ -351,7 +351,7 @@ app.mount('#app')
 
 ## How EHMDS Relies on FKUI
 
-The EHMDS design system has a **minimal dependency** on FKUI, which is primarily **cosmetic and structural** rather than functional:
+The EHM Design System has a **minimal dependency** on FKUI, which is primarily **cosmetic and structural** rather than functional:
 
 ### 1. **CSS Dependencies Only**
 

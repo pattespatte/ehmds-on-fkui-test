@@ -1,7 +1,7 @@
 {
   "name": "@ehmds/design-system",
   "version": "1.0.0",
-  "description": "EHMDS Design System - A Vue 3 design system based on FKUI",
+  "description": "EHM Design System - A Vue 3 design system based on FKUI",
   "main": "dist/ehmds.umd.js",
   "module": "dist/ehmds.es.js",
   "type": "module",
@@ -17,6 +17,10 @@
     "demo:preview": "vite preview --config demo/vite.config.js",
     "lint": "eslint src --ext .vue,.js,.ts",
     "lint:fix": "eslint src --ext .vue,.js,.ts --fix",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "docs:deploy": "npm run docs:build && gh-pages -d docs/.vitepress/dist",
     "update:fkui-deps": "node scripts/update-fkui-deps.js"
   },
   "keywords": [
@@ -47,7 +51,9 @@
     "prettier": "^3.0.0",
     "sass": "1.89.1",
     "vite": "^6.3.5",
-    "vue": "^3.3.0"
+    "vitepress": "^1.6.3",
+    "gh-pages": "^5.0.0",
+    "vue": "^3.5.17"
   },
   "repository": {
     "type": "git",
