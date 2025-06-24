@@ -4,7 +4,7 @@ Welcome to EHMDS (Enhanced Design System), built on top of FKUI.
 
 ## What is EHMDS?
 
-EHMDS is a Vue 3 component library that extends FKUI with additional components and enhanced functionality.
+EHMDS is a Vue 3 component library that extends [FKUI, Försäkringskassan Design System](https://github.com/Forsakringskassan/designsystem) with additional components and enhanced functionality.
 
 ## Quick Start
 

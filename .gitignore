@@ -3,7 +3,7 @@ node_modules/
 dist/
 
 # Vue.js build artifacts
-.vitepress
+docs/.vitepress/cache
 
 # Compiled Java class files
 *.class
