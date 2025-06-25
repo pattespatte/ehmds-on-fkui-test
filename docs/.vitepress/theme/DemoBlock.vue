@@ -37,8 +37,12 @@ const showCode = ref(false)
 .demo-block :deep(button:not(:last-child)),
 .demo-block :deep(input:not(:last-child)),
 .demo-block :deep(select:not(:last-child)),
-.demo-block :deep(textarea:not(:last-child)) {
-  margin-right: 0.75rem;
+.demo-block :deep(textarea:not(:last-child)),
+.demo-block :deep(button:not(:first-child)),
+.demo-block :deep(input:not(:first-child)),
+.demo-block :deep(select:not(:first-child)),
+.demo-block :deep(textarea:not(:first-child)) {
+  margin: 0.5rem;
 }
 
 .demo-block__code {
