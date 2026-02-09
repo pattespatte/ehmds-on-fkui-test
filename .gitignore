@@ -2,17 +2,17 @@
 node_modules/
 dist/
 
+# Log files
+*.log
+
 # Vue.js build artifacts
 docs/.vitepress/cache
-
-# Compiled Java class files
-*.class
 
 # Compiled Python bytecode
 *.py[cod]
 
-# Log files
-*.log
+# Compiled Java class files
+*.class
 
 # Package files
 *.jar
@@ -46,3 +46,5 @@ Thumbs.db
 *.mov
 *.wmv
 
+# Claude Code
+.claude/

@@ -10,15 +10,22 @@ import './assets/global.css'
 
 // Import components
 import Button from './components/Button.vue'
+import Card from './components/Card.vue'
+
+// Import architectural pattern components
+import EhmCard from './components/wrapper/EhmCard.vue'
+import EhmTextField from './components/extension/EhmTextField.vue'
+import EhmSearchBox from './components/composition/EhmSearchBox.vue'
+import EhmBadge from './components/token-override/EhmBadge.vue'
 
 // Import themes and utilities
 import { defaultTheme, generateCSSVariables } from './themes/default.js'
 
 // Component exports
-export { Button }
+export { Button, Card }
 
-import Card from './components/Card.vue';
-export { Card };
+// Architectural pattern component exports
+export { EhmCard, EhmTextField, EhmSearchBox, EhmBadge }
 
 // Theme exports
 export { defaultTheme, generateCSSVariables }
@@ -28,10 +35,10 @@ export default {
   install(app, options = {}) {
     // Merge user options with default theme
     const theme = { ...defaultTheme, ...options.theme }
-    
+
     // Generate and apply CSS variables
     const cssVars = generateCSSVariables(theme)
-    
+
     // Apply CSS variables to document root
     if (typeof document !== 'undefined') {
       const root = document.documentElement
@@ -39,14 +46,20 @@ export default {
         root.style.setProperty(property, value)
       })
     }
-    
-    // Register components globally
+
+    // Register original components globally
     app.component('EhmdsButton', Button)
-    app.component('EhmdsCard', Card);
-    
+    app.component('EhmdsCard', Card)
+
+    // Register architectural pattern components globally
+    app.component('EhmCard', EhmCard)
+    app.component('EhmTextField', EhmTextField)
+    app.component('EhmSearchBox', EhmSearchBox)
+    app.component('EhmBadge', EhmBadge)
+
     // Provide theme context
     app.provide('ehmdsTheme', theme)
-    
+
     // Add global properties
     app.config.globalProperties.$ehmds = {
       theme,
