@@ -1,0 +1,146 @@
+<template>
+	<DocsLayout>
+		<div class="docs-page" v-html="markdownHtml"></div>
+	</DocsLayout>
+</template>
+
+<script setup>
+import { ref, onMounted, watch } from 'vue';
+import { useRoute } from 'vue-router';
+import DocsLayout from './DocsLayout.vue';
+import { loadMarkdown } from '../../utils/markdown.js';
+
+const route = useRoute();
+const markdownHtml = ref('');
+
+const loadDocs = async () => {
+	const page = route.params.page || 'overview';
+	// Map page names to file paths
+	const pageFiles = {
+		'overview': '/docs/architecture/overview.md',
+		'token-override': '/docs/architecture/token-override.md',
+		'wrapper': '/docs/architecture/wrapper.md',
+		'extension': '/docs/architecture/extension.md',
+		'composition': '/docs/architecture/composition.md',
+		'comparison': '/docs/architecture/comparison.md',
+	};
+
+	const filePath = pageFiles[page];
+	if (filePath) {
+		markdownHtml.value = await loadMarkdown(filePath);
+	} else {
+		markdownHtml.value = '<p>Documentation page not found: ' + page + '</p>';
+	}
+};
+
+onMounted(() => {
+	loadDocs();
+});
+
+// Reload when route changes
+watch(() => route.params.page, () => {
+	loadDocs();
+});
+</script>
+
+<style scoped>
+.docs-page {
+	line-height: 1.6;
+}
+
+.docs-page :deep(h1) {
+	font-size: 2rem;
+	margin: 0 0 1rem 0;
+	color: #2c3e50;
+	border-bottom: 2px solid #dee2e6;
+	padding-bottom: 0.5rem;
+}
+
+.docs-page :deep(h2) {
+	font-size: 1.5rem;
+	margin: 1.5rem 0 0.75rem 0;
+	color: #34495e;
+}
+
+.docs-page :deep(h3) {
+	font-size: 1.25rem;
+	margin: 1.25rem 0 0.5rem 0;
+	color: #34495e;
+}
+
+.docs-page :deep(h4) {
+	font-size: 1.1rem;
+	margin: 1rem 0 0.5rem 0;
+	color: #34495e;
+}
+
+.docs-page :deep(p) {
+	margin: 0 0 1rem 0;
+}
+
+.docs-page :deep(ul), .docs-page :deep(ol) {
+	margin: 0 0 1rem 0;
+	padding-left: 2rem;
+}
+
+.docs-page :deep(li) {
+	margin: 0.25rem 0;
+}
+
+.docs-page :deep(code) {
+	background: #f1f5f9;
+	padding: 0.125rem 0.375rem;
+	border-radius: 0.25rem;
+	font-family: 'Monaco', 'Consolas', monospace;
+	font-size: 0.9em;
+}
+
+.docs-page :deep(pre) {
+	background: #1e293b;
+	color: #e2e8f0;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	overflow-x: auto;
+	margin: 1rem 0;
+}
+
+.docs-page :deep(pre code) {
+	background: none;
+	padding: 0;
+	color: inherit;
+}
+
+.docs-page :deep(a) {
+	color: #3498db;
+	text-decoration: none;
+}
+
+.docs-page :deep(a:hover) {
+	text-decoration: underline;
+}
+
+.docs-page :deep(table) {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1rem 0;
+}
+
+.docs-page :deep(th), .docs-page :deep(td) {
+	padding: 0.75rem;
+	text-align: left;
+	border-bottom: 1px solid #dee2e6;
+}
+
+.docs-page :deep(th) {
+	background: #495057;
+	color: white;
+	font-weight: 600;
+}
+
+.docs-page :deep(blockquote) {
+	border-left: 4px solid #3498db;
+	padding-left: 1rem;
+	margin: 1rem 0;
+	color: #6c757d;
+}
+</style>
