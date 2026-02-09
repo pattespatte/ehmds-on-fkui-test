@@ -62,7 +62,7 @@
 						properties for visual changes. Minimal code, maximum FKUI
 						compatibility.
 					</p>
-					<a href="/docs/architecture/token-override.html" class="pattern-docs-link" target="_blank">Read documentation →</a>
+					<router-link to="/docs/architecture/token-override" class="pattern-docs-link">Read documentation →</router-link>
 				</div>
 
 				<div class="demo-block">
@@ -102,7 +102,7 @@
 						Wraps FKUI's <code>FCard</code> with a simplified, customized EHMDS
 						API. Transforms props, slots, and events between the two APIs.
 					</p>
-					<a href="/docs/architecture/wrapper.html" class="pattern-docs-link" target="_blank">Read documentation →</a>
+					<router-link to="/docs/architecture/wrapper" class="pattern-docs-link">Read documentation →</router-link>
 				</div>
 
 				<div class="demo-block">
@@ -167,7 +167,7 @@
 						preserving all original functionality. Adds character count, helper text,
 						error states, and prefix/suffix slots.
 					</p>
-					<a href="/docs/architecture/extension.html" class="pattern-docs-link" target="_blank">Read documentation →</a>
+					<router-link to="/docs/architecture/extension" class="pattern-docs-link">Read documentation →</router-link>
 				</div>
 
 				<div class="demo-block">
@@ -269,7 +269,7 @@
 						<code>FCrudButton</code> + <code>FExpandable</code>) into a higher-level,
 						domain-specific search component with coordinated state and behavior.
 					</p>
-					<a href="/docs/architecture/composition.html" class="pattern-docs-link" target="_blank">Read documentation →</a>
+					<router-link to="/docs/architecture/composition" class="pattern-docs-link">Read documentation →</router-link>
 				</div>
 
 				<div class="demo-block">
