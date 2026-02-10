@@ -10,6 +10,8 @@ EHMDS (EHM Design System) is a **proof-of-concept design system** built on top o
 
 **Primary Hypothesis:** A layered architecture is the most effective pattern for building a design system on top of another design system.
 
+**Live Demo:** https://pattespatte.github.io/ehmds-on-fkui-test/
+
 ## The Four Architectural Patterns
 
 EHMDS demonstrates four distinct patterns for building on FKUI:
