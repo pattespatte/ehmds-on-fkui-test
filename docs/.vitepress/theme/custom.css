@@ -1,3 +1,10 @@
 .menu-text {
   font-size: 0.9rem;
 }
+
+/* Apply EHMDS font family to docs pages */
+.VPDoc,
+.vp-doc,
+body {
+  font-family: var(--ehmds-font-family, inherit);
+}
