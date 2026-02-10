@@ -2,7 +2,7 @@
 
 > **Proof-of-concept** exploring architectural approaches for building one design system on top of another. EHMDS demonstrates four distinct patterns for layering a design system on FKUI (Försäkringskassan Design System).
 
-**Repository:** https://github.com/pattespatte/ehmds-on-fkui-test
+**Repository:** <https://github.com/pattespatte/ehmds-on-fkui-test>
 
 ## Overview
 
@@ -22,6 +22,7 @@ EHMDS demonstrates four distinct patterns for building on FKUI:
 | **Composition** | ⭐⭐⭐⭐ High | ⭐⭐⭐⭐ Very High | ⭐⭐⭐ High | Domain components |
 
 ### 1. Token Override Pattern 🎨
+
 **Minimal code, visual changes only**
 
 Uses FKUI components as-is, only overriding CSS custom properties.
@@ -32,6 +33,7 @@ Uses FKUI components as-is, only overriding CSS custom properties.
 - **Maintenance:** Very low - automatic FKUI updates
 
 ### 2. Wrapper/Facade Pattern 📦
+
 **Simplified API, same component**
 
 Wraps FKUI components with a simplified, customized EHMDS API.
@@ -42,6 +44,7 @@ Wraps FKUI components with a simplified, customized EHMDS API.
 - **Maintenance:** Low - may need testing on FKUI updates
 
 ### 3. Extension Pattern ➕
+
 **FKUI features + EHMDS enhancements**
 
 Extends FKUI components with additional features while preserving all original functionality.
@@ -52,6 +55,7 @@ Extends FKUI components with additional features while preserving all original f
 - **Maintenance:** Medium - may need updates on FKUI changes
 
 ### 4. Composition Pattern 🧩
+
 **Multiple FKUI components, one domain component**
 
 Combines multiple FKUI components into a higher-level, domain-specific component.
@@ -66,7 +70,7 @@ Combines multiple FKUI components into a higher-level, domain-specific component
 - **Vue 3** (Composition API + `<script setup>`)
 - **TypeScript**
 - **Vite** (build tool + dev server)
-- **VitePress** (documentation)
+- **Vue Router** (routing for demo and docs)
 - **FKUI packages:** `@fkui/vue`, `@fkui/design`, `@fkui/logic`, `@fkui/date`, `@fkui/theme-default`
 
 ## Getting Started
@@ -85,22 +89,16 @@ npm install
 ### Running the Demo
 
 ```bash
-# Start the demo app
+# Start the demo app (includes component demos and documentation)
 npm run demo
 
 # Build for production
 npm run build
 ```
 
-### Running Documentation
-
-```bash
-# Start VitePress docs server
-npm run docs:dev
-
-# Build documentation
-npm run docs:build
-```
+The demo app serves both:
+- **Interactive component demos** at `/`
+- **Documentation pages** at `/docs/*`
 
 ## Project Structure
 
@@ -136,14 +134,11 @@ docs/
 
 ```bash
 npm install              # Install dependencies
-npm run demo             # Start demo app dev server
+npm run demo             # Start demo app (includes demos and docs)
 npm run build            # Build design system for production
 npm run preview          # Preview production build
 npm run lint             # Lint code (ESLint)
 npm run lint:fix         # Auto-fix linting issues
-npm run docs:dev         # Start VitePress docs server
-npm run docs:build       # Build documentation
-npm run docs:preview     # Preview built docs
 npm run update:fkui-deps # Update FKUI dependencies to latest
 ```
 
