@@ -40,14 +40,15 @@ const renderMermaidDiagrams = async () => {
 
 const loadDocs = async () => {
 	const page = route.params.page || 'overview';
+	const basePath = import.meta.env.BASE_URL || '/';
 	// Map page names to file paths
 	const pageFiles = {
-		'overview': '/docs/architecture/overview.md',
-		'token-override': '/docs/architecture/token-override.md',
-		'wrapper': '/docs/architecture/wrapper.md',
-		'extension': '/docs/architecture/extension.md',
-		'composition': '/docs/architecture/composition.md',
-		'comparison': '/docs/architecture/comparison.md',
+		'overview': `${basePath}docs/architecture/overview.md`,
+		'token-override': `${basePath}docs/architecture/token-override.md`,
+		'wrapper': `${basePath}docs/architecture/wrapper.md`,
+		'extension': `${basePath}docs/architecture/extension.md`,
+		'composition': `${basePath}docs/architecture/composition.md`,
+		'comparison': `${basePath}docs/architecture/comparison.md`,
 	};
 
 	const filePath = pageFiles[page];

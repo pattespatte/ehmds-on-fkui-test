@@ -8,7 +8,7 @@
 			</p>
 			<div class="header-links">
 				<a href="https://github.com/pattespatte/ehmds-on-fkui-test" target="_blank">GitHub</a>
-				<a href="/docs/">Architecture Docs</a>
+				<router-link to="/docs/">Architecture Docs</router-link>
 			</div>
 		</header>
 
