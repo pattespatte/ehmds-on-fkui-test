@@ -662,10 +662,42 @@ const scrollToSection = (sectionId) => {
 /* Pattern Sections */
 .pattern-section {
 	position: relative;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2rem;
+}
+
+/* Demo blocks - multi-column on wide screens */
+@media (min-width: 1024px) {
+	/* Token Override section has 2 demo blocks */
+	#token-override {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	/* Wrapper section has 2 demo blocks */
+	#wrapper {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	/* Extension section has 3 demo blocks */
+	#extension {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	/* Composition section has 2 demo blocks */
+	#composition {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* Code block should always span full width */
+.pattern-section > .code-block {
+	grid-column: 1 / -1;
 }
 
 .pattern-header {
 	margin-bottom: 2rem;
+	grid-column: 1 / -1;
 }
 
 .pattern-badge {
@@ -714,11 +746,10 @@ const scrollToSection = (sectionId) => {
 
 /* Demo Blocks */
 .demo-block {
-	margin-bottom: 2rem;
-}
-
-.demo-block:last-child {
-	margin-bottom: 0;
+	background: #f8f9fa;
+	padding: 1.5rem;
+	border-radius: 0.5rem;
+	border: 1px solid #e9ecef;
 }
 
 .demo-block h3 {
@@ -828,7 +859,6 @@ const scrollToSection = (sectionId) => {
 
 /* Code Block */
 .code-block {
-	margin-top: 1.5rem;
 	padding: 1rem;
 	background: #1e293b;
 	border-radius: 0.5rem;
