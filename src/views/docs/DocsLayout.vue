@@ -24,6 +24,7 @@
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	font-family: var(--ehmds-font-family, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
 }
 
 .docs-header {

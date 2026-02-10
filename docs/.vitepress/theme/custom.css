@@ -1,3 +1,8 @@
+/* Define EHMDS CSS variables for docs */
+:root {
+  --ehmds-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
 .menu-text {
   font-size: 0.9rem;
 }
@@ -6,5 +11,5 @@
 .VPDoc,
 .vp-doc,
 body {
-  font-family: var(--ehmds-font-family, inherit);
+  font-family: var(--ehmds-font-family);
 }
