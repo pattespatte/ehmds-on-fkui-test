@@ -40,7 +40,8 @@ const renderMermaidDiagrams = async () => {
 
 const loadDocs = async () => {
 	const page = route.params.page || 'overview';
-	const basePath = import.meta.env.BASE_URL || '/';
+	// Base path for GitHub Pages deployment
+	const basePath = '/ehmds-on-fkui-test/';
 	// Map page names to file paths
 	const pageFiles = {
 		'overview': `${basePath}docs/architecture/overview.md`,
