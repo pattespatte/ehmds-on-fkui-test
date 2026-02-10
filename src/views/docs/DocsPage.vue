@@ -5,13 +5,38 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, nextTick } from 'vue';
 import { useRoute } from 'vue-router';
 import DocsLayout from './DocsLayout.vue';
 import { loadMarkdown } from '../../utils/markdown.js';
+import mermaid from 'mermaid';
 
 const route = useRoute();
 const markdownHtml = ref('');
+
+// Initialize Mermaid
+mermaid.initialize({
+	startOnLoad: false,
+	theme: 'default',
+	securityLevel: 'loose',
+});
+
+const renderMermaidDiagrams = async () => {
+	await nextTick();
+	const mermaidDivs = document.querySelectorAll('.mermaid[data-mermaid-code]');
+	for (const div of mermaidDivs) {
+		const encoded = div.getAttribute('data-mermaid-code');
+		const code = decodeURIComponent(escape(atob(encoded)));
+		const id = div.getAttribute('data-mermaid-id');
+		try {
+			const { svg } = await mermaid.render(id + '-svg', code);
+			div.innerHTML = svg;
+		} catch (error) {
+			console.error('Mermaid rendering error:', error);
+			div.innerHTML = `<pre class="mermaid-error">${error.message}</pre>`;
+		}
+	}
+};
 
 const loadDocs = async () => {
 	const page = route.params.page || 'overview';
@@ -28,6 +53,8 @@ const loadDocs = async () => {
 	const filePath = pageFiles[page];
 	if (filePath) {
 		markdownHtml.value = await loadMarkdown(filePath);
+		// Render Mermaid diagrams after HTML update
+		await renderMermaidDiagrams();
 	} else {
 		markdownHtml.value = '<p>Documentation page not found: ' + page + '</p>';
 	}
@@ -142,5 +169,27 @@ watch(() => route.params.page, () => {
 	padding-left: 1rem;
 	margin: 1rem 0;
 	color: #6c757d;
+}
+
+/* Mermaid diagram styling */
+.docs-page :deep(.mermaid) {
+	display: flex;
+	justify-content: center;
+	margin: 2rem 0;
+	padding: 1rem;
+	background: #f8f9fa;
+	border-radius: 0.5rem;
+}
+
+.docs-page :deep(.mermaid svg) {
+	max-width: 100%;
+	height: auto;
+}
+
+.docs-page :deep(.mermaid-error) {
+	color: #dc3545;
+	background: #f8d7da;
+	padding: 1rem;
+	border-radius: 0.25rem;
 }
 </style>

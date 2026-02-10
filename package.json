@@ -43,6 +43,7 @@
     "@fkui/theme-default": "^6.35.0",
     "@fkui/vue": "^6.35.0",
     "marked": "^17.0.1",
+    "mermaid": "^11.12.2",
     "vue-router": "^5.0.2"
   },
   "devDependencies": {
