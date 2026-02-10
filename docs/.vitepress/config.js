@@ -9,7 +9,7 @@ export default defineConfig({
 	themeConfig: {
 		nav: [
 			{ text: 'Guide', link: '/guide/getting-started' },
-			{ text: 'Components', link: '/components/button' },
+			{ text: 'Architecture', link: '/architecture/overview' },
 			{ text: 'GitHub', link: 'https://github.com/pattespatte/ehmds-on-fkui-test' }
 		],
 
@@ -24,12 +24,16 @@ export default defineConfig({
 					]
 				}
 			],
-			'/components/': [
+			'/architecture/': [
 				{
-					text: 'Components',
+					text: 'Architecture Patterns',
 					items: [
-						{ text: 'Button', link: '/components/button' },
-						{ text: 'Card', link: '/components/card' }
+						{ text: 'Overview', link: '/architecture/overview' },
+						{ text: 'Pattern Comparison', link: '/architecture/comparison' },
+						{ text: 'Token Override', link: '/architecture/token-override' },
+						{ text: 'Wrapper/Facade', link: '/architecture/wrapper' },
+						{ text: 'Extension', link: '/architecture/extension' },
+						{ text: 'Composition', link: '/architecture/composition' }
 					]
 				}
 			]
