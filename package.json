@@ -37,11 +37,11 @@
     "vue": "^3.3.0"
   },
   "dependencies": {
-    "@fkui/date": "^6.12.0",
-    "@fkui/design": "^6.12.0",
-    "@fkui/logic": "^6.12.0",
-    "@fkui/theme-default": "^6.12.0",
-    "@fkui/vue": "^6.12.0",
+    "@fkui/date": "^6.35.0",
+    "@fkui/design": "^6.35.0",
+    "@fkui/logic": "^6.35.0",
+    "@fkui/theme-default": "^6.35.0",
+    "@fkui/vue": "^6.35.0",
     "marked": "^17.0.1",
     "vue-router": "^5.0.2"
   },

@@ -142,7 +142,7 @@
 							<template #header>Error State</template>
 							<p>This card has an error. Note the red border.</p>
 							<template #footer>
-								<EhmdsButton size="small" @click="showError = !showError">Toggle</EhmdsButton>
+								<button class="toggle-button" @click="showError = !showError">Toggle</button>
 							</template>
 						</EhmCard>
 					</div>
@@ -428,7 +428,6 @@
 
 <script setup>
 import { ref, reactive, computed, watch } from "vue";
-import EhmdsButton from "../components/Button.vue";
 import EhmBadge from "../components/token-override/EhmBadge.vue";
 import EhmCard from "../components/wrapper/EhmCard.vue";
 import EhmTextField from "../components/extension/EhmTextField.vue";
@@ -903,6 +902,22 @@ const scrollToSection = (sectionId) => {
 .footer span {
 	margin: 0 0.5rem;
 	color: #dee2e6;
+}
+
+/* Toggle Button */
+.toggle-button {
+	padding: 0.375rem 0.75rem;
+	font-size: 0.875rem;
+	background: #3498db;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.toggle-button:hover {
+	background: #2980b9;
 }
 
 /* Responsive */

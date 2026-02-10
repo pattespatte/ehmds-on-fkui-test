@@ -8,10 +8,6 @@
 // Import global styles
 import './assets/global.css'
 
-// Import components
-import Button from './components/Button.vue'
-import Card from './components/Card.vue'
-
 // Import architectural pattern components
 import EhmCard from './components/wrapper/EhmCard.vue'
 import EhmTextField from './components/extension/EhmTextField.vue'
@@ -20,9 +16,6 @@ import EhmBadge from './components/token-override/EhmBadge.vue'
 
 // Import themes and utilities
 import { defaultTheme, generateCSSVariables } from './themes/default.js'
-
-// Component exports
-export { Button, Card }
 
 // Architectural pattern component exports
 export { EhmCard, EhmTextField, EhmSearchBox, EhmBadge }
@@ -47,10 +40,6 @@ export default {
       })
     }
 
-    // Register original components globally
-    app.component('EhmdsButton', Button)
-    app.component('EhmdsCard', Card)
-
     // Register architectural pattern components globally
     app.component('EhmCard', EhmCard)
     app.component('EhmTextField', EhmTextField)
@@ -70,7 +59,10 @@ export default {
 
 // Named exports for component library
 export const components = {
-  Button
+  EhmCard,
+  EhmTextField,
+  EhmSearchBox,
+  EhmBadge
 }
 
 export const themes = {
