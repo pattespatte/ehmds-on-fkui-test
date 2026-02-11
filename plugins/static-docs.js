@@ -20,10 +20,11 @@ export function staticDocsPlugin(options = {}) {
     closeBundle: async () => {
       // Read the generated index.html
       const indexPath = path.resolve(__dirname, '..', outDir, 'index.html')
-      if (!fs.existsSync(indexPath)) {
-        console.warn('[static-docs] index.html not found, skipping static generation')
-        return
-      }
+      // Always regenerate to include new routes
+      // Note: index.html must exist for this to work
+      const indexHtml = fs.readFileSync(indexPath, 'utf-8')
+      // Generate HTML files for each route
+      for (const route of routes) {
 
       const indexHtml = fs.readFileSync(indexPath, 'utf-8')
 
