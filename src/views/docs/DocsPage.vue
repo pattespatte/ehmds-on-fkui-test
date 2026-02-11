@@ -40,16 +40,16 @@ const renderMermaidDiagrams = async () => {
 
 const loadDocs = async () => {
 	const page = route.params.page || 'overview';
-	// Base path for GitHub Pages deployment
-	const basePath = '/ehmds-on-fkui-test/';
 	// Map page names to file paths
+	// For dev: use relative path (docs served from public folder via symlink)
+	// For prod: use full path with base for GitHub Pages
 	const pageFiles = {
-		'overview': `${basePath}docs/architecture/overview.md`,
-		'token-override': `${basePath}docs/architecture/token-override.md`,
-		'wrapper': `${basePath}docs/architecture/wrapper.md`,
-		'extension': `${basePath}docs/architecture/extension.md`,
-		'composition': `${basePath}docs/architecture/composition.md`,
-		'comparison': `${basePath}docs/architecture/comparison.md`,
+		'overview': '/docs/architecture/overview.md',
+		'token-override': '/docs/architecture/token-override.md',
+		'wrapper': '/docs/architecture/wrapper.md',
+		'extension': '/docs/architecture/extension.md',
+		'composition': '/docs/architecture/composition.md',
+		'comparison': '/docs/architecture/comparison.md',
 	};
 
 	const filePath = pageFiles[page];
