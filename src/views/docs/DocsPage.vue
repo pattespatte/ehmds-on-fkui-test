@@ -59,7 +59,9 @@ const loadDocs = async () => {
 	};
 	const filePath = pageFiles[page];
 	if (filePath) {
-		markdownHtml.value = await loadMarkdown(filePath);
+		// Pass the architecture docs directory for resolving relative links
+		const currentDir = `${basePath}docs/architecture`;
+		markdownHtml.value = await loadMarkdown(filePath, currentDir);
 		// Render Mermaid diagrams after HTML update
 		await renderMermaidDiagrams();
 	} else {

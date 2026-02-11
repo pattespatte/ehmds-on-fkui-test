@@ -3,8 +3,12 @@ import { marked } from 'marked';
 // Counter for unique Mermaid diagram IDs
 let mermaidCounter = 0;
 
-// Simple markdown loader that fetches and parses markdown files
-export async function loadMarkdown(path) {
+/**
+ * Simple markdown loader that fetches and parses markdown files
+ * @param {string} path - The path to the markdown file
+ * @param {string} currentDir - The directory of the current markdown file (for resolving relative links)
+ */
+export async function loadMarkdown(path, currentDir = '') {
 	try {
 		const response = await fetch(path);
 		if (!response.ok) {
@@ -16,19 +20,19 @@ export async function loadMarkdown(path) {
 		const mermaidBlocks = [];
 		markdown = markdown.replace(/```mermaid\n([\s\S]*?)```/g, (match, code) => {
 			const id = `mermaid-${mermaidCounter++}`;
-			// Store the code with base64 encoding
 			const encoded = btoa(unescape(encodeURIComponent(code.trim())));
 			mermaidBlocks.push({ id, code: code.trim(), encoded });
-			// Use HTML comment placeholder - marked will preserve these
 			return `<!--MERMAID_PLACEHOLDER_${id}-->`;
 		});
 
 		// Parse markdown to HTML
 		let html = marked(markdown);
 
-		// Post-process: Strip .md extension from internal documentation links
-		// This allows markdown files to work both on GitHub (raw) and in the app
-		html = html.replace(/href="([^"]*)\.md"/g, 'href="$1"');
+		// Post-process: Convert relative .md links to absolute router links
+		// e.g., ./accessibility.md -> /docs/architecture/accessibility
+		html = html.replace(/href="\.\/([^"]+)\.md"/g, (match, link) => {
+			return `href="${currentDir}/${link}"`;
+		});
 
 		// Post-process: Replace mermaid placeholders with mermaid divs
 		mermaidBlocks.forEach(({ id, encoded }) => {
