@@ -3,6 +3,7 @@
 ## Overview
 
 The **Token Override Pattern** uses FKUI components as-is, only overriding CSS custom properties (design tokens) to change appearance. This approach:
+
 - Uses FKUI components without modification
 - Changes only CSS variables for styling
 - Preserves all FKUI behavior and APIs
@@ -11,6 +12,7 @@ The **Token Override Pattern** uses FKUI components as-is, only overriding CSS c
 ## When to Use
 
 Use the Token Override pattern when:
+
 - You like FKUI's behavior but want different styling
 - You only need visual changes, not behavioral changes
 - You want minimal maintenance overhead
@@ -139,6 +141,7 @@ const mappedStatus = computed(() => {
 ## Pros and Cons
 
 **Pros:**
+
 - Minimal code (just CSS overrides)
 - 100% FKUI API compatibility
 - Automatic FKUI updates work
@@ -146,6 +149,7 @@ const mappedStatus = computed(() => {
 - Low maintenance overhead
 
 **Cons:**
+
 - Limited to visual changes only
 - Must understand FKUI's internal class names
 - CSS specificity can be tricky
@@ -247,8 +251,8 @@ graph TD
 
 ## Anti-Patterns to Avoid
 
-❌ **Don't** override non-token properties (padding, margin, etc.)
-❌ **Don't** use complex selectors that may break with FKUI updates
-❌ **Don't** override behavior with CSS (pointer-events, etc.)
-❌ **Don't** forget `!important` on token overrides
-❌ **Don't** override without understanding FKUI's base styles
+- ❌ **Don't** override non-token properties (padding, margin, etc.)
+- ❌ **Don't** use complex selectors that may break with FKUI updates
+- ❌ **Don't** override behavior with CSS (pointer-events, etc.)
+- ❌ **Don't** forget `!important` on token overrides
+- ❌ **Don't** override without understanding FKUI's base styles

@@ -11,30 +11,52 @@ EHMDS (EHM Design System) is a **proof-of-concept design system** built on top o
 ## The Layered Architecture
 
 ```mermaid
-graph TD
-    App[Application Layer] -->|Uses| EHMDS[EHMDS Layer]
-    EHMDS -->|Built on| FKUI[FKUI Layer]
-    FKUI -->|Built on| Platform[Vue 3 + Web Platform]
+graph TB
+    subgraph "Application Layer"
+        App[Application Code]
+    end
 
-    App2[Your Application] --> EHMDS
-    EHMDS -->|Wraps| Wrapper[Wrapper Components]
-    EHMDS -->|Extends| Extension[Extension Components]
-    EHMDS -->|Composes| Composition[Composition Components]
-    EHMDS -->|Overrides| Token[Token Override Components]
+    subgraph "EHMDS Layer - Design System Abstraction"
+        EhmBadge[EhmBadge<br/>Token Override]
+        EhmCard[EhmCard<br/>Wrapper]
+        EhmTextField[EhmTextField<br/>Extension]
+        EhmSearchBox[EhmSearchBox<br/>Composition]
+    end
 
-    Wrapper --> FKUI
-    Extension --> FKUI
-    Composition --> FKUI
-    Token --> FKUI
+    subgraph "FKUI Layer - Base Design System"
+        FBadge[FBadge]
+        FCard[FCard]
+        FTextField[FTextField]
+        FCrudButton[FCrudButton]
+        FExpandable[FExpandable]
+    end
 
-    style App fill:#f5f5f5,stroke:#999
-    style EHMDS fill:#e1f5fe,stroke:#0288d1,stroke-width:3px
-    style FKUI fill:#fff3e0,stroke:#f57c00,stroke-width:3px
-    style Platform fill:#e8f5e9,stroke:#388e3c
-    style Wrapper fill:#e1f5fe,stroke:#0288d1
-    style Extension fill:#e1f5fe,stroke:#0288d1
-    style Composition fill:#e1f5fe,stroke:#0288d1
-    style Token fill:#e1f5fe,stroke:#0288d1
+    subgraph "Vue 3 Framework"
+        Vue[Vue 3 Runtime]
+    end
+
+    App --> EhmBadge
+    App --> EhmCard
+    App --> EhmTextField
+    App --> EhmSearchBox
+
+    EhmBadge -->|CSS Override| FBadge
+    EhmCard -->|Props Mapping| FCard
+    EhmTextField -->|Extends & Enhances| FTextField
+    EhmSearchBox -->|Orchestrates| FTextField
+    EhmSearchBox -->|Orchestrates| FCrudButton
+    EhmSearchBox -->|Orchestrates| FExpandable
+
+    FBadge --> Vue
+    FCard --> Vue
+    FTextField --> Vue
+    FCrudButton --> Vue
+    FExpandable --> Vue
+
+    style EhmBadge fill:#e1f5e1,stroke:#388e3c
+    style EhmCard fill:#e1e5f5,stroke:#0288d1
+    style EhmTextField fill:#f5e1e1,stroke:#f57c00
+    style EhmSearchBox fill:#f5f0e1,stroke:#7b1fa2
 ```
 
 ## Four Architectural Patterns
@@ -304,6 +326,8 @@ When adding new components to EHMDS:
 - [FKUI Documentation](https://designsystem.forsakringskassan.se/)
 - [FKUI GitHub](https://github.com/Forsakringskassan/designsystem)
 - [Vue 3 Documentation](https://vuejs.org/)
+- [Accessibility Guide](./accessibility.md)
+- [FKUI Update Strategy](./fkui-updates.md)
 
 ## License
 

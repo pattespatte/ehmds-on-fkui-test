@@ -7,7 +7,10 @@
 	>
 		<!-- Transform EHMDS's simpler slot API to FCard's slots -->
 		<template v-if="$slots.header" #header>
-			<slot name="header" />
+			<slot name="header">
+				<h3 v-if="title">{{ title }}</h3>
+				<p v-if="subtitle">{{ subtitle }}</p>
+			</slot>
 		</template>
 
 		<!-- Main content slot -->
@@ -18,6 +21,11 @@
 			<div class="ehm-card__footer">
 				<slot name="footer" />
 			</div>
+		</template>
+
+		<!-- Pass through other FCard slots (actions, etc.) -->
+		<template v-if="$slots.actions" #actions>
+			<slot name="actions" />
 		</template>
 	</FCard>
 </template>
@@ -52,6 +60,24 @@ const props = defineProps({
 	 * Optional unique identifier
 	 */
 	id: {
+		type: String,
+		required: false,
+		default: undefined,
+	},
+
+	/**
+	 * Convenience prop for card title (rendered in header slot if no header slot provided)
+	 */
+	title: {
+		type: String,
+		required: false,
+		default: undefined,
+	},
+
+	/**
+	 * Convenience prop for card subtitle (rendered in header slot if no header slot provided)
+	 */
+	subtitle: {
 		type: String,
 		required: false,
 		default: undefined,

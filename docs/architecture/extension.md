@@ -3,6 +3,7 @@
 ## Overview
 
 The **Extension Pattern** extends an FKUI component's functionality while preserving all its original capabilities. The extension component:
+
 - Uses FKUI components as the foundation
 - Adds new props, slots, and features
 - Preserves all FKUI functionality
@@ -11,6 +12,7 @@ The **Extension Pattern** extends an FKUI component's functionality while preser
 ## When to Use
 
 Use the Extension pattern when:
+
 - You need FKUI's features plus additional functionality
 - You want to add utility features (char count, helpers, etc.)
 - You need to enhance FKUI without breaking existing behavior
@@ -104,12 +106,14 @@ graph TD
 ## Pros and Cons
 
 **Pros:**
+
 - Preserves all FKUI functionality
 - Adds new features without breaking changes
 - Maintains FKUI compatibility
 - Can layer multiple extensions
 
 **Cons:**
+
 - Larger component size
 - More complex state management
 - Potential for prop naming conflicts

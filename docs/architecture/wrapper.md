@@ -3,6 +3,7 @@
 ## Overview
 
 The **Wrapper Pattern** (also known as Facade) wraps an FKUI component and exposes a simplified, customized API for EHMDS consumers. The wrapper component:
+
 - Uses FKUI components internally
 - Exposes a different, simplified API
 - Transforms props, slots, and events between the two APIs
@@ -11,6 +12,7 @@ The **Wrapper Pattern** (also known as Facade) wraps an FKUI component and expos
 ## When to Use
 
 Use the Wrapper pattern when:
+
 - You want a simpler API than FKUI provides
 - You need to enforce specific prop combinations
 - You want to hide FKUI complexity from consumers
@@ -64,12 +66,14 @@ graph TD
 ## Pros and Cons
 
 **Pros:**
+
 - Complete control over exposed API
 - Can simplify complex FKUI APIs
 - Can enforce best practices
 - Can add EHMDS-specific features
 
 **Cons:**
+
 - Must maintain wrapper code
 - FKUI updates may require wrapper updates
 - Adds a layer of indirection

@@ -17,23 +17,54 @@ EHMDS demonstrates four distinct architectural patterns for building on FKUI. Ea
 
 ```mermaid
 graph TD
-    Start[Need to customize FKUI component?] -->|No| TokenOverride[Token Override Pattern]
-    Start -->|Yes| WhatChange{What needs changing?}
+    Start{What do you need?}
+    Start -->|Visual changes only| TokenOverride[Token Override Pattern]
+    Start -->|Different API| APICheck{Keep FKUI features?}
+    Start -->|Add features| Extension[Extension Pattern]
+    Start -->|Combine components| Composition[Composition Pattern]
 
-    WhatChange -->|Visuals only| TokenOverride
-    WhatChange -->|API/Interface| Wrapper[Wrapper Pattern]
-    WhatChange -->|Add features| Extension[Extension Pattern]
-    WhatChange -->|Multiple components| Composition[Composition Pattern]
+    APICheck -->|Yes, simplify API| Wrapper[Wrapper Pattern]
+    APICheck -->|No, full rewrite| Custom[Build Custom Component]
 
-    Wrapper -->|Preserve all FKUI| ExtQuestion{Need more features?}
-    ExtQuestion -->|Yes| Extension
-    ExtQuestion -->|No| WrapperDone[Use Wrapper]
+    TokenOverride --> Validate1{Will FKUI updates break it?}
+    Wrapper --> Validate2{Can you accept FKUI API changes?}
+    Extension --> Validate3{Can you test on FKUI updates?}
+    Composition --> Validate4{Can you maintain integration?}
 
-    style TokenOverride fill:#c8e6c9,stroke:#388e3c
-    style Wrapper fill:#e1f5fe,stroke:#0288d1
-    style Extension fill:#fff3e0,stroke:#f57c00
-    style Composition fill:#f3e5f5,stroke:#7b1fa2
+    Validate1 -->|No| Good1[✅ Good Choice]
+    Validate1 -->|Yes| Reconsider1[⚠️ Reconsider]
+
+    Validate2 -->|Yes| Good2[✅ Good Choice]
+    Validate2 -->|No| Reconsider2[⚠️ Use Extension]
+
+    Validate3 -->|Yes| Good3[✅ Good Choice]
+    Validate3 -->|No| Reconsider3[⚠️ Use Wrapper]
+
+    Validate4 -->|Yes| Good4[✅ Good Choice]
+    Validate4 -->|No| Reconsider4[⚠️ Split into smaller components]
+
+    style TokenOverride fill:#e1f5e1,stroke:#388e3c
+    style Wrapper fill:#e1e5f5,stroke:#0288d1
+    style Extension fill:#f5e1e1,stroke:#f57c00
+    style Composition fill:#f5f0e1,stroke:#7b1fa2
+    style Good1 fill:#c8e6c9,stroke:#388e3c
+    style Good2 fill:#c8e6c9,stroke:#388e3c
+    style Good3 fill:#c8e6c9,stroke:#388e3c
+    style Good4 fill:#c8e6c9,stroke:#388e3c
+    style Reconsider1 fill:#ffcdd2,stroke:#d32f2f
+    style Reconsider2 fill:#ffcdd2,stroke:#d32f2f
+    style Reconsider3 fill:#ffcdd2,stroke:#d32f2f
+    style Reconsider4 fill:#ffcdd2,stroke:#d32f2f
 ```
+
+### Decision Criteria by Dimension
+
+| Pattern | TypeScript Support | Bundle Size Impact | FKUI Update Risk | Learning Curve | Testability |
+|---------|-------------------|-------------------|-----------------|----------------|-------------|
+| Token Override | ⭐⭐⭐ (passthrough) | +0KB | ⭐ Very Low | ⭐ Minimal | ⭐⭐ (CSS only) |
+| Wrapper | ⭐⭐⭐⭐ (custom types) | +2-5KB | ⭐⭐ Low | ⭐⭐ Low | ⭐⭐⭐⭐ High |
+| Extension | ⭐⭐⭐⭐⭐ (full control) | +5-10KB | ⭐⭐⭐ Medium | ⭐⭐⭐ Medium | ⭐⭐⭐ Medium |
+| Composition | ⭐⭐⭐⭐⭐ (full control) | +10-20KB | ⭐⭐⭐⭐ High | ⭐⭐⭐⭐ High | ⭐⭐⭐⭐⭐ Very High |
 
 ## Detailed Comparison
 
@@ -192,27 +223,31 @@ graph LR
     style Comp fill:#f3e5f5,stroke:#7b1fa2
 ```
 
-### Use Token Override When:
+### Use Token Override When
+
 - ✅ You only need to change colors, spacing, or fonts
 - ✅ You want 100% FKUI API compatibility
 - ✅ You want automatic FKUI updates
 - ❌ You don't need behavior changes
 
-### Use Wrapper When:
+### Use Wrapper When
+
 - ✅ You want a simpler API than FKUI
 - ✅ You need to enforce specific prop combinations
 - ✅ You want to hide FKUI complexity
 - ✅ You might add features later (can extend to Extension pattern)
 - ❌ You don't need to add new features now
 
-### Use Extension When:
+### Use Extension When
+
 - ✅ You need FKUI features PLUS additional functionality
 - ✅ You want to add helper text, validation, character counts, etc.
 - ✅ You need to maintain full FKUI compatibility
 - ✅ You want component-specific enhancements
 - ❌ You don't need to combine multiple FKUI components
 
-### Use Composition When:
+### Use Composition When
+
 - ✅ You need to combine multiple FKUI components
 - ✅ You're creating domain-specific UI patterns
 - ✅ You want to reduce application boilerplate
@@ -239,6 +274,7 @@ graph TD
 ```
 
 You can evolve from simpler to more complex patterns:
+
 1. Start with **Token Override** for visual customization
 2. Add **Wrapper** if you need API changes
 3. Extend to **Extension** if you need new features
@@ -278,4 +314,6 @@ Use this checklist when deciding which pattern to use:
 - [Wrapper Pattern](./wrapper.md)
 - [Extension Pattern](./extension.md)
 - [Composition Pattern](./composition.md)
+- [Accessibility Guide](./accessibility.md)
+- [FKUI Update Strategy](./fkui-updates.md)
 - [FKUI Documentation](https://designsystem.forsakringskassan.se/)

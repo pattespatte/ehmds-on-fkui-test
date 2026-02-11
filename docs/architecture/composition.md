@@ -3,6 +3,7 @@
 ## Overview
 
 The **Composition Pattern** combines multiple FKUI components into a higher-level, domain-specific component. The composition component:
+
 - Uses multiple FKUI components together
 - Coordinates state and behavior between them
 - Creates a cohesive, domain-focused API
@@ -11,6 +12,7 @@ The **Composition Pattern** combines multiple FKUI components into a higher-leve
 ## When to Use
 
 Use the Composition pattern when:
+
 - You need to combine multiple FKUI components
 - Creating domain-specific UI patterns (search, forms, etc.)
 - Multiple FKUI components need to work together
@@ -155,6 +157,7 @@ const handleSearchInput = (value) => {
 ## Pros and Cons
 
 **Pros:**
+
 - Reduces application boilerplate
 - Consistent domain patterns
 - Coordinated state management
@@ -162,6 +165,7 @@ const handleSearchInput = (value) => {
 - Maintains FKUI accessibility
 
 **Cons:**
+
 - More complex implementation
 - Tight coupling to FKUI components
 - Less flexibility than direct FKUI usage
