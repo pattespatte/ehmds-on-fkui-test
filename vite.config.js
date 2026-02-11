@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import { staticDocsPlugin } from './plugins/static-docs.js'

@@ -5,62 +5,66 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, nextTick } from 'vue';
-import { useRoute } from 'vue-router';
-import DocsLayout from './DocsLayout.vue';
-import { loadMarkdown } from '../../utils/markdown.js';
-import mermaid from 'mermaid';
+import { ref, onMounted, watch, nextTick } from "vue";
+import { useRoute } from "vue-router";
+import DocsLayout from "./DocsLayout.vue";
+import { loadMarkdown } from "../../utils/markdown.js";
+import mermaid from "mermaid";
 
 const route = useRoute();
-const markdownHtml = ref('');
+const markdownHtml = ref("");
 
 // Initialize Mermaid
 mermaid.initialize({
 	startOnLoad: false,
-	theme: 'default',
-	securityLevel: 'loose',
+	theme: "default",
+	securityLevel: "loose",
 });
 
 const renderMermaidDiagrams = async () => {
 	await nextTick();
-	const mermaidDivs = document.querySelectorAll('.mermaid[data-mermaid-code]');
+	const mermaidDivs = document.querySelectorAll(
+		".mermaid[data-mermaid-code]",
+	);
 	for (const div of mermaidDivs) {
-		const encoded = div.getAttribute('data-mermaid-code');
+		const encoded = div.getAttribute("data-mermaid-code");
 		const code = decodeURIComponent(escape(atob(encoded)));
-		const id = div.getAttribute('data-mermaid-id');
+		const id = div.getAttribute("data-mermaid-id");
 		try {
-			const { svg } = await mermaid.render(id + '-svg', code);
+			const { svg } = await mermaid.render(id + "-svg", code);
 			div.innerHTML = svg;
 		} catch (error) {
-			console.error('Mermaid rendering error:', error);
+			console.error("Mermaid rendering error:", error);
 			div.innerHTML = `<pre class="mermaid-error">${error.message}</pre>`;
 		}
 	}
 };
 
 const loadDocs = async () => {
-	const page = route.params.page || 'overview';
+	const page = route.params.page || "overview";
 	// Use Vite's BASE_URL for environment-aware paths
 	// Dev: '/' (docs served via symlink from public/docs)
 	// Prod: '/ehmds-on-fkui-test/' (docs in dist/docs from viteStaticCopy)
 	const basePath = import.meta.env.BASE_URL;
 	// Map page names to file paths
 	const pageFiles = {
-		'overview': `${basePath}docs/architecture/overview.md`,
-		'token-override': `${basePath}docs/architecture/token-override.md`,
-		'wrapper': `${basePath}docs/architecture/wrapper.md`,
-		'extension': `${basePath}docs/architecture/extension.md`,
-		'composition': `${basePath}docs/architecture/composition.md`,
-		'comparison': `${basePath}docs/architecture/comparison.md`,
+		overview: `${basePath}docs/architecture/overview.md`,
+		"token-override": `${basePath}docs/architecture/token-override.md`,
+		wrapper: `${basePath}docs/architecture/wrapper.md`,
+		extension: `${basePath}docs/architecture/extension.md`,
+		composition: `${basePath}docs/architecture/composition.md`,
+		comparison: `${basePath}docs/architecture/comparison.md`,
+		accessibility: `${basePath}docs/architecture/accessibility.md`,
+		"fkui-updates": `${basePath}docs/architecture/fkui-updates.md`,
 	};
-
 	const filePath = pageFiles[page];
 	if (filePath) {
 		markdownHtml.value = await loadMarkdown(filePath);
 		// Render Mermaid diagrams after HTML update
 		await renderMermaidDiagrams();
 	} else {
-		markdownHtml.value = '<p>Documentation page not found: ' + page + '</p>';
+		markdownHtml.value =
+			"<p>Documentation page not found: " + page + "</p>";
 	}
 };
 
@@ -69,9 +73,12 @@ onMounted(() => {
 });
 
 // Reload when route changes
-watch(() => route.params.page, () => {
-	loadDocs();
-});
+watch(
+	() => route.params.page,
+	() => {
+		loadDocs();
+	},
+);
 </script>
 
 <style scoped>
@@ -109,7 +116,8 @@ watch(() => route.params.page, () => {
 	margin: 0 0 1rem 0;
 }
 
-.docs-page :deep(ul), .docs-page :deep(ol) {
+.docs-page :deep(ul),
+.docs-page :deep(ol) {
 	margin: 0 0 1rem 0;
 	padding-left: 2rem;
 }
@@ -122,7 +130,7 @@ watch(() => route.params.page, () => {
 	background: #f1f5f9;
 	padding: 0.125rem 0.375rem;
 	border-radius: 0.25rem;
-	font-family: 'Monaco', 'Consolas', monospace;
+	font-family: "Monaco", "Consolas", monospace;
 	font-size: 0.9em;
 }
 
@@ -156,7 +164,8 @@ watch(() => route.params.page, () => {
 	margin: 1rem 0;
 }
 
-.docs-page :deep(th), .docs-page :deep(td) {
+.docs-page :deep(th),
+.docs-page :deep(td) {
 	padding: 0.75rem;
 	text-align: left;
 	border-bottom: 1px solid #dee2e6;

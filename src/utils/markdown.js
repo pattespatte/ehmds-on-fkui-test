@@ -26,6 +26,10 @@ export async function loadMarkdown(path) {
 		// Parse markdown to HTML
 		let html = marked(markdown);
 
+		// Post-process: Strip .md extension from internal documentation links
+		// This allows markdown files to work both on GitHub (raw) and in the app
+		html = html.replace(/href="([^"]*)\.md"/g, 'href="$1"');
+
 		// Post-process: Replace mermaid placeholders with mermaid divs
 		mermaidBlocks.forEach(({ id, encoded }) => {
 			const placeholder = `<!--MERMAID_PLACEHOLDER_${id}-->`;
