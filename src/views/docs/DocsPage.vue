@@ -40,8 +40,10 @@ const renderMermaidDiagrams = async () => {
 
 const loadDocs = async () => {
 	const page = route.params.page || 'overview';
-	// Base path for GitHub Pages deployment
-	const basePath = '/ehmds-on-fkui-test/';
+	// Use Vite's BASE_URL for environment-aware paths
+	// Dev: '/' (docs served via symlink from public/docs)
+	// Prod: '/ehmds-on-fkui-test/' (docs in dist/docs from viteStaticCopy)
+	const basePath = import.meta.env.BASE_URL;
 	// Map page names to file paths
 	const pageFiles = {
 		'overview': `${basePath}docs/architecture/overview.md`,
