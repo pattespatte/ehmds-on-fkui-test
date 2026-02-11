@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
-import { resolve } from 'path'
 import { staticDocsPlugin } from './plugins/static-docs.js'
 
 export default defineConfig({
@@ -17,7 +16,6 @@ export default defineConfig({
         }
       ]
     }),
-    // Generate static HTML files for documentation routes
     staticDocsPlugin({
       routes: [
         '/docs',
@@ -27,6 +25,8 @@ export default defineConfig({
         '/docs/architecture/extension',
         '/docs/architecture/composition',
         '/docs/architecture/comparison',
+        '/docs/architecture/accessibility',
+        '/docs/architecture/fkui-updates',
       ],
       base: '/ehmds-on-fkui-test/',
       outDir: 'dist',
@@ -34,11 +34,11 @@ export default defineConfig({
   ],
   server: {
     port: 3000,
-    open: true
+    open: true,
   },
   build: {
     outDir: 'dist',
-    emptyOutDir: true
+    emptyOutDir: true,
   },
   resolve: {
     alias: {
