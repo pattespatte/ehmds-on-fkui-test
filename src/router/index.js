@@ -12,11 +12,13 @@ const routes = [
 		path: '/',
 		name: 'home',
 		component: DemoHome,
+		meta: { title: 'EHMDS Design System | Architecture Patterns & Components' },
 	},
 	{
 		path: '/docs',
 		name: 'docs-index',
 		component: DocsIndex,
+		meta: { title: 'Documentation | EHMDS Architecture' },
 	},
 	{
 		path: '/docs/architecture/:page',
@@ -29,6 +31,13 @@ const routes = [
 const router = createRouter({
 	history: createWebHistory('/ehmds-on-fkui-test/'),
 	routes,
+});
+
+// Update document title based on route meta
+router.beforeEach((to, from, next) => {
+	const pageTitle = to.meta.title || 'EHMDS';
+	document.title = pageTitle;
+	next();
 });
 
 export default router;

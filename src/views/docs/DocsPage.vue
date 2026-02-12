@@ -14,6 +14,18 @@ import mermaid from "mermaid";
 const route = useRoute();
 const markdownHtml = ref("");
 
+// Map page names to titles
+const pageTitles = {
+	overview: "Overview | EHMDS Architecture",
+	"token-override": "Token Override Pattern | EHMDS Architecture",
+	wrapper: "Wrapper/Facade Pattern | EHMDS Architecture",
+	extension: "Extension Pattern | EHMDS Architecture",
+	composition: "Composition Pattern | EHMDS Architecture",
+	comparison: "Pattern Comparison | EHMDS Architecture",
+	accessibility: "Accessibility | EHMDS Architecture",
+	"fkui-updates": "FKUI Updates | EHMDS Architecture",
+};
+
 // Initialize Mermaid
 mermaid.initialize({
 	startOnLoad: false,
@@ -42,6 +54,12 @@ const renderMermaidDiagrams = async () => {
 
 const loadDocs = async () => {
 	const page = route.params.page || "overview";
+
+	// Update document title for architecture pages
+	if (pageTitles[page]) {
+		document.title = pageTitles[page];
+	}
+
 	// Use Vite's BASE_URL for environment-aware paths
 	// Dev: '/' (docs served via symlink from public/docs)
 	// Prod: '/ehmds-on-fkui-test/' (docs in dist/docs from viteStaticCopy)
