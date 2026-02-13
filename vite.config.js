@@ -21,6 +21,7 @@ export default defineConfig({
       routes: [
         '/docs',
         '/docs/architecture/overview',
+        '/docs/architecture/architecture-theory',
         '/docs/architecture/token-override',
         '/docs/architecture/wrapper',
         '/docs/architecture/extension',
