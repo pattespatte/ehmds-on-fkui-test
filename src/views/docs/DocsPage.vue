@@ -17,6 +17,7 @@ const markdownHtml = ref("");
 // Map page names to titles
 const pageTitles = {
 	overview: "Overview | EHMDS Architecture",
+	"architecture-theory": "Architecture Theory | EHMDS Architecture",
 	"token-override": "Token Override Pattern | EHMDS Architecture",
 	wrapper: "Wrapper/Facade Pattern | EHMDS Architecture",
 	extension: "Extension Pattern | EHMDS Architecture",
@@ -67,6 +68,7 @@ const loadDocs = async () => {
 	// Map page names to file paths
 	const pageFiles = {
 		overview: `${basePath}docs/architecture/overview.md`,
+		"architecture-theory": `${basePath}docs/architecture/architecture-theory.md`,
 		"token-override": `${basePath}docs/architecture/token-override.md`,
 		wrapper: `${basePath}docs/architecture/wrapper.md`,
 		extension: `${basePath}docs/architecture/extension.md`,
