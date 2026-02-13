@@ -108,3 +108,7 @@ Compared to using FKUI directly:
   </FCard>
 </template>
 ```
+
+## Industry Context: Adapter Pattern
+
+This pattern is an application of the **Adapter Pattern** from the Gang of Four's structural design patterns. The Wrapper component acts as an adapter between FKUI's interface and EHMDS's simplified interface—converting FKUI's API into a form that's more convenient for our specific use case.
