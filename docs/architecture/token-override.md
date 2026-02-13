@@ -256,3 +256,10 @@ graph TD
 - ❌ **Don't** override behavior with CSS (pointer-events, etc.)
 - ❌ **Don't** forget `!important` on token overrides
 - ❌ **Don't** override without understanding FKUI's base styles
+
+## Industry Context: Multi-tier Tokens
+
+This pattern follows the **Tiered Token Architecture**. We treat FKUI tokens as "Global/Choice" tokens and our overrides as "Alias/Decision" tokens.
+
+**Vue Implementation Tip:**
+In Vue, avoid overriding CSS variables globally if possible. Use a scoped class or a `ThemeProvider` component to ensure your overrides only affect EHMDS components.

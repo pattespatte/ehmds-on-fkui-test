@@ -323,6 +323,7 @@ When adding new components to EHMDS:
 
 ## References
 
+- [Architecture Theory](./architecture-theory.md) - Design system ecosystem & industry alignment
 - [FKUI Documentation](https://designsystem.forsakringskassan.se/)
 - [FKUI GitHub](https://github.com/Forsakringskassan/designsystem)
 - [Vue 3 Documentation](https://vuejs.org/)

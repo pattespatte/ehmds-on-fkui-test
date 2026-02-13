@@ -246,3 +246,7 @@ watch(query, (val) => {
 | **Composition** | Combine multiple FKUI components into domain pattern |
 
 The composition pattern shines when you find yourself repeatedly using the same set of FKUI components together in your application code.
+
+## Industry Context: The "Recipe" Pattern
+
+As defined by Brad Frost, **Composition** is the act of combining "Atoms" (FKUI components) into "Recipes" or "Molecules" (EHMDS domain components). This is the most scalable way to build product-specific UI without bloating the base design system.

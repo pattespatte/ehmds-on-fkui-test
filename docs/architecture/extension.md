@@ -165,3 +165,7 @@ The extension pattern follows these principles:
 3. **Smart Defaults**: Provide sensible defaults for new props
 4. **Coordination**: Manage state between FKUI and new features
 5. **Accessibility**: Maintain WCAG compliance when adding features
+
+## Industry Context: Component Augmentation
+
+Nathan Curtis refers to this as "Relinquishing control by offering parts." Instead of one rigid component, we extend FKUI by providing **slots** or **composables** that add new behavior (e.g., validation logic or tooltips) without breaking the core component's contract.
