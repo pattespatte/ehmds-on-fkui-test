@@ -1,9 +1,12 @@
 /**
  * EHM Design System Entry Point
- * 
+ *
  * This file exports all components, themes, and utilities
  * for the EHM Design System.
  */
+
+import type { Plugin, App } from 'vue'
+import type { PluginOptions } from './themes/types'
 
 // Import global styles
 import './assets/global.css'
@@ -15,17 +18,18 @@ import EhmSearchBox from './components/composition/EhmSearchBox.vue'
 import EhmBadge from './components/token-override/EhmBadge.vue'
 
 // Import themes and utilities
-import { defaultTheme, generateCSSVariables } from './themes/default.js'
+import { defaultTheme, generateCSSVariables } from './themes/default'
 
 // Architectural pattern component exports
 export { EhmCard, EhmTextField, EhmSearchBox, EhmBadge }
 
 // Theme exports
 export { defaultTheme, generateCSSVariables }
+export type { Theme, CSSVariables, PluginOptions } from './themes/types'
 
 // Default export for install function (Vue plugin pattern)
-export default {
-  install(app, options = {}) {
+const EHMDSPlugin: Plugin = {
+  install(app: App, options: PluginOptions = {}) {
     // Merge user options with default theme
     const theme = { ...defaultTheme, ...options.theme }
 
@@ -50,28 +54,31 @@ export default {
     app.provide('ehmdsTheme', theme)
 
     // Add global properties
+    // @ts-expect-error - Adding custom property to Vue app
     app.config.globalProperties.$ehmds = {
       theme,
-      version: __EHMDS_VERSION__ || '1.0.0'
+      version: (globalThis as any).__EHMDS_VERSION__ || '1.0.0',
     }
-  }
+  },
 }
+
+export default EHMDSPlugin
 
 // Named exports for component library
 export const components = {
   EhmCard,
   EhmTextField,
   EhmSearchBox,
-  EhmBadge
+  EhmBadge,
 }
 
 export const themes = {
-  default: defaultTheme
+  default: defaultTheme,
 }
 
 export const utils = {
-  generateCSSVariables
+  generateCSSVariables,
 }
 
 // Version
-export const version = __EHMDS_VERSION__ || '1.0.0'
+export const version = (globalThis as any).__EHMDS_VERSION__ || '1.0.0'

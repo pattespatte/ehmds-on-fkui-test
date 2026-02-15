@@ -30,9 +30,11 @@
 	</FCard>
 </template>
 
-<script setup>
-import { computed } from "vue";
+<script setup lang="ts">
+import { computed, type HTMLElement } from "vue";
 import { FCard } from "@fkui/vue";
+
+type CardVariant = "default" | "bordered" | "elevated" | "compact";
 
 /**
  * EhmCard - Wrapper/Facade Pattern
@@ -55,72 +57,36 @@ defineOptions({
 /**
  * EHMDS Custom API - simplified compared to FCard
  */
-const props = defineProps({
-	/**
-	 * Optional unique identifier
-	 */
-	id: {
-		type: String,
-		required: false,
-		default: undefined,
-	},
+interface EhmCardProps {
+	/** Optional unique identifier */
+	id?: string;
+	/** Convenience prop for card title (rendered in header slot if no header slot provided) */
+	title?: string;
+	/** Convenience prop for card subtitle (rendered in header slot if no header slot provided) */
+	subtitle?: string;
+	/** Visual variant for the card - EHMDS custom variants (not in FCard) */
+	variant?: CardVariant;
+	/** Whether this card is in an error state - When true, sets focusRef for validation */
+	hasError?: boolean;
+	/** Element ref to focus when card is in error state - This maps to FCard's focusRef prop */
+	errorRef?: HTMLElement | null;
+}
 
-	/**
-	 * Convenience prop for card title (rendered in header slot if no header slot provided)
-	 */
-	title: {
-		type: String,
-		required: false,
-		default: undefined,
-	},
-
-	/**
-	 * Convenience prop for card subtitle (rendered in header slot if no header slot provided)
-	 */
-	subtitle: {
-		type: String,
-		required: false,
-		default: undefined,
-	},
-
-	/**
-	 * Visual variant for the card
-	 * EHMDS custom variants (not in FCard)
-	 */
-	variant: {
-		type: String,
-		default: "default",
-		validator: (value) => {
-			return ["default", "bordered", "elevated", "compact"].includes(value);
-		},
-	},
-
-	/**
-	 * Whether this card is in an error state
-	 * When true, sets focusRef for validation
-	 */
-	hasError: {
-		type: Boolean,
-		default: false,
-	},
-
-	/**
-	 * Element ref to focus when card is in error state
-	 * This maps to FCard's focusRef prop
-	 */
-	errorRef: {
-		type: [HTMLElement, null],
-		default: null,
-	},
+const props = withDefaults(defineProps<EhmCardProps>(), {
+	variant: "default",
+	hasError: false,
+	errorRef: null,
 });
 
 /**
  * Emit all standard events that consumers might expect
  * These are forwarded from FCard without transformation
  */
-defineEmits({
-	click: (event) => event instanceof MouseEvent,
-});
+interface EhmCardEmits {
+	click: [event: MouseEvent];
+}
+
+const emit = defineEmits<EhmCardEmits>();
 
 /**
  * Compute classes based on EHMDS variant system

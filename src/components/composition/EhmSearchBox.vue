@@ -112,8 +112,8 @@
 	</div>
 </template>
 
-<script setup>
-import { ref, computed, watch } from "vue";
+<script setup lang="ts">
+import { computed, ref, type ComputedRef, type Ref } from "vue";
 import { FTextField } from "@fkui/vue";
 
 /**
@@ -134,69 +134,53 @@ defineOptions({
 	inheritAttrs: false,
 });
 
-const props = defineProps({
+interface EhmSearchBoxProps {
 	/** Placeholder text for search input */
-	placeholder: {
-		type: String,
-		required: false,
-		default: "Search...",
-	},
+	placeholder?: string;
 	/** Disabled state */
-	disabled: {
-		type: Boolean,
-		required: false,
-		default: false,
-	},
+	disabled?: boolean;
 	/** Show search button icon */
-	showIcon: {
-		type: Boolean,
-		required: false,
-		default: true,
-	},
+	showIcon?: boolean;
 	/** Make search box expandable */
-	expandable: {
-		type: Boolean,
-		required: false,
-		default: false,
-	},
+	expandable?: boolean;
 	/** Minimum characters before search is enabled */
-	minLength: {
-		type: Number,
-		required: false,
-		default: 0,
-	},
+	minLength?: number;
 	/** Debounce delay in milliseconds */
-	debounce: {
-		type: Number,
-		required: false,
-		default: 300,
-	},
+	debounce?: number;
 	/** Initial search query */
-	modelValue: {
-		type: String,
-		required: false,
-		default: "",
-	},
+	modelValue?: string;
+}
+
+const props = withDefaults(defineProps<EhmSearchBoxProps>(), {
+	placeholder: "Search...",
+	disabled: false,
+	showIcon: true,
+	expandable: false,
+	minLength: 0,
+	debounce: 300,
+	modelValue: "",
 });
 
-const emit = defineEmits({
-	"update:modelValue": (value) => typeof value === "string",
-	search: (query) => typeof query === "string",
-	clear: () => true,
-	"update:expanded": (value) => typeof value === "boolean",
-});
+interface EhmSearchBoxEmits {
+	"update:modelValue": [value: string];
+	search: [query: string];
+	clear: [];
+	"update:expanded": [value: boolean];
+}
+
+const emit = defineEmits<EhmSearchBoxEmits>();
 
 // === State ===
-const isExpanded = ref(false);
-const isLoading = ref(false);
-const hasSearched = ref(false);
-let debounceTimer = null;
+const isExpanded: Ref<boolean> = ref(false);
+const isLoading: Ref<boolean> = ref(false);
+const hasSearched: Ref<boolean> = ref(false);
+let debounceTimer: number | ReturnType<typeof setTimeout> | null = null;
 
 // === Computed ===
 // Use computed getter/setter for two-way binding with parent
-const searchQuery = computed({
-	get: () => props.modelValue,
-	set: (value) => {
+const searchQuery: ComputedRef<string> = computed({
+	get: () => props.modelValue ?? "",
+	set: (value: string) => {
 		emit("update:modelValue", value);
 
 		// Clear existing timer
@@ -205,7 +189,7 @@ const searchQuery = computed({
 		}
 
 		// Debounce search
-		const query = String(value || "").trim();
+		const query = value.trim();
 		if (query.length >= props.minLength) {
 			if (props.debounce > 0) {
 				debounceTimer = setTimeout(() => {
@@ -217,12 +201,13 @@ const searchQuery = computed({
 		}
 	}
 });
+
 const searchInputId = computed(
 	() => `ehm-search-${Math.random().toString(36).slice(2, 11)}`,
 );
 
 const hasQuery = computed(() => {
-	const query = String(searchQuery.value || "").trim();
+	const query = (searchQuery.value ?? "").trim();
 	return query.length >= props.minLength;
 });
 
@@ -242,7 +227,7 @@ const searchBoxClasses = computed(() => ({
 // === Methods ===
 // Note: @update:model-value is no longer needed since computed setter handles updates
 const performSearch = () => {
-	const query = String(searchQuery.value || "").trim();
+	const query = (searchQuery.value ?? "").trim();
 	if (query.length < props.minLength) {
 		return;
 	}

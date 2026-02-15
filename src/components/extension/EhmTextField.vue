@@ -55,9 +55,12 @@
 	</div>
 </template>
 
-<script setup>
-import { computed, ref, watch } from "vue";
+<script setup lang="ts">
+import { computed, ref, watch, type Ref } from "vue";
 import { FTextField } from "@fkui/vue";
+
+type InputType = "text" | "email" | "tel" | "url" | "password" | "number" | "search";
+type TextFieldVariant = "default" | "success" | "warning" | "error";
 
 /**
  * EhmTextField - Extension Pattern
@@ -80,117 +83,69 @@ defineOptions({
 /**
  * EHMDS Extended API - includes FTextField props plus EHMDS additions
  */
-const props = defineProps({
+interface EhmTextFieldProps {
 	// === FTextField props (forwarded) ===
 	/** Unique identifier for the input */
-	id: {
-		type: String,
-		required: false,
-		default: undefined,
-	},
+	id?: string;
 	/** Input value (v-model) */
-	modelValue: {
-		type: [String, Number],
-		required: false,
-		default: undefined,
-	},
+	modelValue?: string | number;
 	/** Input type */
-	type: {
-		type: String,
-		required: false,
-		default: "text",
-		validator: (value) =>
-			["text", "email", "tel", "url", "password", "number", "search"].includes(
-				value,
-			),
-	},
+	type?: InputType;
 	/** Placeholder text */
-	placeholder: {
-		type: String,
-		required: false,
-		default: "",
-	},
+	placeholder?: string;
 	/** Disabled state */
-	disabled: {
-		type: Boolean,
-		required: false,
-		default: false,
-	},
+	disabled?: boolean;
 	/** Readonly state */
-	readonly: {
-		type: Boolean,
-		required: false,
-		default: false,
-	},
+	readonly?: boolean;
 	/** Required field */
-	required: {
-		type: Boolean,
-		required: false,
-		default: false,
-	},
+	required?: boolean;
 	/** Display inline */
-	inline: {
-		type: Boolean,
-		required: false,
-		default: false,
-	},
+	inline?: boolean;
 
 	// === EHMDS extensions ===
 	/** Label text */
-	label: {
-		type: String,
-		required: false,
-		default: "",
-	},
+	label?: string;
 	/** Helper text displayed below input */
-	helperText: {
-		type: String,
-		required: false,
-		default: "",
-	},
+	helperText?: string;
 	/** Error message */
-	errorMessage: {
-		type: String,
-		required: false,
-		default: "",
-	},
+	errorMessage?: string;
 	/** Error state */
-	hasError: {
-		type: Boolean,
-		required: false,
-		default: false,
-	},
+	hasError?: boolean;
 	/** Maximum character length */
-	maxLength: {
-		type: Number,
-		required: false,
-		default: null,
-	},
+	maxLength?: number | null;
 	/** Show character count */
-	showCharacterCount: {
-		type: Boolean,
-		required: false,
-		default: false,
-	},
+	showCharacterCount?: boolean;
 	/** Variant styling */
-	variant: {
-		type: String,
-		required: false,
-		default: "default",
-		validator: (value) =>
-			["default", "success", "warning", "error"].includes(value),
-	},
+	variant?: TextFieldVariant;
+}
+
+const props = withDefaults(defineProps<EhmTextFieldProps>(), {
+	type: "text",
+	placeholder: "",
+	disabled: false,
+	readonly: false,
+	required: false,
+	inline: false,
+	label: "",
+	helperText: "",
+	errorMessage: "",
+	hasError: false,
+	maxLength: null,
+	showCharacterCount: false,
+	variant: "default",
 });
 
-const emit = defineEmits({
-	"update:modelValue": (value) => true,
-	focus: (event) => event instanceof FocusEvent,
-	blur: (event) => event instanceof FocusEvent,
-});
+interface EhmTextFieldEmits {
+	"update:modelValue": [value: string | number];
+	focus: [event: FocusEvent];
+	blur: [event: FocusEvent];
+}
+
+const emit = defineEmits<EhmTextFieldEmits>();
 
 // === State ===
-const isFocused = ref(false);
-const internalValue = ref(props.modelValue);
+const isFocused: Ref<boolean> = ref(false);
+const internalValue: Ref<string | number | undefined> = ref(props.modelValue);
 
 // === Computed ===
 const inputId = computed(() => props.id || `ehm-text-field-${Math.random().toString(36).slice(2, 11)}`);
@@ -212,17 +167,17 @@ const characterCountText = computed(() => {
 });
 
 // === Methods ===
-const handleUpdate = (value) => {
+const handleUpdate = (value: string | number) => {
 	internalValue.value = value;
 	emit("update:modelValue", value);
 };
 
-const handleFocus = (event) => {
+const handleFocus = (event: FocusEvent) => {
 	isFocused.value = true;
 	emit("focus", event);
 };
 
-const handleBlur = (event) => {
+const handleBlur = (event: FocusEvent) => {
 	isFocused.value = false;
 	emit("blur", event);
 };

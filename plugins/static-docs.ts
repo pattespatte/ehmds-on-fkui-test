@@ -1,0 +1,60 @@
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import type { Plugin } from 'vite'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+interface StaticDocsPluginOptions {
+  routes?: string[]
+  outDir?: string
+  base?: string
+}
+
+/**
+ * Vite plugin to generate static HTML files for documentation routes
+ * This enables GitHub Pages to serve documentation pages with HTTP 200
+ */
+export function staticDocsPlugin(options: StaticDocsPluginOptions = {}): Plugin {
+  const {
+    routes = [],
+    outDir = 'dist',
+    base = '/',
+  } = options
+
+  return {
+    name: 'static-docs-generator',
+    closeBundle: async () => {
+      // Read the generated index.html
+      const indexPath = path.resolve(__dirname, '..', outDir, 'index.html')
+
+      // Check if index.html exists
+      if (!fs.existsSync(indexPath)) {
+        console.log('[static-docs] index.html not found, skipping static page generation')
+        return
+      }
+
+      const indexHtml = fs.readFileSync(indexPath, 'utf-8')
+
+      // Generate HTML files for each route
+      for (const route of routes) {
+        // Remove base path from route and ensure leading slash
+        let routePath = route.replace(new RegExp(`^${base.replace('/', '\\/')}`), '/')
+        if (!routePath.startsWith('/')) {
+          routePath = '/' + routePath
+        }
+
+        // Create directory structure
+        const filePath = path.resolve(__dirname, '..', outDir, routePath.slice(1), 'index.html')
+
+        // Create directory if it doesn't exist
+        fs.mkdirSync(path.dirname(filePath), { recursive: true })
+
+        // Copy index.html to the new location
+        fs.writeFileSync(filePath, indexHtml)
+
+        console.log(`[static-docs] Generated: ${routePath}`)
+      }
+    }
+  }
+}

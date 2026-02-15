@@ -70,7 +70,7 @@ Combines multiple FKUI components into a higher-level, domain-specific component
 ## Tech Stack
 
 - **Vue 3** (Composition API + `<script setup>`)
-- **TypeScript**
+- **TypeScript** (full type safety throughout)
 - **Vite** (build tool + dev server)
 - **Vue Router** (routing for demo and docs)
 - **FKUI packages:** `@fkui/vue`, `@fkui/design`, `@fkui/logic`, `@fkui/date`, `@fkui/theme-default`
@@ -118,10 +118,17 @@ src/
 ├── assets/
 │   └── global.css              # Global styles, FKUI imports, EHMDS CSS variables
 ├── themes/
-│   └── default.js              # Theme configuration with generateCSSVariables()
+│   ├── default.ts              # Theme configuration with generateCSSVariables()
+│   └── types.ts                # TypeScript type definitions for themes
 ├── App.vue                     # Demo app showcasing all components
-├── main.js                     # App entry point
-└── index.js                    # Design system entry point (plugin exports)
+├── main.ts                     # App entry point
+├── index.ts                    # Design system entry point (plugin exports)
+├── types.ts                    # Main EHMDS type definitions
+├── vite-env.d.ts               # Vue module type declarations
+├── router/
+│   └── index.ts                # Vue Router configuration
+└── utils/
+    └── markdown.ts             # Markdown utility functions
 docs/
 └── architecture/               # Architecture pattern documentation
     ├── overview.md             # High-level overview
@@ -137,8 +144,9 @@ docs/
 ```bash
 npm install              # Install dependencies
 npm run demo             # Start demo app (includes demos and docs)
-npm run build            # Build design system for production
+npm run build            # Build design system for production (includes type check)
 npm run preview          # Preview production build
+npm run type-check       # Run TypeScript type checking
 npm run lint             # Lint code (ESLint)
 npm run lint:fix         # Auto-fix linting issues
 npm run update:fkui-deps # Update FKUI dependencies to latest
@@ -159,7 +167,7 @@ npm run update:fkui-deps # Update FKUI dependencies to latest
 
 FKUI components are imported from `@fkui/vue`:
 
-```javascript
+```typescript
 import { FCard, FTextField, FCrudButton, FExpandable, FBadge } from '@fkui/vue';
 ```
 
@@ -189,9 +197,11 @@ When adding new components to EHMDS:
 
 1. **Choose the appropriate pattern** based on your needs
 2. **Follow the conventions** for that pattern
-3. **Document your decision** in an ADR (Architecture Decision Record)
-4. **Add to this catalog** with the pattern used
-5. **Test against FKUI updates** to ensure compatibility
+3. **Use TypeScript** for all new components with proper type definitions
+4. **Run type checking** before committing: `npm run type-check`
+5. **Document your decision** in an ADR (Architecture Decision Record)
+6. **Add to this catalog** with the pattern used
+7. **Test against FKUI updates** to ensure compatibility
 
 ## Resources
 

@@ -10,9 +10,11 @@
 	</FBadge>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
 import { FBadge } from "@fkui/vue";
+
+type BadgeStatus = "default" | "warning" | "error" | "success" | "info" | "brand" | "neutral";
 
 /**
  * EhmBadge - Token Override Pattern
@@ -42,60 +44,41 @@ defineOptions({
  * EHMDS can optionally define its own status values
  * that map to FKUI's status values
  */
-const props = defineProps({
+interface EhmBadgeProps {
 	/**
 	 * EHMDS-specific status values (map to FKUI statuses)
 	 * EHMDS: 'brand' | 'info' | 'neutral'
 	 * FKUI: 'default' | 'warning' | 'error' | 'success' | 'info'
 	 */
-	status: {
-		type: String,
-		required: false,
-		default: "default",
-		validator: (value) => {
-			// Accept both FKUI and EHMDS status values
-			const validValues = [
-				// FKUI values (pass through)
-				"default",
-				"warning",
-				"error",
-				"success",
-				"info",
-				// EHMDS values (map to FKUI)
-				"brand",
-				"neutral",
-			];
-			return validValues.includes(value);
-		},
-	},
+	status?: BadgeStatus;
+	/** Inverted color scheme (passed to FBadge) */
+	inverted?: boolean;
+}
 
-	/**
-	 * Inverted color scheme (passed to FBadge)
-	 */
-	inverted: {
-		type: Boolean,
-		required: false,
-		default: false,
-	},
+const props = withDefaults(defineProps<EhmBadgeProps>(), {
+	status: "default",
+	inverted: false,
 });
+
+type FkuiBadgeStatus = "default" | "warning" | "error" | "success" | "info";
 
 /**
  * Map EHMDS status values to FKUI status values
  * This allows EHMDS to have its own status naming convention
  * while using FBadge's implementation
  */
-const mappedStatus = computed(() => {
-	const statusMap = {
+const mappedStatus = computed<FkuiBadgeStatus>(() => {
+	const statusMap: Record<string, FkuiBadgeStatus> = {
 		// EHMDS -> FKUI mapping
 		brand: "default", // Use FBadge's default but override with brand colors
 		neutral: "info", // Use FBadge's info but override with neutral colors
 	};
-	return statusMap[props.status] || props.status;
+	return statusMap[props.status] || (props.status as FkuiBadgeStatus);
 });
 
-defineEmits({
+defineEmits<{
 	// FBadge doesn't emit events, but we include for consistency
-});
+}>();
 </script>
 
 <style scoped>

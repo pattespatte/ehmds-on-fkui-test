@@ -10,11 +10,12 @@
     "src"
   ],
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && vue-tsc --noEmit",
     "build:watch": "vite build --watch",
     "preview": "vite preview",
-    "demo": "vite --config demo/vite.config.js",
-    "demo:preview": "vite preview --config demo/vite.config.js",
+    "demo": "vite --config demo/vite.config.ts",
+    "demo:preview": "vite preview --config demo/vite.config.ts",
+    "type-check": "vue-tsc --noEmit",
     "lint": "eslint src --ext .vue,.js,.ts",
     "lint:fix": "eslint src --ext .vue,.js,.ts --fix",
     "update:fkui-deps": "node scripts/update-fkui-deps.js",
@@ -48,19 +49,25 @@
     "vue-router": "^5.0.2"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.55.0",
+    "@typescript-eslint/parser": "^8.55.0",
     "@vitejs/plugin-vue": "^5.2.4",
+    "@vitest/ui": "^3.0.9",
     "@vue/eslint-config-prettier": "10.2.0",
     "@vue/test-utils": "^2.4.6",
-    "@vitest/ui": "^3.0.9",
+    "@vue/tsconfig": "^0.8.1",
     "eslint": "9.29.0",
     "eslint-plugin-vue": "9.33.0",
     "jsdom": "^26.0.0",
     "prettier": "3.6.0",
     "sass": "1.89.2",
+    "typescript": "^5.9.3",
     "vite": "^6.3.5",
     "vite-plugin-static-copy": "^3.2.0",
     "vitest": "^3.0.9",
-    "vue": "^3.5.17"
+    "vue": "^3.5.17",
+    "vue-eslint-parser": "^10.4.0",
+    "vue-tsc": "^3.2.4"
   },
   "repository": {
     "type": "git",
