@@ -55,8 +55,8 @@
 			<!-- Token Override Pattern -->
 			<section id="token-override" class="demo-section pattern-section">
 				<div class="pattern-header">
-					<div class="pattern-badge">🎨 Token Override Pattern</div>
-					<h2>EhmBadge</h2>
+					<h2>🎨 Token Override Pattern</h2>
+					<h3>EhmBadge</h3>
 					<p class="pattern-description">
 						Uses FKUI's <code>FBadge</code> as-is, only overriding CSS custom
 						properties for visual changes. Minimal code, maximum FKUI
@@ -96,8 +96,8 @@
 			<!-- Wrapper Pattern -->
 			<section id="wrapper" class="demo-section pattern-section">
 				<div class="pattern-header">
-					<div class="pattern-badge">📦 Wrapper/Facade Pattern</div>
-					<h2>EhmCard</h2>
+					<h2>📦 Wrapper/Facade Pattern</h2>
+					<h3>EhmCard</h3>
 					<p class="pattern-description">
 						Wraps FKUI's <code>FCard</code> with a simplified, customized EHMDS
 						API. Transforms props, slots, and events between the two APIs.
@@ -160,8 +160,8 @@
 			<!-- Extension Pattern -->
 			<section id="extension" class="demo-section pattern-section">
 				<div class="pattern-header">
-					<div class="pattern-badge">➕ Extension Pattern</div>
-					<h2>EhmTextField</h2>
+					<h2>➕ Extension Pattern</h2>
+					<h3>EhmTextField</h3>
 					<p class="pattern-description">
 						Extends FKUI's <code>FTextField</code> with additional features while
 						preserving all original functionality. Adds character count, helper text,
@@ -262,8 +262,8 @@
 			<!-- Composition Pattern -->
 			<section id="composition" class="demo-section pattern-section">
 				<div class="pattern-header">
-					<div class="pattern-badge">🧩 Composition Pattern</div>
-					<h2>EhmSearchBox</h2>
+					<h2>🧩 Composition Pattern</h2>
+					<h3>EhmSearchBox</h3>
 					<p class="pattern-description">
 						Composes multiple FKUI components (<code>FTextField</code> +
 						<code>FCrudButton</code> + <code>FExpandable</code>) into a higher-level,
@@ -698,17 +698,6 @@ const scrollToSection = (sectionId) => {
 .pattern-header {
 	margin-bottom: 2rem;
 	grid-column: 1 / -1;
-}
-
-.pattern-badge {
-	display: inline-block;
-	padding: 0.25rem 0.75rem;
-	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-	color: white;
-	border-radius: 1rem;
-	font-size: 0.875rem;
-	font-weight: 600;
-	margin-bottom: 0.5rem;
 }
 
 .pattern-header h2 {
