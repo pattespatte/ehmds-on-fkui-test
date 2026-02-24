@@ -3,11 +3,15 @@
 		<header class="header">
 			<h1>EHMDS - Layered Design System on FKUI</h1>
 			<p>
-				Proof-of-concept exploring architectural patterns for building one
-				design system on another
+				Proof-of-concept exploring architectural patterns for building
+				one design system on another
 			</p>
 			<div class="header-links">
-				<a href="https://github.com/pattespatte/ehmds-on-fkui-test" target="_blank">GitHub</a>
+				<a
+					href="https://github.com/pattespatte/ehmds-on-fkui-test"
+					target="_blank"
+					>GitHub</a
+				>
 				<router-link to="/docs/">Architecture Docs</router-link>
 			</div>
 		</header>
@@ -16,7 +20,10 @@
 		<nav class="pattern-nav">
 			<h2>Architectural Patterns</h2>
 			<div class="pattern-list">
-				<div class="pattern-item" @click="scrollToSection('token-override')">
+				<div
+					class="pattern-item"
+					@click="scrollToSection('token-override')"
+				>
 					<div class="pattern-icon">🎨</div>
 					<div class="pattern-info">
 						<h3>Token Override</h3>
@@ -40,11 +47,17 @@
 					</div>
 					<div class="pattern-arrow">→</div>
 				</div>
-				<div class="pattern-item" @click="scrollToSection('composition')">
+				<div
+					class="pattern-item"
+					@click="scrollToSection('composition')"
+				>
 					<div class="pattern-icon">🧩</div>
 					<div class="pattern-info">
 						<h3>Composition</h3>
-						<p>Multiple FKUI components, one domain component (~150 lines)</p>
+						<p>
+							Multiple FKUI components, one domain component (~150
+							lines)
+						</p>
 					</div>
 					<div class="pattern-arrow">→</div>
 				</div>
@@ -56,17 +69,21 @@
 			<section id="token-override" class="demo-section pattern-section">
 				<div class="pattern-header">
 					<h2>🎨 Token Override Pattern</h2>
-					<h3>EhmBadge</h3>
 					<p class="pattern-description">
-						Uses FKUI's <code>FBadge</code> as-is, only overriding CSS custom
-						properties for visual changes. Minimal code, maximum FKUI
-						compatibility.
+						Uses FKUI's <code>FBadge</code> as-is, only overriding
+						CSS custom properties for visual changes. Minimal code,
+						maximum FKUI compatibility.
 					</p>
-					<router-link to="/docs/architecture/token-override" class="pattern-docs-link">Read documentation →</router-link>
+					<router-link
+						to="/docs/architecture/token-override"
+						class="pattern-docs-link"
+						>Read documentation →</router-link
+					>
 				</div>
 
 				<div class="demo-block">
-					<h3>All Status Variants</h3>
+					<span class="example-label">[EXAMPLE COMPONENT]</span>
+					<h3>EhmBadge</h3>
 					<div class="demo-row">
 						<EhmBadge status="brand">Brand (EHMDS)</EhmBadge>
 						<EhmBadge status="neutral">Neutral (EHMDS)</EhmBadge>
@@ -79,17 +96,26 @@
 				</div>
 
 				<div class="demo-block">
-					<h3>Inverted Variants</h3>
+					<span class="example-label">[EXAMPLE COMPONENT]</span>
+					<h3>EhmBadge</h3>
 					<div class="demo-row">
-						<EhmBadge status="brand" :inverted="true">Brand Inverted</EhmBadge>
-						<EhmBadge status="neutral" :inverted="true">Neutral Inverted</EhmBadge>
-						<EhmBadge status="success" :inverted="true">Success Inverted</EhmBadge>
+						<EhmBadge status="brand" :inverted="true"
+							>Brand Inverted</EhmBadge
+						>
+						<EhmBadge status="neutral" :inverted="true"
+							>Neutral Inverted</EhmBadge
+						>
+						<EhmBadge status="success" :inverted="true"
+							>Success Inverted</EhmBadge
+						>
 					</div>
 				</div>
 
 				<div class="code-block">
-					<pre>&lt;!-- Minimal code - just CSS overrides --&gt;
-&lt;EhmBadge status="brand"&gt;New Feature&lt;/EhmBadge&gt;</pre>
+					<pre>
+&lt;!-- Minimal code - just CSS overrides --&gt;
+&lt;EhmBadge status="brand"&gt;New Feature&lt;/EhmBadge&gt;</pre
+					>
 				</div>
 			</section>
 
@@ -97,16 +123,21 @@
 			<section id="wrapper" class="demo-section pattern-section">
 				<div class="pattern-header">
 					<h2>📦 Wrapper/Facade Pattern</h2>
-					<h3>EhmCard</h3>
 					<p class="pattern-description">
-						Wraps FKUI's <code>FCard</code> with a simplified, customized EHMDS
-						API. Transforms props, slots, and events between the two APIs.
+						Wraps FKUI's <code>FCard</code> with a simplified,
+						customized EHMDS API. Transforms props, slots, and
+						events between the two APIs.
 					</p>
-					<router-link to="/docs/architecture/wrapper" class="pattern-docs-link">Read documentation →</router-link>
+					<router-link
+						to="/docs/architecture/wrapper"
+						class="pattern-docs-link"
+						>Read documentation →</router-link
+					>
 				</div>
 
 				<div class="demo-block">
-					<h3>EHMDS Variant System</h3>
+					<span class="example-label">[EXAMPLE COMPONENT]</span>
+					<h3>EhmCard</h3>
 					<div class="card-grid">
 						<EhmCard variant="default">
 							<template #header>Default Variant</template>
@@ -131,29 +162,37 @@
 				</div>
 
 				<div class="demo-block">
-					<h3>Error State Handling</h3>
+					<span class="example-label">[EXAMPLE COMPONENT]</span>
+					<h3>EhmCard</h3>
 					<div class="card-grid">
 						<EhmCard variant="default" :has-error="false">
 							<template #header>Normal State</template>
 							<p>This card is in a normal state.</p>
 						</EhmCard>
 
-						<EhmCard variant="default" :has-error="true">
+						<EhmCard variant="default" :has-error="showError">
 							<template #header>Error State</template>
 							<p>This card has an error. Note the red border.</p>
 							<template #footer>
-								<button class="toggle-button" @click="showError = !showError">Toggle</button>
+								<button
+									class="toggle-button"
+									@click="showError = !showError"
+								>
+									Toggle
+								</button>
 							</template>
 						</EhmCard>
 					</div>
 				</div>
 
 				<div class="code-block">
-					<pre>&lt;!-- Simplified EHMDS API vs FKUI --&gt;
+					<pre>
+&lt;!-- Simplified EHMDS API vs FKUI --&gt;
 &lt;EhmCard variant="elevated" :has-error="hasError"&gt;
   &lt;template #header&gt;Title&lt;/template&gt;
   Content here
-&lt;/EhmCard&gt;</pre>
+&lt;/EhmCard&gt;</pre
+					>
 				</div>
 			</section>
 
@@ -161,17 +200,22 @@
 			<section id="extension" class="demo-section pattern-section">
 				<div class="pattern-header">
 					<h2>➕ Extension Pattern</h2>
-					<h3>EhmTextField</h3>
 					<p class="pattern-description">
-						Extends FKUI's <code>FTextField</code> with additional features while
-						preserving all original functionality. Adds character count, helper text,
-						error states, and prefix/suffix slots.
+						Extends FKUI's <code>FTextField</code> with additional
+						features while preserving all original functionality.
+						Adds character count, helper text, error states, and
+						prefix/suffix slots.
 					</p>
-					<router-link to="/docs/architecture/extension" class="pattern-docs-link">Read documentation →</router-link>
+					<router-link
+						to="/docs/architecture/extension"
+						class="pattern-docs-link"
+						>Read documentation →</router-link
+					>
 				</div>
 
 				<div class="demo-block">
-					<h3>Basic Extensions</h3>
+					<span class="example-label">[EXAMPLE COMPONENT]</span>
+					<h3>EhmTextField</h3>
 					<div class="form-grid">
 						<EhmTextField
 							v-model="name"
@@ -200,7 +244,8 @@
 				</div>
 
 				<div class="demo-block">
-					<h3>Error States</h3>
+					<span class="example-label">[EXAMPLE COMPONENT]</span>
+					<h3>EhmTextField</h3>
 					<div class="form-grid">
 						<EhmTextField
 							v-model="username"
@@ -223,7 +268,8 @@
 				</div>
 
 				<div class="demo-block">
-					<h3>With Prefix/Suffix Slots</h3>
+					<span class="example-label">[EXAMPLE COMPONENT]</span>
+					<h3>EhmTextField</h3>
 					<div class="form-grid">
 						<EhmTextField
 							v-model="website"
@@ -246,7 +292,8 @@
 				</div>
 
 				<div class="code-block">
-					<pre>&lt;!-- EHMDS extensions on top of FTextField --&gt;
+					<pre>
+&lt;!-- EHMDS extensions on top of FTextField --&gt;
 &lt;EhmTextField
   v-model="name"
   label="Full Name"
@@ -255,7 +302,8 @@
   helper-text="Enter your first and last name"
   :error-message="nameError"
   :has-error="!!nameError"
-/&gt;</pre>
+/&gt;</pre
+					>
 				</div>
 			</section>
 
@@ -263,17 +311,24 @@
 			<section id="composition" class="demo-section pattern-section">
 				<div class="pattern-header">
 					<h2>🧩 Composition Pattern</h2>
-					<h3>EhmSearchBox</h3>
 					<p class="pattern-description">
-						Composes multiple FKUI components (<code>FTextField</code> +
-						<code>FCrudButton</code> + <code>FExpandable</code>) into a higher-level,
-						domain-specific search component with coordinated state and behavior.
+						Composes multiple FKUI components (<code
+							>FTextField</code
+						>
+						+ <code>FCrudButton</code> + <code>FExpandable</code>)
+						into a higher-level, domain-specific search component
+						with coordinated state and behavior.
 					</p>
-					<router-link to="/docs/architecture/composition" class="pattern-docs-link">Read documentation →</router-link>
+					<router-link
+						to="/docs/architecture/composition"
+						class="pattern-docs-link"
+						>Read documentation →</router-link
+					>
 				</div>
 
 				<div class="demo-block">
-					<h3>Basic Search</h3>
+					<span class="example-label">[EXAMPLE COMPONENT]</span>
+					<h3>EhmSearchBox</h3>
 					<div class="search-demo">
 						<EhmSearchBox
 							v-model="searchQuery"
@@ -284,13 +339,28 @@
 						>
 							<template #results="{ query, isLoading }">
 								<div class="search-results">
-									<div v-if="isLoading" class="search-loading">Searching...</div>
-									<div v-else-if="query && searchResults.length === 0" class="search-empty">
+									<div
+										v-if="isLoading"
+										class="search-loading"
+									>
+										Searching...
+									</div>
+									<div
+										v-else-if="
+											query && searchResults.length === 0
+										"
+										class="search-empty"
+									>
 										No results found for "{{ query }}"
 									</div>
 									<div v-else-if="query" class="search-list">
-										<div v-for="result in searchResults" :key="result.id" class="search-item">
-											<strong>{{ result.name }}</strong> - {{ result.email }}
+										<div
+											v-for="result in searchResults"
+											:key="result.id"
+											class="search-item"
+										>
+											<strong>{{ result.name }}</strong> -
+											{{ result.email }}
 										</div>
 									</div>
 								</div>
@@ -300,7 +370,8 @@
 				</div>
 
 				<div class="demo-block">
-					<h3>Expandable with Filters</h3>
+					<span class="example-label">[EXAMPLE COMPONENT]</span>
+					<h3>EhmSearchBox</h3>
 					<div class="search-demo">
 						<EhmSearchBox
 							v-model="advancedQuery"
@@ -312,15 +383,33 @@
 							<template #filters="{ query }">
 								<div class="search-filters">
 									<div class="filter-group">
-										<label><input type="checkbox" v-model="filters.inStock" /> In Stock Only</label>
-										<label><input type="checkbox" v-model="filters.onSale" /> On Sale</label>
+										<label
+											><input
+												type="checkbox"
+												v-model="filters.inStock"
+											/>
+											In Stock Only</label
+										>
+										<label
+											><input
+												type="checkbox"
+												v-model="filters.onSale"
+											/>
+											On Sale</label
+										>
 									</div>
 									<div class="filter-group">
 										<label>Category:</label>
 										<select v-model="filters.category">
-											<option value="">All Categories</option>
-											<option value="electronics">Electronics</option>
-											<option value="clothing">Clothing</option>
+											<option value="">
+												All Categories
+											</option>
+											<option value="electronics">
+												Electronics
+											</option>
+											<option value="clothing">
+												Clothing
+											</option>
 											<option value="books">Books</option>
 										</select>
 									</div>
@@ -329,14 +418,32 @@
 
 							<template #results="{ query, isLoading }">
 								<div class="search-results">
-									<div v-if="isLoading" class="search-loading">Searching...</div>
-									<div v-else-if="query && productResults.length === 0" class="search-empty">
+									<div
+										v-if="isLoading"
+										class="search-loading"
+									>
+										Searching...
+									</div>
+									<div
+										v-else-if="
+											query && productResults.length === 0
+										"
+										class="search-empty"
+									>
 										No products found for "{{ query }}"
 									</div>
 									<div v-else-if="query" class="product-list">
-										<div v-for="product in productResults" :key="product.id" class="product-item">
-											<span class="product-name">{{ product.name }}</span>
-											<span class="product-price">${{ product.price }}</span>
+										<div
+											v-for="product in productResults"
+											:key="product.id"
+											class="product-item"
+										>
+											<span class="product-name">{{
+												product.name
+											}}</span>
+											<span class="product-price"
+												>${{ product.price }}</span
+											>
 										</div>
 									</div>
 								</div>
@@ -346,7 +453,8 @@
 				</div>
 
 				<div class="code-block">
-					<pre>&lt;!-- Domain component composing multiple FKUI components --&gt;
+					<pre>
+&lt;!-- Domain component composing multiple FKUI components --&gt;
 &lt;EhmSearchBox
   v-model="searchQuery"
   :expandable="true"
@@ -360,7 +468,8 @@
   &lt;template #results="{ query, isLoading }"&gt;
     &lt;!-- Custom results display --&gt;
   &lt;/template&gt;
-&lt;/EhmSearchBox&gt;</pre>
+&lt;/EhmSearchBox&gt;</pre
+					>
 				</div>
 			</section>
 
@@ -413,12 +522,21 @@
 
 		<footer class="footer">
 			<p>
-				EHMDS - A proof-of-concept exploring layered design system architecture
+				EHMDS - A proof-of-concept exploring layered design system
+				architecture
 			</p>
 			<p>
-				<a href="https://github.com/pattespatte/ehmds-on-fkui-test" target="_blank">GitHub</a>
+				<a
+					href="https://github.com/pattespatte/ehmds-on-fkui-test"
+					target="_blank"
+					>GitHub</a
+				>
 				<span>•</span>
-				<a href="https://designsystem.forsakringskassan.se/" target="_blank">FKUI</a>
+				<a
+					href="https://designsystem.forsakringskassan.se/"
+					target="_blank"
+					>FKUI</a
+				>
 				<span>•</span>
 				Built with Vue 3 + Vite
 			</p>
@@ -437,7 +555,7 @@ import EhmSearchBox from "../components/composition/EhmSearchBox.vue";
 // No specific state needed for badges
 
 // === Wrapper Demo State ===
-const showError = ref(false);
+const showError = ref(true);
 
 // === Extension Demo State ===
 const name = ref("");
@@ -451,14 +569,17 @@ const amount = ref("");
 // Validation errors
 const usernameError = computed(() => {
 	if (!username.value) return "";
-	if (username.value.length < 3) return "Username must be at least 3 characters";
-	if (!/^[a-zA-Z0-9_]+$/.test(username.value)) return "Username can only contain letters, numbers, and underscores";
+	if (username.value.length < 3)
+		return "Username must be at least 3 characters";
+	if (!/^[a-zA-Z0-9_]+$/.test(username.value))
+		return "Username can only contain letters, numbers, and underscores";
 	return "";
 });
 
 const passwordError = computed(() => {
 	if (!password.value) return "";
-	if (password.value.length < 8) return "Password must be at least 8 characters";
+	if (password.value.length < 8)
+		return "Password must be at least 8 characters";
 	return "";
 });
 
@@ -479,11 +600,46 @@ const searchResults = ref([]);
 
 // Mock product data
 const mockProducts = [
-	{ id: 1, name: "Wireless Mouse", price: 29.99, category: "electronics", inStock: true, onSale: false },
-	{ id: 2, name: "Mechanical Keyboard", price: 89.99, category: "electronics", inStock: true, onSale: true },
-	{ id: 3, name: "Cotton T-Shirt", price: 19.99, category: "clothing", inStock: true, onSale: false },
-	{ id: 4, name: "Programming Book", price: 39.99, category: "books", inStock: false, onSale: false },
-	{ id: 5, name: "USB-C Cable", price: 12.99, category: "electronics", inStock: true, onSale: true },
+	{
+		id: 1,
+		name: "Wireless Mouse",
+		price: 29.99,
+		category: "electronics",
+		inStock: true,
+		onSale: false,
+	},
+	{
+		id: 2,
+		name: "Mechanical Keyboard",
+		price: 89.99,
+		category: "electronics",
+		inStock: true,
+		onSale: true,
+	},
+	{
+		id: 3,
+		name: "Cotton T-Shirt",
+		price: 19.99,
+		category: "clothing",
+		inStock: true,
+		onSale: false,
+	},
+	{
+		id: 4,
+		name: "Programming Book",
+		price: 39.99,
+		category: "books",
+		inStock: false,
+		onSale: false,
+	},
+	{
+		id: 5,
+		name: "USB-C Cable",
+		price: 12.99,
+		category: "electronics",
+		inStock: true,
+		onSale: true,
+	},
 ];
 
 const productResults = ref([]);
@@ -502,9 +658,10 @@ const handleSearch = (query) => {
 
 	// Simulate search with delay
 	setTimeout(() => {
-		searchResults.value = mockUsers.filter(user =>
-			user.name.toLowerCase().includes(query.toLowerCase()) ||
-			user.email.toLowerCase().includes(query.toLowerCase())
+		searchResults.value = mockUsers.filter(
+			(user) =>
+				user.name.toLowerCase().includes(query.toLowerCase()) ||
+				user.email.toLowerCase().includes(query.toLowerCase()),
 		);
 	}, 300);
 };
@@ -516,19 +673,19 @@ const handleAdvancedSearch = (query) => {
 	}
 
 	setTimeout(() => {
-		let results = mockProducts.filter(product =>
-			product.name.toLowerCase().includes(query.toLowerCase())
+		let results = mockProducts.filter((product) =>
+			product.name.toLowerCase().includes(query.toLowerCase()),
 		);
 
 		// Apply filters
 		if (filters.inStock) {
-			results = results.filter(p => p.inStock);
+			results = results.filter((p) => p.inStock);
 		}
 		if (filters.onSale) {
-			results = results.filter(p => p.onSale);
+			results = results.filter((p) => p.onSale);
 		}
 		if (filters.category) {
-			results = results.filter(p => p.category === filters.category);
+			results = results.filter((p) => p.category === filters.category);
 		}
 
 		productResults.value = results;
@@ -549,7 +706,8 @@ const scrollToSection = (sectionId) => {
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 2rem;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 /* Header */
@@ -735,16 +893,32 @@ const scrollToSection = (sectionId) => {
 
 /* Demo Blocks */
 .demo-block {
-	background: #f8f9fa;
+	background: #ffffff;
 	padding: 1.5rem;
 	border-radius: 0.5rem;
-	border: 1px solid #e9ecef;
+	border: 1px solid #ced4da;
+}
+
+.example-label {
+	color: #6c757d;
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+.demo-block .example-label {
+	display: block;
+	padding: 0 0 0.5rem 0;
 }
 
 .demo-block h3 {
+	display: inline-block;
 	color: #495057;
 	margin: 0 0 1rem 0;
-	font-size: 1.25rem;
+	font-size: 1.1rem;
+	font-weight: 600;
+	letter-spacing: 0.025em;
 }
 
 .demo-row {

@@ -108,6 +108,7 @@ const cardClasses = computed(() => {
 .ehm-card {
 	/* Base styles override FCard */
 	border-radius: var(--ehmds-border-radius-large, 8px);
+	padding: var(--ehmds-spacing-4, 1rem);
 }
 
 /* EHMDS variant styles - these don't exist in FCard */
