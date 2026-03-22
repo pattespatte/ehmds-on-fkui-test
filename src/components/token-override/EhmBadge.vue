@@ -94,46 +94,67 @@ defineEmits<{
 
 /* ============================================
    FKUI Token Overrides for EHMDS Brand Colors
+
+   FKUI uses these CSS variables for badges:
+   - --fkds-color-feedback-background-*
+   - --fkds-color-text-primary
+   - --fkds-color-text-inverted
    ============================================ */
 
 /* Override FKUI badge styles when status="brand" (EHMDS custom) */
-/* Note: FBadge renders with class like c-badge--status-default */
-.ehm-badge:deep(.c-badge--status-default) {
-	/* Token overrides for brand styling */
-	--fk-badge-background: var(--ehmds-color-primary, #2563eb) !important;
-	--fk-badge-color: var(--ehmds-color-primary-contrast, #ffffff) !important;
+/* Note: FBadge renders with class like badge--default */
+.ehm-badge:deep(.badge--default) {
+	/* Token overrides for brand styling - override FKUI's neutral feedback colors */
+	--fkds-color-feedback-background-neutral-strong: var(--ehmds-color-primary, #2563eb) !important;
+	--fkds-color-feedback-border-neutral-strong: var(--ehmds-color-primary, #2563eb) !important;
+	--fkds-color-text-primary: var(--ehmds-color-primary-contrast, #ffffff) !important;
 }
 
 /* Override for neutral status (maps to FBadge's info) */
-.ehm-badge:deep(.c-badge--status-info) {
+.ehm-badge:deep(.badge--info) {
 	/* Token overrides for neutral styling */
-	--fk-badge-background: var(--ehmds-color-neutral-200, #e2e8f0) !important;
-	--fk-badge-color: var(--ehmds-color-text-primary, #0f172a) !important;
+	--fkds-color-feedback-background-info-strong: var(--ehmds-color-neutral-200, #e2e8f0) !important;
+	--fkds-color-feedback-border-info-strong: var(--ehmds-color-neutral-200, #e2e8f0) !important;
+	--fkds-color-text-inverted: var(--ehmds-color-text-primary, #0f172a) !important;
 }
 
 /* Override for error status (use EHMDS error color) */
-.ehm-badge:deep(.c-badge--status-error) {
-	--fk-badge-background: var(--ehmds-color-error, #ef4444) !important;
-	--fk-badge-color: var(--ehmds-color-error-contrast, #ffffff) !important;
+.ehm-badge:deep(.badge--error) {
+	--fkds-color-feedback-background-negative-strong: var(--ehmds-color-error, #ef4444) !important;
+	--fkds-color-feedback-border-negative-strong: var(--ehmds-color-error, #ef4444) !important;
 }
 
 /* Override for success status (use EHMDS success color) */
-.ehm-badge:deep(.c-badge--status-success) {
-	--fk-badge-background: var(--ehmds-color-success, #10b981) !important;
-	--fk-badge-color: var(--ehmds-color-success-contrast, #ffffff) !important;
+.ehm-badge:deep(.badge--success) {
+	--fkds-color-feedback-background-positive-strong: var(--ehmds-color-success, #10b981) !important;
+	--fkds-color-feedback-border-positive-strong: var(--ehmds-color-success, #10b981) !important;
 }
 
 /* Override for warning status (use EHMDS warning color) */
-.ehm-badge:deep(.c-badge--status-warning) {
-	--fk-badge-background: var(--ehmds-color-warning, #f59e0b) !important;
-	--fk-badge-color: var(--ehmds-color-warning-contrast, #212529) !important;
+.ehm-badge:deep(.badge--warning) {
+	--fkds-color-feedback-background-warning-strong: var(--ehmds-color-warning, #f59e0b) !important;
+	--fkds-color-feedback-border-warning-strong: var(--ehmds-color-warning, #f59e0b) !important;
 }
 
-/* Inverted state overrides */
-.ehm-badge:deep(.c-badge--inverted) {
-	/* Swap foreground/background for inverted state */
-	--fk-badge-background: var(--ehmds-color-background-primary, #ffffff) !important;
-	--fk-badge-color: var(--ehmds-color-primary, #2563eb) !important;
+/* Inverted state overrides - default inverted */
+.ehm-badge:deep(.badge--default-inverted) {
+	--fkds-color-feedback-background-neutral: var(--ehmds-color-primary-light, #3b82f6) !important;
+	--fkds-color-feedback-border-neutral: var(--ehmds-color-primary, #2563eb) !important;
+	--fkds-color-text-primary: var(--ehmds-color-primary-contrast, #ffffff) !important;
+}
+
+/* Inverted state overrides - info inverted */
+.ehm-badge:deep(.badge--info-inverted) {
+	--fkds-color-feedback-background-info: var(--ehmds-color-neutral-100, #f1f5f9) !important;
+	--fkds-color-feedback-border-info: var(--ehmds-color-neutral-300, #cbd5e1) !important;
+	--fkds-color-text-primary: var(--ehmds-color-text-primary, #0f172a) !important;
+}
+
+/* Inverted state overrides - success inverted */
+.ehm-badge:deep(.badge--success-inverted) {
+	--fkds-color-feedback-background-positive: var(--ehmds-color-success-light, #34d399) !important;
+	--fkds-color-feedback-border-positive: var(--ehmds-color-success, #10b981) !important;
+	--fkds-color-text-primary: var(--ehmds-color-text-primary, #0f172a) !important;
 }
 
 /* Additional EHMDS-specific styling (not token overrides, but cosmetic) */
