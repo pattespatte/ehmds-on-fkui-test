@@ -11,19 +11,12 @@
   ],
   "scripts": {
     "build": "vite build && vue-tsc --noEmit",
-    "build:watch": "vite build --watch",
-    "preview": "vite preview",
     "demo": "vite --config demo/vite.config.ts",
     "demo:preview": "vite preview --config demo/vite.config.ts",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint src --ext .vue,.js,.ts",
     "lint:fix": "eslint src --ext .vue,.js,.ts --fix",
-    "update:fkui-deps": "node scripts/update-fkui-deps.js",
-    "test": "vitest",
-    "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui",
-    "test:patterns": "vitest run -t 'pattern'"
+    "update:fkui-deps": "node scripts/update-fkui-deps.js"
   },
   "keywords": [
     "vue",
