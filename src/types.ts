@@ -5,28 +5,27 @@
  * and utilities.
  */
 
-import type { App } from 'vue'
-import type { PluginOptions, Theme } from './themes/types'
+import type { App } from "vue";
+import type { PluginOptions, Theme } from "./themes/types";
 
 /**
  * EHMDS Plugin Interface
  * Extends Vue's Plugin interface with EHMDS-specific options
  */
 export interface EHMDSPlugin {
-  install: (app: App, options?: PluginOptions) => void
+  install: (app: App, options?: PluginOptions) => void;
 }
 
 /**
  * Component types exported by EHMDS
  * These are the actual Vue component types
  */
-export type {
-  // Components will be typed when imported
-  // EhmCard,
-  // EhmTextField,
-  // EhmSearchBox,
-  // EhmBadge,
-} from './components/wrapper/EhmCard.vue'
+export type {} from // Components will be typed when imported
+// EhmCard,
+// EhmTextField,
+// EhmSearchBox,
+// EhmBadge,
+"./components/wrapper/EhmCard.vue";
 
 /**
  * Global properties injected by EHMDS
@@ -34,9 +33,9 @@ export type {
  */
 export interface EHMDSGlobalProperties {
   $ehmds: {
-    theme: Partial<Theme>
-    version: string
-  }
+    theme: Partial<Theme>;
+    version: string;
+  };
 }
 
 /**
@@ -44,15 +43,17 @@ export interface EHMDSGlobalProperties {
  * Use these for template ref typing
  */
 export interface EHMDSInstance {
-  $ehmds: EHMDSGlobalProperties['$ehmds']
+  $ehmds: EHMDSGlobalProperties["$ehmds"];
 }
 
 /**
  * EHMDS provide/inject keys
  */
-export const EHMDS_THEME_KEY = Symbol('ehmdsTheme') as InjectionKey<Partial<Theme>>
+export const EHMDS_THEME_KEY = Symbol("ehmdsTheme") as InjectionKey<
+  Partial<Theme>
+>;
 
-import type { InjectionKey } from 'vue'
+import type { InjectionKey } from "vue";
 
 /**
  * Re-export theme types for convenience
@@ -69,11 +70,14 @@ export type {
   ThemeZIndex,
   CSSVariables,
   PluginOptions,
-} from './themes/types'
+} from "./themes/types";
 
 /**
  * Common component prop types used across EHMDS
  */
-export type { CardVariant } from './components/wrapper/EhmCard.vue'
-export type { InputType, TextFieldVariant } from './components/extension/EhmTextField.vue'
-export type { BadgeStatus } from './components/token-override/EhmBadge.vue'
+export type { CardVariant } from "./components/wrapper/EhmCard.vue";
+export type {
+  InputType,
+  TextFieldVariant,
+} from "./components/extension/EhmTextField.vue";
+export type { BadgeStatus } from "./components/token-override/EhmBadge.vue";

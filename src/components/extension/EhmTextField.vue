@@ -1,65 +1,72 @@
 <template>
-	<!-- Extension pattern: EhmTextField extends FTextField's functionality -->
-	<div class="ehm-text-field" :class="fieldClasses">
-		<label v-if="label" :for="inputId" class="ehm-text-field__label">
-			{{ label }}
-			<span v-if="required" class="ehm-text-field__required">*</span>
-		</label>
+  <!-- Extension pattern: EhmTextField extends FTextField's functionality -->
+  <div class="ehm-text-field" :class="fieldClasses">
+    <label v-if="label" :for="inputId" class="ehm-text-field__label">
+      {{ label }}
+      <span v-if="required" class="ehm-text-field__required">*</span>
+    </label>
 
-		<!-- Extend FTextField with additional wrapper for EHMDS features -->
-		<div class="ehm-text-field__input-wrapper">
-			<!-- Prefix slot (EHMDS enhancement) -->
-			<span v-if="$slots.prefix" class="ehm-text-field__prefix">
-				<slot name="prefix" />
-			</span>
+    <!-- Extend FTextField with additional wrapper for EHMDS features -->
+    <div class="ehm-text-field__input-wrapper">
+      <!-- Prefix slot (EHMDS enhancement) -->
+      <span v-if="$slots.prefix" class="ehm-text-field__prefix">
+        <slot name="prefix" />
+      </span>
 
-			<!-- The extended FTextField component -->
-			<FTextField
-				:id="inputId"
-				v-model="internalValue"
-				:type="type"
-				:placeholder="placeholder"
-				:disabled="disabled"
-				:readonly="readonly"
-				:required="required"
-				:inline="inline"
-				:model-value="modelValue"
-				@update:model-value="handleUpdate"
-				@blur="handleBlur"
-				@focus="handleFocus"
-			/>
+      <!-- The extended FTextField component -->
+      <FTextField
+        :id="inputId"
+        v-model="internalValue"
+        :type="type"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :readonly="readonly"
+        :required="required"
+        :inline="inline"
+        :model-value="modelValue"
+        @update:model-value="handleUpdate"
+        @blur="handleBlur"
+        @focus="handleFocus"
+      />
 
-			<!-- Suffix slot (EHMDS enhancement) -->
-			<span v-if="$slots.suffix" class="ehm-text-field__suffix">
-				<slot name="suffix" />
-			</span>
+      <!-- Suffix slot (EHMDS enhancement) -->
+      <span v-if="$slots.suffix" class="ehm-text-field__suffix">
+        <slot name="suffix" />
+      </span>
 
-			<!-- Character count (EHMDS enhancement) -->
-			<span
-				v-if="showCharacterCount && maxLength"
-				class="ehm-text-field__charcount"
-			>
-				{{ characterCountText }}
-			</span>
-		</div>
+      <!-- Character count (EHMDS enhancement) -->
+      <span
+        v-if="showCharacterCount && maxLength"
+        class="ehm-text-field__charcount"
+      >
+        {{ characterCountText }}
+      </span>
+    </div>
 
-		<!-- Helper text (EHMDS enhancement) -->
-		<p v-if="helperText && !hasError" class="ehm-text-field__helper">
-			{{ helperText }}
-		</p>
+    <!-- Helper text (EHMDS enhancement) -->
+    <p v-if="helperText && !hasError" class="ehm-text-field__helper">
+      {{ helperText }}
+    </p>
 
-		<!-- Error message (EHMDS enhancement extending validation) -->
-		<p v-if="hasError && errorMessage" class="ehm-text-field__error">
-			{{ errorMessage }}
-		</p>
-	</div>
+    <!-- Error message (EHMDS enhancement extending validation) -->
+    <p v-if="hasError && errorMessage" class="ehm-text-field__error">
+      {{ errorMessage }}
+    </p>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch, type Ref } from "vue";
 import { FTextField } from "@fkui/vue";
 
-type InputType = "text" | "email" | "tel" | "url" | "password" | "number" | "search";
+type InputType =
+  | "text"
+  | "email"
+  | "tel"
+  | "url"
+  | "password"
+  | "number"
+  | "search";
 type TextFieldVariant = "default" | "success" | "warning" | "error";
 
 /**
@@ -76,69 +83,69 @@ type TextFieldVariant = "default" | "success" | "warning" | "error";
  */
 
 defineOptions({
-	name: "EhmTextField",
-	inheritAttrs: false,
+  name: "EhmTextField",
+  inheritAttrs: false,
 });
 
 /**
  * EHMDS Extended API - includes FTextField props plus EHMDS additions
  */
 interface EhmTextFieldProps {
-	// === FTextField props (forwarded) ===
-	/** Unique identifier for the input */
-	id?: string;
-	/** Input value (v-model) */
-	modelValue?: string | number;
-	/** Input type */
-	type?: InputType;
-	/** Placeholder text */
-	placeholder?: string;
-	/** Disabled state */
-	disabled?: boolean;
-	/** Readonly state */
-	readonly?: boolean;
-	/** Required field */
-	required?: boolean;
-	/** Display inline */
-	inline?: boolean;
+  // === FTextField props (forwarded) ===
+  /** Unique identifier for the input */
+  id?: string;
+  /** Input value (v-model) */
+  modelValue?: string | number;
+  /** Input type */
+  type?: InputType;
+  /** Placeholder text */
+  placeholder?: string;
+  /** Disabled state */
+  disabled?: boolean;
+  /** Readonly state */
+  readonly?: boolean;
+  /** Required field */
+  required?: boolean;
+  /** Display inline */
+  inline?: boolean;
 
-	// === EHMDS extensions ===
-	/** Label text */
-	label?: string;
-	/** Helper text displayed below input */
-	helperText?: string;
-	/** Error message */
-	errorMessage?: string;
-	/** Error state */
-	hasError?: boolean;
-	/** Maximum character length */
-	maxLength?: number | null;
-	/** Show character count */
-	showCharacterCount?: boolean;
-	/** Variant styling */
-	variant?: TextFieldVariant;
+  // === EHMDS extensions ===
+  /** Label text */
+  label?: string;
+  /** Helper text displayed below input */
+  helperText?: string;
+  /** Error message */
+  errorMessage?: string;
+  /** Error state */
+  hasError?: boolean;
+  /** Maximum character length */
+  maxLength?: number | null;
+  /** Show character count */
+  showCharacterCount?: boolean;
+  /** Variant styling */
+  variant?: TextFieldVariant;
 }
 
 const props = withDefaults(defineProps<EhmTextFieldProps>(), {
-	type: "text",
-	placeholder: "",
-	disabled: false,
-	readonly: false,
-	required: false,
-	inline: false,
-	label: "",
-	helperText: "",
-	errorMessage: "",
-	hasError: false,
-	maxLength: null,
-	showCharacterCount: false,
-	variant: "default",
+  type: "text",
+  placeholder: "",
+  disabled: false,
+  readonly: false,
+  required: false,
+  inline: false,
+  label: "",
+  helperText: "",
+  errorMessage: "",
+  hasError: false,
+  maxLength: null,
+  showCharacterCount: false,
+  variant: "default",
 });
 
 interface EhmTextFieldEmits {
-	"update:modelValue": [value: string | number];
-	focus: [event: FocusEvent];
-	blur: [event: FocusEvent];
+  "update:modelValue": [value: string | number];
+  focus: [event: FocusEvent];
+  blur: [event: FocusEvent];
 }
 
 const emit = defineEmits<EhmTextFieldEmits>();
@@ -148,139 +155,146 @@ const isFocused: Ref<boolean> = ref(false);
 const internalValue: Ref<string | number | undefined> = ref(props.modelValue);
 
 // === Computed ===
-const inputId = computed(() => props.id || `ehm-text-field-${Math.random().toString(36).slice(2, 11)}`);
+const inputId = computed(
+  () => props.id || `ehm-text-field-${Math.random().toString(36).slice(2, 11)}`,
+);
 
 const fieldClasses = computed(() => {
-	return {
-		"ehm-text-field--disabled": props.disabled,
-		"ehm-text-field--readonly": props.readonly,
-		"ehm-text-field--focused": isFocused.value,
-		"ehm-text-field--error": props.hasError,
-		"ehm-text-field--success": props.variant === "success",
-		"ehm-text-field--warning": props.variant === "warning",
-	};
+  return {
+    "ehm-text-field--disabled": props.disabled,
+    "ehm-text-field--readonly": props.readonly,
+    "ehm-text-field--focused": isFocused.value,
+    "ehm-text-field--error": props.hasError,
+    "ehm-text-field--success": props.variant === "success",
+    "ehm-text-field--warning": props.variant === "warning",
+  };
 });
 
 const characterCountText = computed(() => {
-	const currentLength = String(internalValue.value || "").length;
-	return `${currentLength}/${props.maxLength}`;
+  const currentLength = String(internalValue.value || "").length;
+  return `${currentLength}/${props.maxLength}`;
 });
 
 // === Methods ===
 const handleUpdate = (value: string | number) => {
-	internalValue.value = value;
-	emit("update:modelValue", value);
+  internalValue.value = value;
+  emit("update:modelValue", value);
 };
 
 const handleFocus = (event: FocusEvent) => {
-	isFocused.value = true;
-	emit("focus", event);
+  isFocused.value = true;
+  emit("focus", event);
 };
 
 const handleBlur = (event: FocusEvent) => {
-	isFocused.value = false;
-	emit("blur", event);
+  isFocused.value = false;
+  emit("blur", event);
 };
 
 // === Watchers ===
 // Keep internal value in sync with modelValue prop
-watch(() => props.modelValue, (newValue) => {
-	internalValue.value = newValue;
-});
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    internalValue.value = newValue;
+  },
+);
 
 // Enforce maxLength
 watch(internalValue, (newValue) => {
-	if (props.maxLength && String(newValue || "").length > props.maxLength) {
-		internalValue.value = String(newValue).slice(0, props.maxLength);
-		emit("update:modelValue", internalValue.value);
-	}
+  if (props.maxLength && String(newValue || "").length > props.maxLength) {
+    internalValue.value = String(newValue).slice(0, props.maxLength);
+    emit("update:modelValue", internalValue.value);
+  }
 });
 </script>
 
 <style scoped>
 /* Extension pattern styles - build upon FTextField base */
 .ehm-text-field {
-	display: flex;
-	flex-direction: column;
-	gap: var(--ehmds-spacing-1, 0.25rem);
-	width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ehmds-spacing-1, 0.25rem);
+  width: 100%;
 }
 
 .ehm-text-field__label {
-	font-size: var(--ehmds-font-size-sm, 0.875rem);
-	font-weight: var(--ehmds-font-weight-medium, 500);
-	color: var(--ehmds-color-text-primary, #0f172a);
-	display: flex;
-	align-items: center;
-	gap: var(--ehmds-spacing-1, 0.25rem);
+  font-size: var(--ehmds-font-size-sm, 0.875rem);
+  font-weight: var(--ehmds-font-weight-medium, 500);
+  color: var(--ehmds-color-text-primary, #0f172a);
+  display: flex;
+  align-items: center;
+  gap: var(--ehmds-spacing-1, 0.25rem);
 }
 
 .ehm-text-field__required {
-	color: var(--ehmds-color-error, #ef4444);
+  color: var(--ehmds-color-error, #ef4444);
 }
 
 .ehm-text-field__input-wrapper {
-	display: flex;
-	align-items: center;
-	position: relative;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .ehm-text-field__prefix,
 .ehm-text-field__suffix {
-	display: flex;
-	align-items: center;
-	padding: 0 var(--ehmds-spacing-3, 0.75rem);
-	color: var(--ehmds-color-text-tertiary, #64748b);
-	background-color: var(--ehmds-color-neutral-100, #f1f5f9);
-	border: 1px solid var(--ehmds-color-neutral-300, #cbd5e1);
-	height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--ehmds-spacing-3, 0.75rem);
+  color: var(--ehmds-color-text-tertiary, #64748b);
+  background-color: var(--ehmds-color-neutral-100, #f1f5f9);
+  border: 1px solid var(--ehmds-color-neutral-300, #cbd5e1);
+  height: 100%;
 }
 
 .ehm-text-field__prefix {
-	border-right: none;
-	border-radius: var(--ehmds-border-radius-medium, 6px) 0 0 var(--ehmds-border-radius-medium, 6px);
+  border-right: none;
+  border-radius: var(--ehmds-border-radius-medium, 6px) 0 0
+    var(--ehmds-border-radius-medium, 6px);
 }
 
 .ehm-text-field__suffix {
-	border-left: none;
-	border-radius: 0 var(--ehmds-border-radius-medium, 6px) var(--ehmds-border-radius-medium, 6px) 0;
+  border-left: none;
+  border-radius: 0 var(--ehmds-border-radius-medium, 6px)
+    var(--ehmds-border-radius-medium, 6px) 0;
 }
 
 .ehm-text-field__charcount {
-	position: absolute;
-	right: var(--ehmds-spacing-3, 0.75rem);
-	bottom: var(--ehmds-spacing-3, 0.75rem);
-	font-size: var(--ehmds-font-size-xs, 0.75rem);
-	color: var(--ehmds-color-text-tertiary, #64748b);
-	background-color: var(--ehmds-color-background-primary, #ffffff);
-	padding: var(--ehmds-spacing-1, 0.25rem) var(--ehmds-spacing-2, 0.5rem);
-	border-radius: var(--ehmds-border-radius-small, 4px);
+  position: absolute;
+  right: var(--ehmds-spacing-3, 0.75rem);
+  bottom: var(--ehmds-spacing-3, 0.75rem);
+  font-size: var(--ehmds-font-size-xs, 0.75rem);
+  color: var(--ehmds-color-text-tertiary, #64748b);
+  background-color: var(--ehmds-color-background-primary, #ffffff);
+  padding: var(--ehmds-spacing-1, 0.25rem) var(--ehmds-spacing-2, 0.5rem);
+  border-radius: var(--ehmds-border-radius-small, 4px);
 }
 
 .ehm-text-field__helper,
 .ehm-text-field__error {
-	font-size: var(--ehmds-font-size-sm, 0.875rem);
-	margin: 0;
+  font-size: var(--ehmds-font-size-sm, 0.875rem);
+  margin: 0;
 }
 
 .ehm-text-field__helper {
-	color: var(--ehmds-color-text-secondary, #475569);
+  color: var(--ehmds-color-text-secondary, #475569);
 }
 
 .ehm-text-field__error {
-	color: var(--ehmds-color-error, #ef4444);
+  color: var(--ehmds-color-error, #ef4444);
 }
 
 /* Variant states */
 .ehm-text-field--error :deep(*) {
-	border-color: var(--ehmds-color-error, #ef4444) !important;
+  border-color: var(--ehmds-color-error, #ef4444) !important;
 }
 
 .ehm-text-field--success :deep(*) {
-	border-color: var(--ehmds-color-success, #10b981) !important;
+  border-color: var(--ehmds-color-success, #10b981) !important;
 }
 
 .ehm-text-field--warning :deep(*) {
-	border-color: var(--ehmds-color-warning, #f59e0b) !important;
+  border-color: var(--ehmds-color-warning, #f59e0b) !important;
 }
 </style>
