@@ -81,6 +81,21 @@
 					>
 				</div>
 
+				<div class="demo-block fkui-reference">
+					<span class="fkui-reference__tag">FKUI ORIGINAL</span>
+					<h3>FBadge</h3>
+					<p class="fkui-reference__note">
+						Raw FKUI badges with standard statuses — no EHMDS overrides.
+					</p>
+					<div class="demo-row">
+						<FBadge status="default">Default</FBadge>
+						<FBadge status="info">Info</FBadge>
+						<FBadge status="success">Success</FBadge>
+						<FBadge status="warning">Warning</FBadge>
+						<FBadge status="error">Error</FBadge>
+					</div>
+				</div>
+
 				<div class="demo-block">
 					<span class="example-label">[EXAMPLE COMPONENT]</span>
 					<h3>EhmBadge</h3>
@@ -133,6 +148,20 @@
 						class="pattern-docs-link"
 						>Read documentation →</router-link
 					>
+				</div>
+
+				<div class="demo-block fkui-reference">
+					<span class="fkui-reference__tag">FKUI ORIGINAL</span>
+					<h3>FCard</h3>
+					<p class="fkui-reference__note">
+						Raw FKUI card — the component EhmCard wraps.
+					</p>
+					<div class="card-grid">
+						<FCard>
+							<template #header>Default FCard</template>
+							<p>Standard FKUI card with default styling.</p>
+						</FCard>
+					</div>
 				</div>
 
 				<div class="demo-block">
@@ -211,6 +240,20 @@
 						class="pattern-docs-link"
 						>Read documentation →</router-link
 					>
+				</div>
+
+				<div class="demo-block fkui-reference">
+					<span class="fkui-reference__tag">FKUI ORIGINAL</span>
+					<h3>FTextField</h3>
+					<p class="fkui-reference__note">
+						Raw FKUI text field — no label, helper text, or character count.
+					</p>
+					<div class="form-grid">
+						<FTextField
+							v-model="fkuiTextValue"
+							placeholder="Type something..."
+						/>
+					</div>
 				</div>
 
 				<div class="demo-block">
@@ -322,6 +365,24 @@
 						class="pattern-docs-link"
 						>Read documentation →</router-link
 					>
+				</div>
+
+				<div class="demo-block fkui-reference">
+					<span class="fkui-reference__tag">FKUI ORIGINAL</span>
+					<h3>FTextField (standalone)</h3>
+					<p class="fkui-reference__note">
+						Raw FKUI text field — what you'd use without EHMDS composition.
+					</p>
+					<div class="fkui-search-reference">
+						<FTextField
+							v-model="fkuiSearchValue"
+							placeholder="Search..."
+							:inline="true"
+						/>
+						<button type="button" class="fkui-reference__btn">
+							Search
+						</button>
+					</div>
 				</div>
 
 				<div class="demo-block">
@@ -544,10 +605,15 @@
 
 <script setup>
 import { ref, reactive, computed, watch } from "vue";
+import { FBadge, FCard, FTextField } from "@fkui/vue";
 import EhmBadge from "../components/token-override/EhmBadge.vue";
 import EhmCard from "../components/wrapper/EhmCard.vue";
 import EhmTextField from "../components/extension/EhmTextField.vue";
 import EhmSearchBox from "../components/composition/EhmSearchBox.vue";
+
+// === FKUI Reference Demo State ===
+const fkuiTextValue = ref("");
+const fkuiSearchValue = ref("");
 
 // === Token Override Demo State ===
 // No specific state needed for badges
@@ -824,29 +890,30 @@ const scrollToSection = (sectionId) => {
 
 /* Demo blocks - multi-column on wide screens */
 @media (min-width: 1024px) {
-	/* Token Override section has 2 demo blocks */
+	/* Token Override: 1 FKUI reference + 2 EHMDS demos */
 	#token-override {
 		grid-template-columns: repeat(2, 1fr);
 	}
 
-	/* Wrapper section has 2 demo blocks */
+	/* Wrapper: 1 FKUI reference + 2 EHMDS demos */
 	#wrapper {
 		grid-template-columns: repeat(2, 1fr);
 	}
 
-	/* Extension section has 3 demo blocks */
+	/* Extension: 1 FKUI reference + 3 EHMDS demos */
 	#extension {
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(2, 1fr);
 	}
 
-	/* Composition section has 2 demo blocks */
+	/* Composition: 1 FKUI reference + 2 EHMDS demos */
 	#composition {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
-/* Code block should always span full width */
-.pattern-section > .code-block {
+/* Code block and FKUI reference should always span full width */
+.pattern-section > .code-block,
+.pattern-section > .fkui-reference {
 	grid-column: 1 / -1;
 }
 
@@ -894,6 +961,59 @@ const scrollToSection = (sectionId) => {
 	padding: 1.5rem;
 	border-radius: 0.5rem;
 	border: 1px solid #ced4da;
+}
+
+/* FKUI Reference Blocks */
+.fkui-reference {
+	background: #f0f4ff;
+	border: 1px dashed #93c5fd;
+}
+
+.fkui-reference__tag {
+	display: inline-block;
+	background: #dbeafe;
+	color: #1d4ed8;
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	padding: 0.2rem 0.5rem;
+	border-radius: 3px;
+	margin-bottom: 0.5rem;
+}
+
+.fkui-reference h3 {
+	color: #1d4ed8;
+}
+
+.fkui-reference__note {
+	color: #6b7280;
+	font-size: 0.85rem;
+	margin: 0 0 1rem 0;
+}
+
+.fkui-reference__btn {
+	padding: 0.375rem 0.75rem;
+	font-size: 0.875rem;
+	background: #e2e8f0;
+	color: #334155;
+	border: 1px solid #cbd5e1;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.fkui-reference__btn:hover {
+	background: #cbd5e1;
+}
+
+.fkui-search-reference {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.fkui-search-reference > :deep(.text-field) {
+	flex: 1;
 }
 
 .example-label {
