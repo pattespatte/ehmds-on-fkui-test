@@ -9,11 +9,11 @@ EHMDS depends on FKUI as a peer dependency. When FKUI releases updates, EHMDS co
 ### Monthly Checks
 
 ```bash
-# Check for outdated FKUI packages
-npm outdated @fkui/*
+# Check for outdated FKUI packages (grep from full list)
+npm outdated | grep @fkui
 
-# Or check individual packages
-npm outdated @fkui/vue @fkui/design @fkui/logic @fkui/date
+# Or list all FKUI packages explicitly
+npm outdated @fkui/vue @fkui/design @fkui/logic @fkui/date @fkui/theme-default
 ```
 
 ### Review Checklist
