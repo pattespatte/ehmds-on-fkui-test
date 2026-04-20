@@ -245,7 +245,7 @@ watch(internalValue, (newValue) => {
 .ehm-text-field__label {
   font-size: var(--ehmds-font-size-sm, 0.875rem);
   font-weight: var(--ehmds-font-weight-medium, 500);
-  color: var(--ehmds-color-text-primary, #0f172a);
+  color: var(--ehmds-color-text-primary, #232948);
   display: flex;
   align-items: center;
   gap: var(--ehmds-spacing-1, 0.25rem);
@@ -266,22 +266,22 @@ watch(internalValue, (newValue) => {
   display: flex;
   align-items: center;
   padding: 0 var(--ehmds-spacing-3, 0.75rem);
-  color: var(--ehmds-color-text-tertiary, #64748b);
-  background-color: var(--ehmds-color-neutral-100, #f1f5f9);
-  border: 1px solid var(--ehmds-color-neutral-300, #cbd5e1);
+  color: var(--ehmds-color-text-tertiary, #7a7f94);
+  background-color: var(--ehmds-color-neutral-100, #eee9e0);
+  border: 1px solid var(--ehmds-color-neutral-300, #c8c2b8);
   height: 100%;
 }
 
 .ehm-text-field__prefix {
   border-right: none;
-  border-radius: var(--ehmds-border-radius-medium, 6px) 0 0
-    var(--ehmds-border-radius-medium, 6px);
+  border-radius: var(--ehmds-border-radius-medium, 8px) 0 0
+    var(--ehmds-border-radius-medium, 8px);
 }
 
 .ehm-text-field__suffix {
   border-left: none;
-  border-radius: 0 var(--ehmds-border-radius-medium, 6px)
-    var(--ehmds-border-radius-medium, 6px) 0;
+  border-radius: 0 var(--ehmds-border-radius-medium, 8px)
+    var(--ehmds-border-radius-medium, 8px) 0;
 }
 
 .ehm-text-field__charcount {
@@ -289,10 +289,10 @@ watch(internalValue, (newValue) => {
   right: var(--ehmds-spacing-3, 0.75rem);
   bottom: var(--ehmds-spacing-3, 0.75rem);
   font-size: var(--ehmds-font-size-xs, 0.75rem);
-  color: var(--ehmds-color-text-tertiary, #64748b);
-  background-color: var(--ehmds-color-background-primary, #ffffff);
+  color: var(--ehmds-color-text-tertiary, #7a7f94);
+  background-color: var(--ehmds-color-background-primary, #f6f3ee);
   padding: var(--ehmds-spacing-1, 0.25rem) var(--ehmds-spacing-2, 0.5rem);
-  border-radius: var(--ehmds-border-radius-small, 4px);
+  border-radius: var(--ehmds-border-radius-small, 6px);
 }
 
 .ehm-text-field__helper,
@@ -302,7 +302,7 @@ watch(internalValue, (newValue) => {
 }
 
 .ehm-text-field__helper {
-  color: var(--ehmds-color-text-secondary, #475569);
+  color: var(--ehmds-color-text-secondary, #4a5068);
 }
 
 .ehm-text-field__error {

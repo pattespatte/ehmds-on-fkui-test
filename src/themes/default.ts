@@ -12,10 +12,10 @@ export const defaultTheme: Theme = {
 
   // Brand Colors - Primary palette for EHMDS
   colors: {
-    // Primary brand color (can override FKUI primary)
-    primary: "#2563eb", // Blue-600
-    primaryLight: "#3b82f6", // Blue-500
-    primaryDark: "#1d4ed8", // Blue-700
+    // Primary brand color (dark navy)
+    primary: "#232948",
+    primaryLight: "#3a4270",
+    primaryDark: "#1a1f38",
     primaryContrast: "#ffffff",
 
     // Secondary brand color
@@ -43,35 +43,35 @@ export const defaultTheme: Theme = {
     errorLight: "#f87171", // Red-400
     errorDark: "#dc2626", // Red-600
 
-    // Neutral colors
+    // Neutral colors (warm tones)
     neutral: {
-      50: "#f8fafc",
-      100: "#f1f5f9",
-      200: "#e2e8f0",
-      300: "#cbd5e1",
-      400: "#94a3b8",
-      500: "#64748b",
-      600: "#475569",
-      700: "#334155",
-      800: "#1e293b",
-      900: "#0f172a",
+      50: "#f6f3ee",
+      100: "#eee9e0",
+      200: "#e0dbd2",
+      300: "#c8c2b8",
+      400: "#9a9590",
+      500: "#7a7f94",
+      600: "#4a5068",
+      700: "#363c52",
+      800: "#232948",
+      900: "#1a1f38",
     },
 
     // Focus color for accessibility
-    focus: "#3b82f6",
+    focus: "#3a4270",
 
     // Background colors
     background: {
-      primary: "#ffffff",
-      secondary: "#f8fafc",
-      tertiary: "#f1f5f9",
+      primary: "#f6f3ee",
+      secondary: "#eee9e0",
+      tertiary: "#e5dfd4",
     },
 
     // Text colors
     text: {
-      primary: "#0f172a",
-      secondary: "#475569",
-      tertiary: "#64748b",
+      primary: "#232948",
+      secondary: "#4a5068",
+      tertiary: "#7a7f94",
       inverse: "#ffffff",
     },
   },
@@ -128,13 +128,13 @@ export const defaultTheme: Theme = {
     24: "6rem", // 96px
   },
 
-  // Border radius scale
+  // Border radius scale (more rounded)
   borderRadius: {
     none: "0",
-    small: "0.25rem", // 4px
-    medium: "0.375rem", // 6px
-    large: "0.5rem", // 8px
-    xl: "0.75rem", // 12px
+    small: "0.375rem", // 6px
+    medium: "0.5rem", // 8px
+    large: "0.75rem", // 12px
+    xl: "1rem", // 16px
     full: "9999px",
   },
 

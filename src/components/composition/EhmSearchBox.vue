@@ -300,10 +300,10 @@ defineExpose({
   justify-content: center;
   min-width: 40px;
   height: 40px;
-  background: var(--ehmds-color-background-primary, #ffffff);
-  border: 1px solid var(--ehmds-color-primary, #2563eb);
-  border-radius: var(--ehmds-border-radius-medium, 6px);
-  color: var(--ehmds-color-primary, #2563eb);
+  background: var(--ehmds-color-background-primary, #f6f3ee);
+  border: 1px solid var(--ehmds-color-primary, #232948);
+  border-radius: var(--ehmds-border-radius-medium, 8px);
+  color: var(--ehmds-color-primary, #232948);
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
@@ -311,7 +311,7 @@ defineExpose({
 }
 
 .ehm-search-box__button:hover {
-  background: var(--ehmds-color-primary, #2563eb);
+  background: var(--ehmds-color-primary, #232948);
   color: var(--ehmds-color-primary-contrast, #ffffff);
 }
 
@@ -328,9 +328,9 @@ defineExpose({
   min-width: 32px;
   height: 40px;
   background: transparent;
-  border: 1px solid var(--ehmds-color-neutral-300, #cbd5e1);
-  border-radius: var(--ehmds-border-radius-medium, 6px);
-  color: var(--ehmds-color-text-tertiary, #64748b);
+  border: 1px solid var(--ehmds-color-neutral-300, #c8c2b8);
+  border-radius: var(--ehmds-border-radius-medium, 8px);
+  color: var(--ehmds-color-text-tertiary, #7a7f94);
   cursor: pointer;
   font-size: 0.875rem;
   transition: all 0.15s ease;
@@ -339,13 +339,13 @@ defineExpose({
 .ehm-search-box__clear:hover {
   border-color: var(--ehmds-color-error, #ef4444);
   color: var(--ehmds-color-error, #ef4444);
-  background: var(--ehmds-color-background-primary, #ffffff);
+  background: var(--ehmds-color-background-primary, #f6f3ee);
 }
 
 .ehm-search-box__filters {
   margin-top: var(--ehmds-spacing-3, 0.75rem);
   padding-top: var(--ehmds-spacing-3, 0.75rem);
-  border-top: 1px solid var(--ehmds-color-neutral-200, #e2e8f0);
+  border-top: 1px solid var(--ehmds-color-neutral-200, #e0dbd2);
 }
 
 .ehm-search-box__results {
@@ -354,9 +354,9 @@ defineExpose({
 
 /* Expandable styles */
 .ehm-search-box__expandable {
-  border: 1px solid var(--ehmds-color-neutral-300, #cbd5e1);
-  border-radius: var(--ehmds-border-radius-medium, 6px);
-  background-color: var(--ehmds-color-background-primary, #ffffff);
+  border: 1px solid var(--ehmds-color-neutral-300, #c8c2b8);
+  border-radius: var(--ehmds-border-radius-medium, 8px);
+  background-color: var(--ehmds-color-background-primary, #f6f3ee);
   overflow: hidden;
 }
 
@@ -374,12 +374,12 @@ defineExpose({
   font-family: inherit;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--ehmds-color-text-primary, #1a202c);
+  color: var(--ehmds-color-text-primary, #232948);
   transition: background-color 0.2s;
 }
 
 .ehm-search-box__toggle:hover {
-  background-color: var(--ehmds-color-neutral-100, #f7fafc);
+  background-color: var(--ehmds-color-neutral-100, #eee9e0);
 }
 
 .ehm-search-box__toggle-text {
@@ -392,7 +392,7 @@ defineExpose({
 }
 
 .ehm-search-box__expandable-content {
-  border-top: 1px solid var(--ehmds-color-neutral-200, #e2e8f0);
+  border-top: 1px solid var(--ehmds-color-neutral-200, #e0dbd2);
 }
 
 /* Loading state */

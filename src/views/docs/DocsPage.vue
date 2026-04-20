@@ -108,7 +108,7 @@ watch(
 .docs-page :deep(h1) {
   font-size: 2rem;
   margin: 0 0 1rem 0;
-  color: #2c3e50;
+  color: #34495e;
   border-bottom: 2px solid #dee2e6;
   padding-bottom: 0.5rem;
 }
@@ -148,7 +148,7 @@ watch(
 .docs-page :deep(code) {
   background: #f1f5f9;
   padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
+  border-radius: 0.375rem;
   font-family: "Monaco", "Consolas", monospace;
   font-size: 0.9em;
 }
@@ -191,7 +191,7 @@ watch(
 }
 
 .docs-page :deep(th) {
-  background: #495057;
+  background: #1e293b;
   color: white;
   font-weight: 600;
 }
@@ -209,7 +209,7 @@ watch(
   justify-content: center;
   margin: 2rem 0;
   padding: 1rem;
-  background: #f8f9fa;
+  background: #f1f5f9;
   border-radius: 0.5rem;
 }
 
@@ -222,6 +222,6 @@ watch(
   color: #dc3545;
   background: #f8d7da;
   padding: 1rem;
-  border-radius: 0.25rem;
+  border-radius: 0.375rem;
 }
 </style>

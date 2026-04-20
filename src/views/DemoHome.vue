@@ -978,7 +978,7 @@ const scrollToSection = (sectionId) => {
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
 	padding: 0.2rem 0.5rem;
-	border-radius: 3px;
+	border-radius: 6px;
 	margin-bottom: 0.5rem;
 }
 
@@ -998,7 +998,7 @@ const scrollToSection = (sectionId) => {
 	background: #e2e8f0;
 	color: #334155;
 	border: 1px solid #cbd5e1;
-	border-radius: 4px;
+	border-radius: 6px;
 	cursor: pointer;
 }
 
@@ -1221,7 +1221,7 @@ const scrollToSection = (sectionId) => {
 	background: #3498db;
 	color: white;
 	border: none;
-	border-radius: 4px;
+	border-radius: 6px;
 	cursor: pointer;
 	transition: background 0.2s;
 }
