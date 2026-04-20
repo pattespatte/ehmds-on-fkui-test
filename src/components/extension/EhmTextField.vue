@@ -15,6 +15,7 @@
 
       <!-- The extended FTextField component -->
       <FTextField
+        v-bind="$attrs"
         :id="inputId"
         v-model="internalValue"
         :type="type"
@@ -24,6 +25,8 @@
         :required="required"
         :inline="inline"
         :model-value="modelValue"
+        :aria-invalid="hasError || undefined"
+        :aria-describedby="ariaDescribedBy || undefined"
         @update:model-value="handleUpdate"
         @blur="handleBlur"
         @focus="handleFocus"
@@ -44,12 +47,20 @@
     </div>
 
     <!-- Helper text (EHMDS enhancement) -->
-    <p v-if="helperText && !hasError" class="ehm-text-field__helper">
+    <p
+      v-if="helperText && !hasError"
+      :id="helperId"
+      class="ehm-text-field__helper"
+    >
       {{ helperText }}
     </p>
 
     <!-- Error message (EHMDS enhancement extending validation) -->
-    <p v-if="hasError && errorMessage" class="ehm-text-field__error">
+    <p
+      v-if="hasError && errorMessage"
+      :id="errorId"
+      class="ehm-text-field__error"
+    >
       {{ errorMessage }}
     </p>
   </div>
@@ -170,6 +181,19 @@ const fieldClasses = computed(() => {
   };
 });
 
+const helperId = computed(() =>
+  props.helperText ? `${inputId.value}-helper` : undefined,
+);
+const errorId = computed(() =>
+  props.hasError && props.errorMessage ? `${inputId.value}-error` : undefined,
+);
+const ariaDescribedBy = computed(() => {
+  const ids: string[] = [];
+  if (helperId.value && !props.hasError) ids.push(helperId.value);
+  if (errorId.value) ids.push(errorId.value);
+  return ids.length > 0 ? ids.join(" ") : undefined;
+});
+
 const characterCountText = computed(() => {
   const currentLength = String(internalValue.value || "").length;
   return `${currentLength}/${props.maxLength}`;
@@ -286,15 +310,15 @@ watch(internalValue, (newValue) => {
 }
 
 /* Variant states */
-.ehm-text-field--error :deep(*) {
-  border-color: var(--ehmds-color-error, #ef4444) !important;
+.ehm-text-field--error :deep(input) {
+  border-color: var(--ehmds-color-error, #ef4444);
 }
 
-.ehm-text-field--success :deep(*) {
-  border-color: var(--ehmds-color-success, #10b981) !important;
+.ehm-text-field--success :deep(input) {
+  border-color: var(--ehmds-color-success, #10b981);
 }
 
-.ehm-text-field--warning :deep(*) {
-  border-color: var(--ehmds-color-warning, #f59e0b) !important;
+.ehm-text-field--warning :deep(input) {
+  border-color: var(--ehmds-color-warning, #f59e0b);
 }
 </style>

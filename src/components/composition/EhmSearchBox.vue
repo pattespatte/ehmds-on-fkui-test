@@ -8,6 +8,7 @@
         type="button"
         class="ehm-search-box__toggle"
         :aria-expanded="isExpanded"
+        aria-controls="ehm-search-expandable-content"
         @click="toggleExpand"
       >
         <span class="ehm-search-box__toggle-text">{{
@@ -19,7 +20,11 @@
       </button>
 
       <!-- Expandable content -->
-      <div v-show="isExpanded" class="ehm-search-box__expandable-content">
+      <div
+        id="ehm-search-expandable-content"
+        v-show="isExpanded"
+        class="ehm-search-box__expandable-content"
+      >
         <div class="ehm-search-box__content">
           <!-- Search input - COMPOSED from FTextField -->
           <FTextField
@@ -121,10 +126,14 @@ import { FTextField } from "@fkui/vue";
  * domain-specific component for search functionality.
  *
  * Architecture: COMPOSITION
- * - Composes: FTextField (input) + HTML Button with FKUI styling + FExpandablePanel (expandable)
+ * - Composes: FTextField (input) + HTML Buttons with FKUI CSS classes + custom expandable toggle
  * - Creates: Search domain component with filtering, results display
  * - Coordinate: Manages state and communication between composed components
  * - Use case: When you need to combine multiple FKUI components into a cohesive UI
+ *
+ * Note: Uses raw HTML buttons with FKUI CSS classes (button, button--small, button--discrete)
+ * rather than FCrudButton, and a hand-rolled expandable toggle rather than FExpandablePanel.
+ * This keeps the dependency surface minimal while still leveraging FKUI's visual design.
  */
 
 defineOptions({

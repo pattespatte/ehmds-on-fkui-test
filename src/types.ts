@@ -18,14 +18,10 @@ export interface EHMDSPlugin {
 
 /**
  * Component types exported by EHMDS
- * These are the actual Vue component types
+ *
+ * Note: Types defined inside <script setup> are not automatically exported.
+ * Re-export shared types here when components use separate type files.
  */
-export type {} from // Components will be typed when imported
-// EhmCard,
-// EhmTextField,
-// EhmSearchBox,
-// EhmBadge,
-"./components/wrapper/EhmCard.vue";
 
 /**
  * Global properties injected by EHMDS
@@ -74,10 +70,25 @@ export type {
 
 /**
  * Common component prop types used across EHMDS
+ *
+ * These types are defined here because <script setup> components
+ * don't automatically export their local types for re-export.
  */
-export type { CardVariant } from "./components/wrapper/EhmCard.vue";
-export type {
-  InputType,
-  TextFieldVariant,
-} from "./components/extension/EhmTextField.vue";
-export type { BadgeStatus } from "./components/token-override/EhmBadge.vue";
+export type CardVariant = "default" | "bordered" | "elevated" | "compact";
+export type InputType =
+  | "text"
+  | "email"
+  | "tel"
+  | "url"
+  | "password"
+  | "number"
+  | "search";
+export type TextFieldVariant = "default" | "success" | "warning" | "error";
+export type BadgeStatus =
+  | "default"
+  | "warning"
+  | "error"
+  | "success"
+  | "info"
+  | "brand"
+  | "neutral";

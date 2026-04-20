@@ -1,6 +1,6 @@
 <template>
   <!-- Wrapper pattern: EhmCard wraps FCard, exposing a simplified custom API -->
-  <FCard :id="id" :focus-ref="errorRef" :class="cardClasses">
+  <FCard v-bind="$attrs" :id="id" :focus-ref="errorRef" :class="cardClasses">
     <!-- Transform EHMDS's simpler slot API to FCard's slots -->
     <template v-if="$slots.header" #header>
       <slot name="header">
@@ -73,16 +73,6 @@ const props = withDefaults(defineProps<EhmCardProps>(), {
   hasError: false,
   errorRef: null,
 });
-
-/**
- * Emit all standard events that consumers might expect
- * These are forwarded from FCard without transformation
- */
-interface EhmCardEmits {
-  click: [event: MouseEvent];
-}
-
-const emit = defineEmits<EhmCardEmits>();
 
 /**
  * Compute classes based on EHMDS variant system
