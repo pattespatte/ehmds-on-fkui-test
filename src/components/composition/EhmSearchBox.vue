@@ -41,7 +41,7 @@
           <!-- Search button - COMPOSED with FKUI button styling -->
           <button
             type="button"
-            class="button button--small ehm-search-box__button"
+            class="ehm-search-box__button"
             :disabled="isButtonDisabled"
             @click="handleSearch"
             :aria-label="showIcon ? 'Sök' : undefined"
@@ -56,7 +56,7 @@
           <button
             v-if="showClearButton"
             type="button"
-            class="button button--discrete button--small ehm-search-box__clear"
+            class="ehm-search-box__clear"
             @click="handleClear"
             aria-label="Rensa"
           >
@@ -295,10 +295,51 @@ defineExpose({
 
 .ehm-search-box__button {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  background: var(--ehmds-color-background-primary, #ffffff);
+  border: 1px solid var(--ehmds-color-primary, #2563eb);
+  border-radius: var(--ehmds-border-radius-medium, 6px);
+  color: var(--ehmds-color-primary, #2563eb);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.ehm-search-box__button:hover {
+  background: var(--ehmds-color-primary, #2563eb);
+  color: var(--ehmds-color-primary-contrast, #ffffff);
+}
+
+.ehm-search-box__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .ehm-search-box__clear {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--ehmds-color-neutral-300, #cbd5e1);
+  border-radius: var(--ehmds-border-radius-medium, 6px);
+  color: var(--ehmds-color-text-tertiary, #64748b);
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.15s ease;
+}
+
+.ehm-search-box__clear:hover {
+  border-color: var(--ehmds-color-error, #ef4444);
+  color: var(--ehmds-color-error, #ef4444);
+  background: var(--ehmds-color-background-primary, #ffffff);
 }
 
 .ehm-search-box__filters {

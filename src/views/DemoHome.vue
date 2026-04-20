@@ -312,12 +312,10 @@
 				<div class="pattern-header">
 					<h2>🧩 Composition Pattern</h2>
 					<p class="pattern-description">
-						Composes multiple FKUI components (<code
-							>FTextField</code
-						>
-						+ <code>FCrudButton</code> + <code>FExpandable</code>)
-						into a higher-level, domain-specific search component
-						with coordinated state and behavior.
+						Composes <code>FTextField</code> with custom buttons
+						and expandable toggle into a higher-level,
+						domain-specific search component with coordinated state
+						and behavior.
 					</p>
 					<router-link
 						to="/docs/architecture/composition"
@@ -705,7 +703,7 @@ const scrollToSection = (sectionId) => {
 .app {
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 2rem;
+	padding: 1.5rem 2rem;
 	font-family:
 		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
@@ -713,18 +711,18 @@ const scrollToSection = (sectionId) => {
 /* Header */
 .header {
 	text-align: center;
-	margin-bottom: 3rem;
+	margin-bottom: 2rem;
 }
 
 .header h1 {
 	color: #2c3e50;
 	margin-bottom: 0.5rem;
-	font-size: 2.5rem;
+	font-size: 2rem;
 }
 
 .header p {
 	color: #7f8c8d;
-	font-size: 1.1rem;
+	font-size: 1rem;
 	margin-bottom: 1rem;
 }
 
@@ -750,7 +748,7 @@ const scrollToSection = (sectionId) => {
 	padding: 2rem;
 	border-radius: 0.75rem;
 	border: 1px solid #e9ecef;
-	margin-bottom: 3rem;
+	margin-bottom: 2rem;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -795,7 +793,7 @@ const scrollToSection = (sectionId) => {
 .pattern-info h3 {
 	color: #495057;
 	margin: 0 0 0.25rem 0;
-	font-size: 1.1rem;
+	font-size: 1rem;
 }
 
 .pattern-info p {
@@ -813,7 +811,7 @@ const scrollToSection = (sectionId) => {
 .main {
 	display: flex;
 	flex-direction: column;
-	gap: 3rem;
+	gap: 1.5rem;
 }
 
 /* Pattern Sections */
@@ -821,7 +819,7 @@ const scrollToSection = (sectionId) => {
 	position: relative;
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 2rem;
+	gap: 1.5rem;
 }
 
 /* Demo blocks - multi-column on wide screens */
@@ -915,7 +913,7 @@ const scrollToSection = (sectionId) => {
 	display: inline-block;
 	color: #495057;
 	margin: 0 0 1rem 0;
-	font-size: 1.1rem;
+	font-size: 1rem;
 	font-weight: 600;
 	letter-spacing: 0.025em;
 }
