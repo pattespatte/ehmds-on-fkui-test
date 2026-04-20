@@ -238,8 +238,23 @@ watch(internalValue, (newValue) => {
 .ehm-text-field {
   display: flex;
   flex-direction: column;
-  gap: var(--ehmds-spacing-1, 0.25rem);
+  gap: 0;
   width: 100%;
+}
+
+/* Neutralize FKUI's internal spacing — EHMDS provides its own label */
+.ehm-text-field :deep(.text-field) {
+  margin-bottom: 0;
+}
+
+.ehm-text-field :deep(.label) {
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+.ehm-text-field :deep(.text-field > :first-child) {
+  height: 0;
+  overflow: hidden;
 }
 
 .ehm-text-field__label {
