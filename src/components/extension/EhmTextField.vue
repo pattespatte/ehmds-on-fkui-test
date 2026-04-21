@@ -259,8 +259,8 @@ watch(internalValue, (newValue) => {
 
 .ehm-text-field__label {
   font-size: var(--ehmds-font-size-sm, 0.875rem);
-  font-weight: var(--ehmds-font-weight-medium, 500);
-  color: var(--ehmds-color-text-primary, #232948);
+  font-weight: var(--ehmds-font-weight-semibold, 600);
+  color: var(--ehmds-color-text-primary, #081130);
   display: flex;
   align-items: center;
   gap: var(--ehmds-spacing-1, 0.25rem);
@@ -281,10 +281,10 @@ watch(internalValue, (newValue) => {
   display: flex;
   align-items: center;
   padding: 0 var(--ehmds-spacing-3, 0.75rem);
-  color: var(--ehmds-color-text-tertiary, #7a7f94);
-  background-color: var(--ehmds-color-neutral-100, #eee9e0);
-  border: 1px solid var(--ehmds-color-neutral-300, #c8c2b8);
-  height: 100%;
+  color: var(--ehmds-color-text-tertiary, #636e85);
+  background-color: var(--ehmds-color-neutral-100, #edf0f5);
+  border: 1px solid var(--ehmds-color-neutral-300, #b0b8c9);
+  height: 48px;
 }
 
 .ehm-text-field__prefix {
@@ -304,8 +304,8 @@ watch(internalValue, (newValue) => {
   right: var(--ehmds-spacing-3, 0.75rem);
   bottom: var(--ehmds-spacing-3, 0.75rem);
   font-size: var(--ehmds-font-size-xs, 0.75rem);
-  color: var(--ehmds-color-text-tertiary, #7a7f94);
-  background-color: var(--ehmds-color-background-primary, #f6f3ee);
+  color: var(--ehmds-color-text-tertiary, #636e85);
+  background-color: var(--ehmds-color-background-primary, #ffffff);
   padding: var(--ehmds-spacing-1, 0.25rem) var(--ehmds-spacing-2, 0.5rem);
   border-radius: var(--ehmds-border-radius-small, 6px);
 }
@@ -317,7 +317,7 @@ watch(internalValue, (newValue) => {
 }
 
 .ehm-text-field__helper {
-  color: var(--ehmds-color-text-secondary, #4a5068);
+  color: var(--ehmds-color-text-secondary, #3d4663);
 }
 
 .ehm-text-field__error {
@@ -327,6 +327,7 @@ watch(internalValue, (newValue) => {
 /* Variant states */
 .ehm-text-field--error :deep(input) {
   border-color: var(--ehmds-color-error, #ef4444);
+  box-shadow: 0 0 0 1px var(--ehmds-color-error, #ef4444);
 }
 
 .ehm-text-field--success :deep(input) {
@@ -335,5 +336,18 @@ watch(internalValue, (newValue) => {
 
 .ehm-text-field--warning :deep(input) {
   border-color: var(--ehmds-color-warning, #f59e0b);
+}
+
+/* Helix input height + focus pattern */
+.ehm-text-field :deep(input) {
+  height: 48px;
+  padding: var(--ehmds-spacing-2, 0.5rem) var(--ehmds-spacing-3, 0.75rem);
+  border: 1px solid var(--ehmds-color-neutral-300, #b0b8c9);
+  border-radius: var(--ehmds-border-radius-medium, 8px);
+}
+
+.ehm-text-field--focused :deep(input) {
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
 }
 </style>

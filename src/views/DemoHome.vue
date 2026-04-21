@@ -781,13 +781,13 @@ const scrollToSection = (sectionId) => {
 }
 
 .header h1 {
-	color: #2c3e50;
+	color: #081130;
 	margin-bottom: 0.5rem;
 	font-size: 2rem;
 }
 
 .header p {
-	color: #7f8c8d;
+	color: #636e85;
 	font-size: 1rem;
 	margin-bottom: 1rem;
 }
@@ -799,7 +799,7 @@ const scrollToSection = (sectionId) => {
 }
 
 .header-links a {
-	color: #3498db;
+	color: #1a2a6c;
 	text-decoration: none;
 	font-weight: 500;
 }
@@ -812,14 +812,14 @@ const scrollToSection = (sectionId) => {
 .pattern-nav {
 	background: #ffffff;
 	padding: 2rem;
-	border-radius: 0.75rem;
-	border: 1px solid #e9ecef;
+	border-radius: 0.5rem;
+	border: 1px solid #d0d5e0;
 	margin-bottom: 2rem;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .pattern-nav h2 {
-	color: #495057;
+	color: #081130;
 	margin: 0 0 1.5rem 0;
 	font-size: 1.5rem;
 	padding-bottom: 0.5rem;
@@ -836,15 +836,15 @@ const scrollToSection = (sectionId) => {
 	align-items: center;
 	gap: 1rem;
 	padding: 1rem;
-	background: #f8f9fa;
+	background: #f5f7fa;
 	border-radius: 0.5rem;
-	border: 1px solid #dee2e6;
+	border: 1px solid #d0d5e0;
 	cursor: pointer;
 	transition: all 0.2s;
 }
 
 .pattern-item:hover {
-	background: #e9ecef;
+	background: #d0d5e0;
 	transform: translateX(4px);
 }
 
@@ -857,19 +857,19 @@ const scrollToSection = (sectionId) => {
 }
 
 .pattern-info h3 {
-	color: #495057;
+	color: #081130;
 	margin: 0 0 0.25rem 0;
 	font-size: 1rem;
 }
 
 .pattern-info p {
-	color: #6c757d;
+	color: #3d4663;
 	margin: 0;
 	font-size: 0.9rem;
 }
 
 .pattern-arrow {
-	color: #3498db;
+	color: #1a2a6c;
 	font-size: 1.5rem;
 }
 
@@ -923,20 +923,20 @@ const scrollToSection = (sectionId) => {
 }
 
 .pattern-header h2 {
-	color: #495057;
+	color: #081130;
 	margin: 0.5rem 0;
 	font-size: 2rem;
 }
 
 .pattern-description {
-	color: #6c757d;
+	color: #3d4663;
 	font-size: 1rem;
 	line-height: 1.6;
 	max-width: 800px;
 }
 
 .pattern-description code {
-	background: #f1f5f9;
+	background: #edf0f5;
 	padding: 0.125rem 0.375rem;
 	border-radius: 0.25rem;
 	font-family: "Monaco", "Consolas", monospace;
@@ -946,7 +946,7 @@ const scrollToSection = (sectionId) => {
 .pattern-docs-link {
 	display: inline-block;
 	margin-top: 0.5rem;
-	color: #3498db;
+	color: #1a2a6c;
 	text-decoration: none;
 	font-weight: 500;
 }
@@ -960,34 +960,34 @@ const scrollToSection = (sectionId) => {
 	background: #ffffff;
 	padding: 1.5rem;
 	border-radius: 0.5rem;
-	border: 1px solid #ced4da;
+	border: 1px solid #b0b8c9;
 }
 
 /* FKUI Reference Blocks */
 .fkui-reference {
-	background: #f0f4ff;
-	border: 1px dashed #93c5fd;
+	background: #edf0f5;
+	border: 1px dashed #8892a6;
 }
 
 .fkui-reference__tag {
 	display: inline-block;
-	background: #dbeafe;
-	color: #1d4ed8;
+	background: #edf0f5;
+	color: #081130;
 	font-size: 0.7rem;
 	font-weight: 700;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
 	padding: 0.2rem 0.5rem;
-	border-radius: 6px;
+	border-radius: 4px;
 	margin-bottom: 0.5rem;
 }
 
 .fkui-reference h3 {
-	color: #1d4ed8;
+	color: #081130;
 }
 
 .fkui-reference__note {
-	color: #6b7280;
+	color: #636e85;
 	font-size: 0.85rem;
 	margin: 0 0 1rem 0;
 }
@@ -995,15 +995,15 @@ const scrollToSection = (sectionId) => {
 .fkui-reference__btn {
 	padding: 0.375rem 0.75rem;
 	font-size: 0.875rem;
-	background: #e2e8f0;
-	color: #334155;
-	border: 1px solid #cbd5e1;
-	border-radius: 6px;
+	background: #edf0f5;
+	color: #3d4663;
+	border: 1px solid #b0b8c9;
+	border-radius: 4px;
 	cursor: pointer;
 }
 
 .fkui-reference__btn:hover {
-	background: #cbd5e1;
+	background: #b0b8c9;
 }
 
 .fkui-search-reference {
@@ -1017,7 +1017,7 @@ const scrollToSection = (sectionId) => {
 }
 
 .example-label {
-	color: #6c757d;
+	color: #3d4663;
 	font-size: 0.75rem;
 	font-weight: 600;
 	letter-spacing: 0.05em;
@@ -1031,7 +1031,7 @@ const scrollToSection = (sectionId) => {
 
 .demo-block h3 {
 	display: inline-block;
-	color: #495057;
+	color: #081130;
 	margin: 0 0 1rem 0;
 	font-size: 1rem;
 	font-weight: 600;
@@ -1067,14 +1067,14 @@ const scrollToSection = (sectionId) => {
 .search-results {
 	margin-top: 1rem;
 	padding: 1rem;
-	background: #f8f9fa;
+	background: #f5f7fa;
 	border-radius: 0.5rem;
 	min-height: 60px;
 }
 
 .search-loading,
 .search-empty {
-	color: #6c757d;
+	color: #3d4663;
 	text-align: center;
 }
 
@@ -1090,7 +1090,7 @@ const scrollToSection = (sectionId) => {
 	padding: 0.75rem;
 	background: white;
 	border-radius: 0.375rem;
-	border: 1px solid #dee2e6;
+	border: 1px solid #d0d5e0;
 }
 
 .product-item {
@@ -1113,7 +1113,7 @@ const scrollToSection = (sectionId) => {
 	flex-direction: column;
 	gap: 1rem;
 	padding: 1rem;
-	background: #f8f9fa;
+	background: #f5f7fa;
 	border-radius: 0.5rem;
 }
 
@@ -1127,12 +1127,12 @@ const scrollToSection = (sectionId) => {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
-	color: #495057;
+	color: #081130;
 }
 
 .filter-group select {
 	padding: 0.5rem;
-	border: 1px solid #ced4da;
+	border: 1px solid #b0b8c9;
 	border-radius: 0.25rem;
 	background: white;
 }
@@ -1147,7 +1147,7 @@ const scrollToSection = (sectionId) => {
 
 .code-block pre {
 	margin: 0;
-	color: #e2e8f0;
+	color: #edf0f5;
 	font-family: "Monaco", "Consolas", monospace;
 	font-size: 0.875rem;
 	line-height: 1.5;
@@ -1155,7 +1155,7 @@ const scrollToSection = (sectionId) => {
 
 /* Comparison Table */
 .comparison-section {
-	background: #f8f9fa;
+	background: #f5f7fa;
 }
 
 .comparison-table {
@@ -1170,11 +1170,11 @@ const scrollToSection = (sectionId) => {
 .comparison-table td {
 	padding: 1rem;
 	text-align: left;
-	border-bottom: 1px solid #dee2e6;
+	border-bottom: 1px solid #d0d5e0;
 }
 
 .comparison-table th {
-	background: #495057;
+	background: #081130;
 	color: white;
 	font-weight: 600;
 }
@@ -1184,16 +1184,16 @@ const scrollToSection = (sectionId) => {
 }
 
 .comparison-table tbody tr:hover {
-	background: #f8f9fa;
+	background: #f5f7fa;
 }
 
 /* Footer */
 .footer {
 	text-align: center;
 	padding: 2rem 0;
-	border-top: 1px solid #dee2e6;
+	border-top: 1px solid #d0d5e0;
 	margin-top: 3rem;
-	color: #6c757d;
+	color: #3d4663;
 }
 
 .footer p {
@@ -1201,7 +1201,7 @@ const scrollToSection = (sectionId) => {
 }
 
 .footer a {
-	color: #3498db;
+	color: #1a2a6c;
 	text-decoration: none;
 }
 
@@ -1211,23 +1211,23 @@ const scrollToSection = (sectionId) => {
 
 .footer span {
 	margin: 0 0.5rem;
-	color: #dee2e6;
+	color: #d0d5e0;
 }
 
 /* Toggle Button */
 .toggle-button {
 	padding: 0.375rem 0.75rem;
 	font-size: 0.875rem;
-	background: #3498db;
+	background: #1a2a6c;
 	color: white;
 	border: none;
-	border-radius: 6px;
+	border-radius: 4px;
 	cursor: pointer;
 	transition: background 0.2s;
 }
 
 .toggle-button:hover {
-	background: #2980b9;
+	background: #0f1a4a;
 }
 
 /* Responsive */

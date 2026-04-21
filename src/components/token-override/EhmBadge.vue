@@ -114,11 +114,11 @@ defineEmits<{
   /* Token overrides for brand styling - override FKUI's neutral feedback colors */
   --fkds-color-feedback-background-neutral-strong: var(
     --ehmds-color-primary,
-    #232948
+    #081130
   ) !important;
   --fkds-color-feedback-border-neutral-strong: var(
     --ehmds-color-primary,
-    #232948
+    #081130
   ) !important;
   --fkds-color-text-primary: var(
     --ehmds-color-primary-contrast,
@@ -131,15 +131,15 @@ defineEmits<{
   /* Token overrides for neutral styling */
   --fkds-color-feedback-background-info-strong: var(
     --ehmds-color-neutral-200,
-    #e0dbd2
+    #d0d5e0
   ) !important;
   --fkds-color-feedback-border-info-strong: var(
     --ehmds-color-neutral-200,
-    #e0dbd2
+    #d0d5e0
   ) !important;
   --fkds-color-text-inverted: var(
     --ehmds-color-text-primary,
-    #232948
+    #081130
   ) !important;
 }
 
@@ -183,11 +183,11 @@ defineEmits<{
 .ehm-badge:deep(.badge--default-inverted) {
   --fkds-color-feedback-background-neutral: var(
     --ehmds-color-primary-light,
-    #3a4270
+    #1a2a6c
   ) !important;
   --fkds-color-feedback-border-neutral: var(
     --ehmds-color-primary,
-    #232948
+    #081130
   ) !important;
   --fkds-color-text-primary: var(
     --ehmds-color-primary-contrast,
@@ -199,15 +199,15 @@ defineEmits<{
 .ehm-badge:deep(.badge--info-inverted) {
   --fkds-color-feedback-background-info: var(
     --ehmds-color-neutral-100,
-    #eee9e0
+    #edf0f5
   ) !important;
   --fkds-color-feedback-border-info: var(
     --ehmds-color-neutral-300,
-    #c8c2b8
+    #b0b8c9
   ) !important;
   --fkds-color-text-primary: var(
     --ehmds-color-text-primary,
-    #232948
+    #081130
   ) !important;
 }
 
@@ -223,7 +223,7 @@ defineEmits<{
   ) !important;
   --fkds-color-text-primary: var(
     --ehmds-color-text-primary,
-    #232948
+    #081130
   ) !important;
 }
 
@@ -232,6 +232,6 @@ defineEmits<{
   /* Ensure EHMDS font stack is used */
   font-family: var(--ehmds-font-family, inherit);
   /* Optional: Slightly adjust border radius for EHMDS design */
-  border-radius: var(--ehmds-border-radius-small, 6px);
+  border-radius: var(--ehmds-border-radius-small, 4px);
 }
 </style>

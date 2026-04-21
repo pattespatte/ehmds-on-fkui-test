@@ -1,7 +1,8 @@
 /**
  * EHMDS Default Theme Configuration
  *
- * This theme extends and customizes FKUI's design tokens
+ * Visual design based on Helix design system.
+ * Extends and customizes FKUI's design tokens
  * with EHMDS-specific styling and branding.
  */
 
@@ -10,77 +11,76 @@ import type { Theme, CSSVariables } from "./types";
 export const defaultTheme: Theme = {
   name: "ehmds-default",
 
-  // Brand Colors - Primary palette for EHMDS
   colors: {
-    // Primary brand color (dark navy)
-    primary: "#232948",
-    primaryLight: "#3a4270",
-    primaryDark: "#1a1f38",
+    // Primary brand color (Helix deep blue)
+    primary: "#081130",
+    primaryLight: "#1a2a6c",
+    primaryDark: "#050a1f",
     primaryContrast: "#ffffff",
 
-    // Secondary brand color
-    secondary: "#64748b", // Slate-500
-    secondaryLight: "#94a3b8", // Slate-400
-    secondaryDark: "#475569", // Slate-600
+    // Secondary brand color (cool slate)
+    secondary: "#4a5568",
+    secondaryLight: "#718096",
+    secondaryDark: "#2d3748",
     secondaryContrast: "#ffffff",
 
-    // Accent color for highlights and CTAs
-    accent: "#f59e0b", // Amber-500
-    accentLight: "#fbbf24", // Amber-400
-    accentDark: "#d97706", // Amber-600
+    // Accent color (action blue)
+    accent: "#1a2a6c",
+    accentLight: "#2d4a9e",
+    accentDark: "#0f1a4a",
     accentContrast: "#ffffff",
 
-    // Semantic colors
-    success: "#10b981", // Emerald-500
-    successLight: "#34d399", // Emerald-400
-    successDark: "#059669", // Emerald-600
+    // Semantic colors (Helix-aligned feedback)
+    success: "#10b981",
+    successLight: "#34d399",
+    successDark: "#059669",
 
-    warning: "#f59e0b", // Amber-500
-    warningLight: "#fbbf24", // Amber-400
-    warningDark: "#d97706", // Amber-600
+    warning: "#f59e0b",
+    warningLight: "#fbbf24",
+    warningDark: "#d97706",
 
-    error: "#ef4444", // Red-500
-    errorLight: "#f87171", // Red-400
-    errorDark: "#dc2626", // Red-600
+    error: "#ef4444",
+    errorLight: "#f87171",
+    errorDark: "#dc2626",
 
-    // Neutral colors (warm tones)
+    // Neutral colors (cool blue-gray)
     neutral: {
-      50: "#f6f3ee",
-      100: "#eee9e0",
-      200: "#e0dbd2",
-      300: "#c8c2b8",
-      400: "#9a9590",
-      500: "#7a7f94",
-      600: "#4a5068",
-      700: "#363c52",
-      800: "#232948",
-      900: "#1a1f38",
+      50: "#f8f9fc",
+      100: "#edf0f5",
+      200: "#d0d5e0",
+      300: "#b0b8c9",
+      400: "#8892a6",
+      500: "#636e85",
+      600: "#3d4663",
+      700: "#2a3150",
+      800: "#1a2040",
+      900: "#081130",
     },
 
     // Focus color for accessibility
-    focus: "#3a4270",
+    focus: "#081130",
 
     // Background colors
     background: {
-      primary: "#f6f3ee",
-      secondary: "#eee9e0",
-      tertiary: "#e5dfd4",
+      primary: "#ffffff",
+      secondary: "#f5f7fa",
+      tertiary: "#edf0f5",
     },
 
     // Text colors
     text: {
-      primary: "#232948",
-      secondary: "#4a5068",
-      tertiary: "#7a7f94",
+      primary: "#081130",
+      secondary: "#3d4663",
+      tertiary: "#636e85",
       inverse: "#ffffff",
     },
   },
 
-  // Typography scale
+  // Typography scale (Helix-based)
   typography: {
     fontFamily: {
       primary:
-        '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        '"Public Sans", "Noto Sans", Arial, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif',
       mono: '"Fira Code", "Monaco", "Cascadia Code", "Roboto Mono", monospace',
     },
 
@@ -91,7 +91,7 @@ export const defaultTheme: Theme = {
       lg: "1.125rem", // 18px
       xl: "1.25rem", // 20px
       "2xl": "1.5rem", // 24px
-      "3xl": "1.875rem", // 30px
+      "3xl": "2.375rem", // 38px (Helix display-lg)
       "4xl": "2.25rem", // 36px
       "5xl": "3rem", // 48px
     },
@@ -111,7 +111,7 @@ export const defaultTheme: Theme = {
     },
   },
 
-  // Spacing scale (follows 8px grid system)
+  // Spacing scale (4px base, matching Helix)
   spacing: {
     0: "0",
     1: "0.25rem", // 4px
@@ -128,13 +128,13 @@ export const defaultTheme: Theme = {
     24: "6rem", // 96px
   },
 
-  // Border radius scale (more rounded)
+  // Border radius scale (8px standard per Helix)
   borderRadius: {
     none: "0",
-    small: "0.375rem", // 6px
+    small: "0.25rem", // 4px
     medium: "0.5rem", // 8px
-    large: "0.75rem", // 12px
-    xl: "1rem", // 16px
+    large: "0.5rem", // 8px (same as medium)
+    xl: "0.75rem", // 12px
     full: "9999px",
   },
 

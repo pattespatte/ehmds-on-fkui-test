@@ -93,13 +93,13 @@ const cardClasses = computed(() => {
 /* Wrapper pattern styles - override FCard defaults with EHMDS design */
 .ehm-card {
   /* Base styles override FCard */
-  border-radius: var(--ehmds-border-radius-large, 12px);
+  border-radius: var(--ehmds-border-radius-medium, 8px);
   padding: var(--ehmds-spacing-4, 1rem);
 }
 
 /* EHMDS variant styles - these don't exist in FCard */
 .ehm-card--bordered {
-  border: 2px solid var(--ehmds-color-neutral-300, #c8c2b8);
+  border: 2px solid var(--ehmds-color-neutral-300, #b0b8c9);
 }
 
 .ehm-card--elevated {
