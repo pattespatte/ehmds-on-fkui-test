@@ -1,7 +1,7 @@
 /**
  * EHMDS Default Theme Configuration
  *
- * Visual design based on Helix design system.
+ * Visual design based on EHMDS design system.
  * Extends and customizes FKUI's design tokens
  * with EHMDS-specific styling and branding.
  */
@@ -12,7 +12,7 @@ export const defaultTheme: Theme = {
   name: "ehmds-default",
 
   colors: {
-    // Primary brand color (Helix deep blue)
+    // Primary brand color (EHMDS deep blue)
     primary: "#081130",
     primaryLight: "#1a2a6c",
     primaryDark: "#050a1f",
@@ -30,7 +30,7 @@ export const defaultTheme: Theme = {
     accentDark: "#0f1a4a",
     accentContrast: "#ffffff",
 
-    // Semantic colors (Helix-aligned feedback)
+    // Semantic colors (EHMDS feedback)
     success: "#10b981",
     successLight: "#34d399",
     successDark: "#059669",
@@ -76,7 +76,7 @@ export const defaultTheme: Theme = {
     },
   },
 
-  // Typography scale (Helix-based)
+  // Typography scale (EHMDS-based)
   typography: {
     fontFamily: {
       primary:
@@ -91,7 +91,7 @@ export const defaultTheme: Theme = {
       lg: "1.125rem", // 18px
       xl: "1.25rem", // 20px
       "2xl": "1.5rem", // 24px
-      "3xl": "2.375rem", // 38px (Helix display-lg)
+      "3xl": "2.375rem", // 38px (EHMDS display-lg)
       "4xl": "2.25rem", // 36px
       "5xl": "3rem", // 48px
     },
@@ -111,7 +111,7 @@ export const defaultTheme: Theme = {
     },
   },
 
-  // Spacing scale (4px base, matching Helix)
+  // Spacing scale (4px base, EHMDS standard)
   spacing: {
     0: "0",
     1: "0.25rem", // 4px
@@ -128,7 +128,7 @@ export const defaultTheme: Theme = {
     24: "6rem", // 96px
   },
 
-  // Border radius scale (8px standard per Helix)
+  // Border radius scale (8px standard per EHMDS)
   borderRadius: {
     none: "0",
     small: "0.25rem", // 4px

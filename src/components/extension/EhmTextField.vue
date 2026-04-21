@@ -338,7 +338,7 @@ watch(internalValue, (newValue) => {
   border-color: var(--ehmds-color-warning, #f59e0b);
 }
 
-/* Helix input height + focus pattern */
+/* EHMDS input height + focus pattern */
 .ehm-text-field :deep(input) {
   height: 48px;
   padding: var(--ehmds-spacing-2, 0.5rem) var(--ehmds-spacing-3, 0.75rem);

@@ -1,7 +1,7 @@
 /**
  * EHMDS Global Styles
  *
- * Visual design based on Helix design system.
+ * Visual design based on EHMDS design system.
  * This file imports FKUI base styles and defines EHMDS-specific
  * CSS custom properties and global styles.
  */
@@ -14,11 +14,11 @@
 
 /* ============================================================================
    EHMDS CSS Custom Properties
-   Based on Helix design system visual language
+   Based on EHMDS design system visual language
    ============================================================================ */
 
 :root {
-  /* Colors - Primary Palette (Helix-based deep blue) */
+  /* Colors - Primary Palette (EHMDS deep blue) */
   --ehmds-color-primary: #081130;
   --ehmds-color-primary-light: #1a2a6c;
   --ehmds-color-primary-dark: #050a1f;
@@ -36,7 +36,7 @@
   --ehmds-color-accent-dark: #0f1a4a;
   --ehmds-color-accent-contrast: #ffffff;
 
-  /* Colors - Semantic (aligned with Helix feedback colors) */
+  /* Colors - Semantic (EHMDS feedback colors) */
   --ehmds-color-success: #10b981;
   --ehmds-color-success-light: #34d399;
   --ehmds-color-success-dark: #059669;
@@ -75,7 +75,7 @@
   --ehmds-color-text-tertiary: #636e85;
   --ehmds-color-text-inverse: #ffffff;
 
-  /* Typography - Helix font stack */
+  /* Typography - EHMDS font stack */
   --ehmds-font-family-primary: "Public Sans", "Noto Sans", Arial, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif;
   --ehmds-font-family-mono: "Fira Code", "Monaco", "Cascadia Code", "Roboto Mono", monospace;
   --ehmds-font-family: var(--ehmds-font-family-primary);
@@ -100,7 +100,7 @@
   --ehmds-line-height-normal: 1.5;
   --ehmds-line-height-relaxed: 1.75;
 
-  /* Spacing (4px base, matching Helix) */
+  /* Spacing (4px base, EHMDS spacing scale) */
   --ehmds-spacing-0: 0;
   --ehmds-spacing-1: 0.25rem;
   --ehmds-spacing-2: 0.5rem;
@@ -115,7 +115,7 @@
   --ehmds-spacing-20: 5rem;
   --ehmds-spacing-24: 6rem;
 
-  /* Border Radius (8px standard per Helix) */
+  /* Border Radius (8px standard per EHMDS) */
   --ehmds-border-radius-none: 0;
   --ehmds-border-radius-small: 0.25rem;
   --ehmds-border-radius-medium: 0.5rem;
@@ -180,7 +180,7 @@ body {
    EHMDS Utility Classes
    ============================================================================ */
 
-/* Focus utilities — Helix pattern: white/black box-shadow */
+/* Focus utilities — EHMDS pattern: white/black box-shadow */
 .ehmds-focus-ring {
   outline: none;
   box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
