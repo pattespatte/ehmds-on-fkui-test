@@ -341,12 +341,13 @@ defineExpose({
 	margin: 0;
 	min-width: 40px;
 	height: 40px;
-	background: var(--ehmds-color-background-primary, #ffffff);
+	background: #232948;
+	box-shadow: none;
 	border: 1px solid var(--ehmds-color-neutral-300, #b0b8c9);
 	border-left: none;
 	border-radius: 0 var(--ehmds-border-radius-medium, 8px)
 		var(--ehmds-border-radius-medium, 8px) 0;
-	color: var(--ehmds-color-primary, #081130);
+	color: #fff;
 	cursor: pointer;
 	font-size: 1rem;
 	font-weight: 600;
@@ -356,15 +357,12 @@ defineExpose({
 }
 
 .ehm-search-box__button:hover {
-	background: var(--ehmds-color-primary, #081130);
-	color: var(--ehmds-color-primary-contrast, #ffffff);
+	background: #334075;
+	color: #fff;
 }
 
 .ehm-search-box__button:focus-visible {
 	outline: none;
-	box-shadow:
-		0 0 0 2px #fff,
-		0 0 0 4px #000;
 	position: relative;
 	z-index: 1;
 }

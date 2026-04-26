@@ -318,6 +318,7 @@
 							v-model="website"
 							label="Website"
 							placeholder="yourwebsite.com"
+							style="border-radius: 0 8px 8px 0"
 						>
 							<template #prefix>🌐</template>
 						</EhmTextField>
@@ -327,6 +328,8 @@
 							label="Amount"
 							placeholder="0.00"
 							type="number"
+							style="border-radius: 0"
+
 						>
 							<template #prefix>$</template>
 							<template #suffix>USD</template>
