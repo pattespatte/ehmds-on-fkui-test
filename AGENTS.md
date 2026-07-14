@@ -33,6 +33,8 @@ ESLint (flat config) + Prettier, Sass. FKUI packages all at `^6.39.0`.
 ```bash
 npm run demo           # Dev server (demo app + in-app docs) — uses demo/vite.config.ts
 npm run build          # Type-checks then builds the demo APP (root vite.config.ts). NOT the library.
+npm run build:lib      # Build the PUBLISHABLE library (demo/vite.config.ts, lib mode → dist/ehmds.{es,umd}.js)
+npm run build:all      # Demo app + library + type-check, in one go
 npm run type-check     # vue-tsc --noEmit
 npm run lint           # eslint src --ext .vue,.js,.ts
 npm run lint:fix
@@ -98,6 +100,23 @@ Path alias: `@` → `src` (configured in `tsconfig.demo.json`, root
 - **Import FKUI from `@fkui/vue`** (named imports), never from subpaths.
 - **Preserve FKUI's WCAG/accessibility** when wrapping or extending — don't
   strip aria attributes, roles, or keyboard handling.
+
+## Security & accessibility rules
+
+- **Sanitize any HTML before `v-html`.** `marked`/Mermaid output is never
+  trusted raw — wrap with `DOMPurify.sanitize(...)` first (see
+  `src/utils/markdown.ts` and `DocsPage.vue`). This is the project's safe-v-html
+  pattern; don't bypass it when adding new doc/content surfaces.
+- **Never set `outline: none` without a replacement `:focus-visible` style.**
+  Removing the focus ring without a substitute violates WCAG 2.4.7 (Focus
+  Visible). The project convention is the high-contrast ring
+  `box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;` (see `EhmSearchBox`).
+- **FKUI slot surface is the source of truth.** Before forwarding a slot in a
+  wrapper/extension/composition component, confirm the FKUI component actually
+  declares it (check `@fkui/vue`). FCard's real slots, for example, are
+  `header`, `error-message`, `default`, `footer` — there is no `actions` slot,
+  so EhmCard intentionally does not forward one. Forwarding a non-existent slot
+  is dead code that teaches the wrong thing about the pattern.
 
 ## Theme: two sources of truth
 
