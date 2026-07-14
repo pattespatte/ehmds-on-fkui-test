@@ -103,7 +103,19 @@ const cardClasses = computed(() => {
 }
 
 .ehm-card--compact {
-  padding: var(--ehmds-spacing-3, 0.75rem);
+  /* Outer padding: dense for dashboards/tables/lists. FKUI's .card default is
+     1rem; compact reduces it to 0.5rem so the difference is clearly visible. */
+  padding: var(--ehmds-spacing-2, 0.5rem);
+}
+
+/* Tighten FKUI's internal spacing to match the denser outer padding.
+   FKUI defaults: header-label margin-bottom 0.25rem, footer padding-top 1.25rem. */
+.ehm-card--compact :deep(.card__header-label) {
+  margin-bottom: var(--ehmds-spacing-1, 0.25rem);
+}
+
+.ehm-card--compact :deep(.card__footer) {
+  padding-top: var(--ehmds-spacing-2, 0.5rem);
 }
 
 .ehm-card--error {
