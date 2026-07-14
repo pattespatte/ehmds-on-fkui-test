@@ -9,6 +9,7 @@ export default defineConfig({
       entry: resolve(__dirname, '../src/index.ts'),
       name: 'EHMDS',
       fileName: (format) => `ehmds.${format}.js`,
+      cssFileName: 'style',
       formats: ['es', 'umd']
     },
     rollupOptions: {

@@ -11,6 +11,8 @@
   ],
   "scripts": {
     "build": "vite build && vue-tsc --noEmit",
+    "build:lib": "vite build --config demo/vite.config.ts",
+    "build:all": "vite build && vite build --config demo/vite.config.ts && vue-tsc --noEmit",
     "demo": "vite --config demo/vite.config.ts",
     "demo:preview": "vite preview --config demo/vite.config.ts",
     "type-check": "vue-tsc --noEmit",
@@ -32,16 +34,18 @@
     "vue": "^3.5.30"
   },
   "dependencies": {
-    "@fkui/date": "^6.39.0",
-    "@fkui/design": "^6.39.0",
-    "@fkui/logic": "^6.39.0",
-    "@fkui/theme-default": "^6.39.0",
-    "@fkui/vue": "^6.39.0",
+    "@fkui/date": "^6.52.0",
+    "@fkui/design": "^6.52.1",
+    "@fkui/logic": "^6.52.1",
+    "@fkui/theme-default": "^6.52.0",
+    "@fkui/vue": "^6.52.1",
+    "dompurify": "^3.4.12",
     "marked": "^17.0.5",
     "mermaid": "^11.13.0",
     "vue-router": "^5.0.4"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@typescript-eslint/eslint-plugin": "^8.57.1",
     "@typescript-eslint/parser": "^8.57.1",
     "@vitejs/plugin-vue": "^6.0.5",
@@ -51,6 +55,7 @@
     "@vue/tsconfig": "^0.9.0",
     "eslint": "10.1.0",
     "eslint-plugin-vue": "10.8.0",
+    "globals": "^17.7.0",
     "jsdom": "^29.0.1",
     "prettier": "3.8.1",
     "sass": "1.98.0",

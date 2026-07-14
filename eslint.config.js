@@ -4,11 +4,24 @@ import tsParser from '@typescript-eslint/parser'
 import tsPlugin from '@typescript-eslint/eslint-plugin'
 import * as parserVue from 'vue-eslint-parser'
 import configPrettier from '@vue/eslint-config-prettier'
+import globals from 'globals'
 
 export default [
   {
     name: 'app/files-to-lint',
     files: ['**/*.{ts,mts,tsx,vue}'],
+  },
+
+  {
+    name: 'app/globals',
+    // Browser APIs (fetch, document, console, btoa/atob, ...) are valid in a
+    // Vue SPA; declaring them removes false no-undef errors.
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
   },
 
   {

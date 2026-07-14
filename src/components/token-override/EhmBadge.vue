@@ -82,10 +82,6 @@ const mappedStatus = computed<FkuiBadgeStatus>(() => {
   };
   return statusMap[props.status] || (props.status as FkuiBadgeStatus);
 });
-
-defineEmits<{
-  // FBadge doesn't emit events, but we include for consistency
-}>();
 </script>
 
 <style scoped>

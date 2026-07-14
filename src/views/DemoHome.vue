@@ -442,7 +442,7 @@
 							:debounce="500"
 							@search="handleAdvancedSearch"
 						>
-							<template #filters="{ query }">
+							<template #filters>
 								<div class="search-filters">
 									<div class="filter-group">
 										<label
