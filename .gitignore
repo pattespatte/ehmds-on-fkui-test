@@ -46,8 +46,10 @@ Thumbs.db
 *.mov
 *.wmv
 
-# Claude Code
+# Harnesses
 .claude/
+.zcode/
+.agents/
 
 # Playwright MCP
 .playwright-mcp/
