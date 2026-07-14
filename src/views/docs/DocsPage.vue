@@ -9,6 +9,7 @@ import { ref, onMounted, watch, nextTick } from "vue";
 import { useRoute } from "vue-router";
 import DocsLayout from "./DocsLayout.vue";
 import { loadMarkdown } from "../../utils/markdown.js";
+import DOMPurify from "dompurify";
 import mermaid from "mermaid";
 
 const route = useRoute();
@@ -31,7 +32,7 @@ const pageTitles = {
 mermaid.initialize({
   startOnLoad: false,
   theme: "default",
-  securityLevel: "loose",
+  securityLevel: "strict",
 });
 
 const renderMermaidDiagrams = async () => {
@@ -46,7 +47,11 @@ const renderMermaidDiagrams = async () => {
       div.innerHTML = svg;
     } catch (error) {
       console.error("Mermaid rendering error:", error);
-      div.innerHTML = `<pre class="mermaid-error">${error.message}</pre>`;
+      // Sanitize the runtime error string before injecting as HTML
+      const safeMessage = DOMPurify.sanitize(error.message, {
+        USE_PROFILES: { html: false },
+      });
+      div.innerHTML = `<pre class="mermaid-error">${safeMessage}</pre>`;
     }
   }
 };

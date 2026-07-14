@@ -1,4 +1,5 @@
 import { marked } from "marked";
+import DOMPurify from "dompurify";
 
 interface MermaidBlock {
   id: string;
@@ -50,7 +51,13 @@ export async function loadMarkdown(
       html = html.replace(placeholder, mermaidDiv);
     });
 
-    return html;
+    // Sanitize the final HTML before it reaches v-html. `marked` does not strip
+    // raw HTML, so without this any <script>/onerror in a markdown file would
+    // execute. Allow the mermaid <div> and its data-* attributes through.
+    return DOMPurify.sanitize(html, {
+      ADD_TAGS: ["div"],
+      ADD_ATTR: ["data-mermaid-id", "data-mermaid-code"],
+    });
   } catch (error) {
     console.error("Error loading markdown:", error);
     const errorMessage =
