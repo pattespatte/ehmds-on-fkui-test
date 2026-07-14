@@ -2,7 +2,8 @@
   <!-- Wrapper pattern: EhmCard wraps FCard, exposing a simplified custom API -->
   <FCard v-bind="$attrs" :id="id" :focus-ref="errorRef" :class="cardClasses">
     <!-- Transform EHMDS's simpler slot API to FCard's slots -->
-    <template v-if="$slots.header" #header>
+    <!-- Render header when consumer supplies a header slot OR title/subtitle props -->
+    <template v-if="$slots.header || title || subtitle" #header>
       <slot name="header">
         <h3 v-if="title">{{ title }}</h3>
         <p v-if="subtitle">{{ subtitle }}</p>
@@ -17,11 +18,6 @@
       <div class="ehm-card__footer">
         <slot name="footer" />
       </div>
-    </template>
-
-    <!-- Pass through other FCard slots (actions, etc.) -->
-    <template v-if="$slots.actions" #actions>
-      <slot name="actions" />
     </template>
   </FCard>
 </template>

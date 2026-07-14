@@ -225,8 +225,8 @@ const showClearButton = computed(() => {
 	return Boolean(searchQuery.value);
 });
 
-// Always enable buttons for now (TODO: implement proper disabled logic)
-const isButtonDisabled = computed(() => false);
+// Disable when explicitly disabled or when the query is shorter than minLength
+const isButtonDisabled = computed(() => props.disabled || !hasQuery.value);
 
 const searchBoxClasses = computed(() => ({
 	"ehm-search-box--expandable": props.expandable,
@@ -362,7 +362,11 @@ defineExpose({
 }
 
 .ehm-search-box__button:focus-visible {
+	/* High-contrast focus ring (WCAG 2.4.7) — same pattern as .ehm-search-box__clear */
 	outline: none;
+	box-shadow:
+		0 0 0 2px #fff,
+		0 0 0 4px #000;
 	position: relative;
 	z-index: 1;
 }

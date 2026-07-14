@@ -89,15 +89,21 @@ describe('Wrapper Pattern: EhmCard', () => {
     expect(wrapper.find('.ehm-card__footer').html()).toContain('Footer Action');
   });
 
-  it('forwards actions slot from FCard', () => {
+  it('does not invent slot forwarding for slots FCard does not have', () => {
+    // FCard's real slots are: header, error-message, default, footer.
+    // There is no 'actions' slot on FCard, so EhmCard does not forward one
+    // (forwarding a non-existent slot would be dead code that teaches the
+    // wrong thing about the wrapper pattern). This test documents that
+    // decision and guards against reintroducing the dead forwarding.
     const wrapper = mount(EhmCard, {
       slots: {
         actions: '<button>Action Button</button>',
       },
     });
 
-    // The actions slot should be passed through to FCard
-    expect(wrapper.text()).toContain('Action Button');
+    // 'actions' content is not rendered because neither EhmCard nor FCard
+    // declares that slot.
+    expect(wrapper.text()).not.toContain('Action Button');
   });
 
   it('applies CSS classes on the wrapper element', () => {
