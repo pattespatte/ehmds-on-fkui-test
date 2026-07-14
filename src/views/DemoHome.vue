@@ -20,7 +20,8 @@
 		<nav class="pattern-nav">
 			<h2>Architectural Patterns</h2>
 			<div class="pattern-list">
-				<div
+				<button
+					type="button"
 					class="pattern-item"
 					@click="scrollToSection('token-override')"
 				>
@@ -30,24 +31,33 @@
 						<p>CSS variable overrides only (~10 lines)</p>
 					</div>
 					<div class="pattern-arrow">→</div>
-				</div>
-				<div class="pattern-item" @click="scrollToSection('wrapper')">
+				</button>
+				<button
+					type="button"
+					class="pattern-item"
+					@click="scrollToSection('wrapper')"
+				>
 					<div class="pattern-icon">📦</div>
 					<div class="pattern-info">
 						<h3>Wrapper/Facade</h3>
 						<p>Simplified API, same component (~50 lines)</p>
 					</div>
 					<div class="pattern-arrow">→</div>
-				</div>
-				<div class="pattern-item" @click="scrollToSection('extension')">
+				</button>
+				<button
+					type="button"
+					class="pattern-item"
+					@click="scrollToSection('extension')"
+				>
 					<div class="pattern-icon">➕</div>
 					<div class="pattern-info">
 						<h3>Extension</h3>
 						<p>FKUI features + EHMDS enhancements (~100 lines)</p>
 					</div>
 					<div class="pattern-arrow">→</div>
-				</div>
-				<div
+				</button>
+				<button
+					type="button"
 					class="pattern-item"
 					@click="scrollToSection('composition')"
 				>
@@ -60,7 +70,7 @@
 						</p>
 					</div>
 					<div class="pattern-arrow">→</div>
-				</div>
+				</button>
 			</div>
 		</nav>
 
@@ -593,13 +603,13 @@
 					target="_blank"
 					>GitHub</a
 				>
-				<span>•</span>
+				<span aria-hidden="true">•</span>
 				<a
-					href="https://designsystem.forsakringskassan.se/"
-					target="_blank"
-					>FKUI</a
-				>
-				<span>•</span>
+						href="https://designsystem.forsakringskassan.se/"
+						target="_blank"
+						>FKUI</a
+					>
+					<span aria-hidden="true">•</span>
 				Built with Vue 3 + Vite
 			</p>
 		</footer>
@@ -803,12 +813,20 @@ const scrollToSection = (sectionId) => {
 
 .header-links a {
 	color: #1a2a6c;
-	text-decoration: none;
+	text-decoration: underline;
 	font-weight: 500;
 }
 
 .header-links a:hover {
-	text-decoration: underline;
+	text-decoration-thickness: 2px;
+}
+
+.header-links a:focus-visible {
+	outline: none;
+	box-shadow:
+		0 0 0 2px #fff,
+		0 0 0 4px #000;
+	border-radius: 2px;
 }
 
 /* Pattern Navigation */
@@ -838,17 +856,28 @@ const scrollToSection = (sectionId) => {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
+	width: 100%;
 	padding: 1rem;
 	background: #f5f7fa;
 	border-radius: 0.5rem;
 	border: 1px solid #d0d5e0;
 	cursor: pointer;
+	text-align: left;
+	font: inherit;
+	color: inherit;
 	transition: all 0.2s;
 }
 
 .pattern-item:hover {
 	background: #d0d5e0;
 	transform: translateX(4px);
+}
+
+.pattern-item:focus-visible {
+	outline: none;
+	box-shadow:
+		0 0 0 2px #fff,
+		0 0 0 4px #000;
 }
 
 .pattern-icon {
@@ -950,12 +979,20 @@ const scrollToSection = (sectionId) => {
 	display: inline-block;
 	margin-top: 0.5rem;
 	color: #1a2a6c;
-	text-decoration: none;
+	text-decoration: underline;
 	font-weight: 500;
 }
 
 .pattern-docs-link:hover {
-	text-decoration: underline;
+	text-decoration-thickness: 2px;
+}
+
+.pattern-docs-link:focus-visible {
+	outline: none;
+	box-shadow:
+		0 0 0 2px #fff,
+		0 0 0 4px #000;
+	border-radius: 2px;
 }
 
 /* Demo Blocks */
@@ -1007,6 +1044,13 @@ const scrollToSection = (sectionId) => {
 
 .fkui-reference__btn:hover {
 	background: #b0b8c9;
+}
+
+.fkui-reference__btn:focus-visible {
+	outline: none;
+	box-shadow:
+		0 0 0 2px #fff,
+		0 0 0 4px #000;
 }
 
 .fkui-search-reference {
@@ -1107,7 +1151,7 @@ const scrollToSection = (sectionId) => {
 }
 
 .product-price {
-	color: #10b981;
+	color: var(--ehmds-color-success, #059669);
 	font-weight: 600;
 }
 
@@ -1138,6 +1182,13 @@ const scrollToSection = (sectionId) => {
 	border: 1px solid #b0b8c9;
 	border-radius: 0.25rem;
 	background: white;
+}
+
+.filter-group select:focus-visible {
+	outline: none;
+	box-shadow:
+		0 0 0 2px #fff,
+		0 0 0 4px #000;
 }
 
 /* Code Block */
@@ -1205,16 +1256,24 @@ const scrollToSection = (sectionId) => {
 
 .footer a {
 	color: #1a2a6c;
-	text-decoration: none;
+	text-decoration: underline;
 }
 
 .footer a:hover {
-	text-decoration: underline;
+	text-decoration-thickness: 2px;
+}
+
+.footer a:focus-visible {
+	outline: none;
+	box-shadow:
+		0 0 0 2px #fff,
+		0 0 0 4px #000;
+	border-radius: 2px;
 }
 
 .footer span {
 	margin: 0 0.5rem;
-	color: #d0d5e0;
+	color: #8892a6;
 }
 
 /* Toggle Button */
@@ -1231,6 +1290,13 @@ const scrollToSection = (sectionId) => {
 
 .toggle-button:hover {
 	background: #0f1a4a;
+}
+
+.toggle-button:focus-visible {
+	outline: none;
+	box-shadow:
+		0 0 0 2px #fff,
+		0 0 0 4px #000;
 }
 
 /* Responsive */

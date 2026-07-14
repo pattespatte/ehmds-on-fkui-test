@@ -449,6 +449,14 @@ defineExpose({
 	background-color: var(--ehmds-color-neutral-100, #edf0f5);
 }
 
+.ehm-search-box__toggle:focus-visible {
+	outline: none;
+	box-shadow:
+		0 0 0 2px #fff,
+		0 0 0 4px #000;
+	z-index: 1;
+}
+
 .ehm-search-box__toggle-text {
 	flex: 1;
 }

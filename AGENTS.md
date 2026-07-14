@@ -111,6 +111,24 @@ Path alias: `@` → `src` (configured in `tsconfig.demo.json`, root
   Removing the focus ring without a substitute violates WCAG 2.4.7 (Focus
   Visible). The project convention is the high-contrast ring
   `box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;` (see `EhmSearchBox`).
+- **Links must be distinguishable without color alone (WCAG 1.4.1).** All
+  `<a>`/`<router-link>` elements use `text-decoration: underline` in the
+  resting state — not only on hover. Color is a secondary cue, never the sole
+  one.
+- **State must not be indicated by color alone (WCAG 1.4.1).** Success and
+  warning states need a text/icon/ARIA cue in addition to color.
+  `EhmTextField` renders a ✓/⚠ glyph + `aria-live` for its success/warning
+  variants; `EhmCard` sets `role="alert"` when in error. Do not introduce a new
+  state that relies on border/background color only.
+- **Text must meet 4.5:1 contrast (WCAG 1.4.3).** The semantic tokens
+  (`--ehmds-color-success/warning/error`) were darkened from their Tailwind
+  500-shade defaults to meet this. When introducing a color, verify the ratio
+  against the actual background (note: the page bg is `#f5f7fa`, not pure
+  white, which pushes borderline grays below threshold).
+- **Interactive elements must be keyboard-accessible (WCAG 2.4.1).** Use
+  `<button>`/`<a>` for actions/navigation — never a `<div>`/`<span>` with only
+  `@click`. If a non-semantic element is unavoidable, add `tabindex="0"`,
+  `role="button"`, and a `@keyup.enter`/`@keydown.space` handler.
 - **FKUI slot surface is the source of truth.** Before forwarding a slot in a
   wrapper/extension/composition component, confirm the FKUI component actually
   declares it (check `@fkui/vue`). FCard's real slots, for example, are

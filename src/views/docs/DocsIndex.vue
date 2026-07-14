@@ -58,12 +58,20 @@ import DocsLayout from "./DocsLayout.vue";
 }
 
 .docs-list a {
-  color: #3498db;
-  text-decoration: none;
+  color: var(--ehmds-color-text-primary, #081130);
+  text-decoration: underline;
   font-size: 1.1rem;
 }
 
 .docs-list a:hover {
-  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.docs-list a:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #000;
+  border-radius: 2px;
 }
 </style>

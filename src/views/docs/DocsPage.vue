@@ -174,12 +174,12 @@ watch(
 }
 
 .docs-page :deep(a) {
-  color: #3498db;
-  text-decoration: none;
+  color: var(--ehmds-color-text-primary, #081130);
+  text-decoration: underline;
 }
 
 .docs-page :deep(a:hover) {
-  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 .docs-page :deep(table) {
@@ -205,7 +205,7 @@ watch(
   border-left: 4px solid #3498db;
   padding-left: 1rem;
   margin: 1rem 0;
-  color: #6c757d;
+  color: #495057;
 }
 
 /* Mermaid diagram styling */
@@ -224,7 +224,7 @@ watch(
 }
 
 .docs-page :deep(.mermaid-error) {
-  color: #dc3545;
+  color: #b02a37;
   background: #f8d7da;
   padding: 1rem;
   border-radius: 0.375rem;

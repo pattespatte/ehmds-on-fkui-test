@@ -56,13 +56,21 @@
 }
 
 .docs-nav a {
-  color: #3498db;
-  text-decoration: none;
+  color: var(--ehmds-color-text-primary, #081130);
+  text-decoration: underline;
   font-weight: 500;
 }
 
 .docs-nav a:hover {
-  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.docs-nav a:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #000;
+  border-radius: 2px;
 }
 
 .docs-main {
@@ -80,7 +88,7 @@
   padding: 2rem 0;
   border-top: 1px solid #e9ecef;
   text-align: center;
-  color: #6c757d;
+  color: #495057;
   font-size: 0.875rem;
 }
 

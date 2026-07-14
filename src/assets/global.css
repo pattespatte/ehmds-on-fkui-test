@@ -37,17 +37,17 @@
   --ehmds-color-accent-contrast: #ffffff;
 
   /* Colors - Semantic (EHMDS feedback colors) */
-  --ehmds-color-success: #10b981;
+  --ehmds-color-success: #059669;
   --ehmds-color-success-light: #34d399;
-  --ehmds-color-success-dark: #059669;
+  --ehmds-color-success-dark: #047857;
 
-  --ehmds-color-warning: #f59e0b;
+  --ehmds-color-warning: #d97706;
   --ehmds-color-warning-light: #fbbf24;
-  --ehmds-color-warning-dark: #d97706;
+  --ehmds-color-warning-dark: #b45309;
 
-  --ehmds-color-error: #ef4444;
+  --ehmds-color-error: #dc2626;
   --ehmds-color-error-light: #f87171;
-  --ehmds-color-error-dark: #dc2626;
+  --ehmds-color-error-dark: #b91c1c;
 
   /* Colors - Neutral Scale (cool blue-gray) */
   --ehmds-color-neutral-50: #f8f9fc;

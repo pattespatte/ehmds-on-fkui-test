@@ -55,6 +55,19 @@
       {{ helperText }}
     </p>
 
+    <!-- Success/warning status (EHMDS enhancement — non-color cue for variant states) -->
+    <p
+      v-if="!hasError && (variant === 'success' || variant === 'warning')"
+      class="ehm-text-field__status"
+      :class="`ehm-text-field__status--${variant}`"
+      aria-live="polite"
+    >
+      <span class="ehm-text-field__status-icon" aria-hidden="true">{{
+        variant === "success" ? "✓" : "⚠"
+      }}</span>
+      {{ variant === "success" ? "Valid" : "Check" }}
+    </p>
+
     <!-- Error message (EHMDS enhancement extending validation) -->
     <p
       v-if="hasError && errorMessage"
@@ -281,7 +294,7 @@ watch(internalValue, (newValue) => {
   display: flex;
   align-items: center;
   padding: 0 var(--ehmds-spacing-3, 0.75rem);
-  color: var(--ehmds-color-text-tertiary, #636e85);
+  color: var(--ehmds-color-text-secondary, #3d4663);
   background-color: var(--ehmds-color-neutral-100, #edf0f5);
   border: 1px solid var(--ehmds-color-neutral-300, #b0b8c9);
   height: 48px;
@@ -322,6 +335,27 @@ watch(internalValue, (newValue) => {
 
 .ehm-text-field__error {
   color: var(--ehmds-color-error, #ef4444);
+}
+
+/* Status (success/warning) — non-color cue so variant states pass WCAG 1.4.1 */
+.ehm-text-field__status {
+  font-size: var(--ehmds-font-size-sm, 0.875rem);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--ehmds-spacing-1, 0.25rem);
+}
+
+.ehm-text-field__status-icon {
+  font-weight: var(--ehmds-font-weight-bold, 700);
+}
+
+.ehm-text-field__status--success {
+  color: var(--ehmds-color-success, #10b981);
+}
+
+.ehm-text-field__status--warning {
+  color: var(--ehmds-color-warning, #f59e0b);
 }
 
 /* Variant states */
