@@ -79,6 +79,37 @@ graph TD
 - Adds a layer of indirection
 - More code than direct FKUI usage
 
+## Risks & When NOT to Use
+
+**Abstractions leak.** A wrapper around a design system is never a fully sealed
+boundary — this is the Law of Leaky Abstractions (Spolsky): a wrapper over a
+design system leaks. Upstream prop names, the error DOM that FKUI emits, the
+accessibility structure (roles, `aria-*` wiring, focus management), and FKUI
+breaking changes all bleed through the facade no matter how clean the EHMDS API
+looks on the surface. Consumers who hit one of these leaks are forced to
+understand both APIs, which is exactly the complexity the wrapper promised to
+hide.
+
+**The maintenance burden is ongoing and quietly erodes the headline benefit.**
+Because the wrapper translates between two live APIs, it must be re-verified on
+*every* FKUI release — a prop rename, a changed slot contract, or a new
+accessibility requirement upstream can silently change what your wrapper
+delivers. That recurring re-verification work is real cost, and over time it can
+erode the "less code than direct FKUI usage" benefit the Cons list cites.
+
+**Do not use Wrapper when:**
+
+- You only want to restyle a component — use **Token Override** instead; it
+  carries none of this translation surface.
+- You want to add features to one component — use **Extension**, which preserves
+  the FKUI API rather than replacing it.
+- You need to combine multiple components — use **Composition**, which is built
+  for orchestration rather than for hiding a single component.
+- You need to translate between two different design systems' vocabularies — use
+  an **Adapter/Bridge** that explicitly translates between two systems, not a
+  facade that pretends to hide one. A facade obscures which system is really
+  driving behaviour; an adapter makes the translation honest and visible.
+
 ## Code Example
 
 ```vue

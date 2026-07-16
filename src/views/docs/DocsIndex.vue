@@ -10,6 +10,11 @@
           >
         </li>
         <li>
+          <router-link to="/docs/architecture/spectrum"
+            >The reuse spectrum</router-link
+          >
+        </li>
+        <li>
           <router-link to="/docs/architecture/architecture-theory"
             >Architecture Theory</router-link
           >

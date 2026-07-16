@@ -6,7 +6,18 @@ EHMDS (EHM Design System) is a **proof-of-concept design system** built on top o
 
 ## Primary Hypothesis
 
-**A layered architecture is the most effective pattern** for building a design system on top of another design system.
+This proof-of-concept explores the hypothesis that **a layered architecture is an
+effective pattern** for building a design system on top of another design
+system — and sets out to test where that holds and where it breaks down.
+
+> **Read this first: the reuse spectrum.** The four patterns demoed below are
+> one slice of a larger decision space. Before choosing a pattern, see
+> [`spectrum.md`](./spectrum.md), which frames the full range of ways to build
+> on a parent system — from the lightest theming to a fully independent fork —
+> along two axes: **coupling** to the parent and **investment/ownership**. The
+> four patterns here are the *demonstrated* subset; the spectrum page covers
+> three additional patterns (headless split, adapter, fork) that complete the
+> picture.
 
 ## The Layered Architecture
 
@@ -28,7 +39,7 @@ graph TB
         FCard[FCard]
         FTextField[FTextField]
         FCrudButton[FCrudButton]
-        FExpandable[FExpandable]
+        FExpandablePanel[FExpandablePanel]
     end
 
     subgraph "Vue 3 Framework"
@@ -45,13 +56,13 @@ graph TB
     EhmTextField -->|Extends & Enhances| FTextField
     EhmSearchBox -->|Orchestrates| FTextField
     EhmSearchBox -->|Orchestrates| FCrudButton
-    EhmSearchBox -->|Orchestrates| FExpandable
+    EhmSearchBox -->|Orchestrates| FExpandablePanel
 
     FBadge --> Vue
     FCard --> Vue
     FTextField --> Vue
     FCrudButton --> Vue
-    FExpandable --> Vue
+    FExpandablePanel --> Vue
 
     style EhmBadge fill:#e1f5e1,stroke:#388e3c
     style EhmCard fill:#e1e5f5,stroke:#0288d1
@@ -70,12 +81,12 @@ EHMDS demonstrates four distinct patterns for building on FKUI:
 Uses FKUI components as-is, overriding only CSS custom properties for visual changes.
 
 - **Component:** `EhmBadge` (wraps `FBadge`)
-- **Code:** ~10 lines (mostly CSS)
+- **Size:** Very small (mostly CSS overrides)
 - **Use Case:** When you only need to change colors, fonts, or spacing
-- **Maintenance:** Very low - automatic FKUI updates
+- **Maintenance:** Low — visual review only on FKUI updates
 
 ```vue
-<EhmBadge status="brand">New Feature</EhmBadge>
+<EhmBadge status="default">New Feature</EhmBadge>
 ```
 
 **[Learn more →](./token-override.md)**
@@ -89,7 +100,7 @@ Uses FKUI components as-is, overriding only CSS custom properties for visual cha
 Wraps FKUI components with a simplified, customized EHMDS API.
 
 - **Component:** `EhmCard` (wraps `FCard`)
-- **Code:** ~50 lines
+- **Size:** Small
 - **Use Case:** When you want a simpler or different API than FKUI
 - **Maintenance:** Low - may need testing on FKUI updates
 
@@ -111,7 +122,7 @@ Wraps FKUI components with a simplified, customized EHMDS API.
 Extends FKUI components with additional features while preserving all original functionality.
 
 - **Component:** `EhmTextField` (extends `FTextField`)
-- **Code:** ~100 lines
+- **Size:** Medium
 - **Use Case:** When you need FKUI's features plus additional functionality
 - **Maintenance:** Medium - may need updates on FKUI changes
 
@@ -136,7 +147,7 @@ Extends FKUI components with additional features while preserving all original f
 Combines multiple FKUI components into a higher-level, domain-specific component.
 
 - **Component:** `EhmSearchBox` (composes `FTextField` + `FCrudButton` + `FExpandablePanel`)
-- **Code:** ~150 lines
+- **Size:** Largest
 - **Use Case:** When you need to combine multiple FKUI components into a pattern
 - **Maintenance:** High - likely needs updates on FKUI changes
 
@@ -272,7 +283,7 @@ app.mount('#app')
 <template>
   <div>
     <!-- Token Override -->
-    <EhmBadge status="brand">New</EhmBadge>
+    <EhmBadge status="default">New</EhmBadge>
 
     <!-- Wrapper -->
     <EhmCard variant="elevated">
@@ -303,9 +314,9 @@ EHMDS requires FKUI as a peer dependency:
 ```json
 {
   "peerDependencies": {
-    "@fkui/vue": "^6.12.0",
-    "@fkui/design": "^6.12.0",
-    "@fkui/logic": "^6.12.0",
+    "@fkui/vue": "^6.39.0",
+    "@fkui/design": "^6.39.0",
+    "@fkui/logic": "^6.39.0",
     "vue": "^3.5.0"
   }
 }

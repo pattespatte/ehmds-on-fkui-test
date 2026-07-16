@@ -12,7 +12,7 @@ import type { CardVariant } from '@ehmds/design-system'
 
 <template>
   <EhmCard title="Welcome" variant="elevated">
-    <EhmBadge status="brand">Type-Safe</EhmBadge>
+    <EhmBadge status="default">Type-Safe</EhmBadge>
   </EhmCard>
 </template>
 ```

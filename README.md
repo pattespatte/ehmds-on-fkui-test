@@ -8,7 +8,7 @@
 
 EHMDS (EHM Design System) is a **proof-of-concept design system** built on top of [FKUI](https://github.com/Forsakringskassan/designsystem). Its purpose is to explore, demonstrate, and compare architectural approaches for building one design system on another.
 
-**Primary Hypothesis:** A layered architecture is the most effective pattern for building a design system on top of another design system.
+**Primary Hypothesis:** A layered architecture is an effective pattern for building a design system on top of another design system — this proof-of-concept explores where that holds and where it breaks down.
 
 **Live Demo:** https://pattespatte.github.io/ehmds-on-fkui-test/
 
@@ -18,7 +18,7 @@ EHMDS demonstrates four distinct patterns for building on FKUI:
 
 | Pattern | Complexity | Flexibility | Maintenance | Best For |
 |---------|------------|-------------|-------------|----------|
-| **Token Override** | ⭐ Very Low | ⭐ Low | ⭐ Very Low | Visual changes only |
+| **Token Override** | ⭐ Low | ⭐ Low | ⭐ Low | Visual changes only |
 | **Wrapper/Facade** | ⭐⭐ Low-Medium | ⭐⭐⭐ High | ⭐⭐ Medium | API simplification |
 | **Extension** | ⭐⭐⭐ Medium-High | ⭐⭐ Medium | ⭐⭐ Medium | Adding features |
 | **Composition** | ⭐⭐⭐⭐ High | ⭐⭐⭐⭐ Very High | ⭐⭐⭐ High | Domain components |
@@ -30,9 +30,9 @@ EHMDS demonstrates four distinct patterns for building on FKUI:
 Uses FKUI components as-is, only overriding CSS custom properties.
 
 - **Component:** `EhmBadge` (wraps `FBadge`)
-- **Code:** ~10 lines (mostly CSS)
+- **Size:** Very small (mostly CSS overrides)
 - **Use Case:** When you only need to change colors, fonts, or spacing
-- **Maintenance:** Very low - automatic FKUI updates
+- **Maintenance:** Low — visual review only on FKUI updates
 
 ### 2. Wrapper/Facade Pattern 📦
 
@@ -41,7 +41,7 @@ Uses FKUI components as-is, only overriding CSS custom properties.
 Wraps FKUI components with a simplified, customized EHMDS API.
 
 - **Component:** `EhmCard` (wraps `FCard`)
-- **Code:** ~50 lines
+- **Size:** Small
 - **Use Case:** When you want a simpler or different API than FKUI
 - **Maintenance:** Low - may need testing on FKUI updates
 
@@ -52,7 +52,7 @@ Wraps FKUI components with a simplified, customized EHMDS API.
 Extends FKUI components with additional features while preserving all original functionality.
 
 - **Component:** `EhmTextField` (extends `FTextField`)
-- **Code:** ~100 lines
+- **Size:** Medium
 - **Use Case:** When you need FKUI's features plus additional functionality
 - **Maintenance:** Medium - may need updates on FKUI changes
 
@@ -62,8 +62,8 @@ Extends FKUI components with additional features while preserving all original f
 
 Combines multiple FKUI components into a higher-level, domain-specific component.
 
-- **Component:** `EhmSearchBox` (composes `FTextField` + `FCrudButton` + `FExpandable`)
-- **Code:** ~150 lines
+- **Component:** `EhmSearchBox` (composes `FTextField` + `FCrudButton` + `FExpandablePanel`)
+- **Size:** Largest
 - **Use Case:** When you need to combine multiple FKUI components into a pattern
 - **Maintenance:** High - likely needs updates on FKUI changes
 
@@ -112,7 +112,7 @@ src/
 │   ├── extension/              # Extension pattern
 │   │   └── EhmTextField.vue    # Extends FTextField with features
 │   ├── composition/            # Composition pattern
-│   │   └── EhmSearchBox.vue    # Composes FTextField + FCrudButton + FExpandable
+│   │   └── EhmSearchBox.vue    # Composes FTextField + FCrudButton + FExpandablePanel
 │   └── token-override/         # Token Override pattern
 │       └── EhmBadge.vue        # FBadge with CSS token overrides
 ├── assets/
@@ -159,7 +159,7 @@ npm run update:fkui-deps # Update FKUI dependencies to latest
 | `EhmBadge` | Token Override | `FBadge` | ✅ Implemented |
 | `EhmCard` | Wrapper | `FCard` | ✅ Implemented |
 | `EhmTextField` | Extension | `FTextField` | ✅ Implemented |
-| `EhmSearchBox` | Composition | `FTextField` + `FCrudButton` + `FExpandable` | ✅ Implemented |
+| `EhmSearchBox` | Composition | `FTextField` + `FCrudButton` + `FExpandablePanel` | ✅ Implemented |
 
 ## FKUI Integration
 
@@ -168,7 +168,7 @@ npm run update:fkui-deps # Update FKUI dependencies to latest
 FKUI components are imported from `@fkui/vue`:
 
 ```typescript
-import { FCard, FTextField, FCrudButton, FExpandable, FBadge } from '@fkui/vue';
+import { FCard, FTextField, FCrudButton, FExpandablePanel, FBadge } from '@fkui/vue';
 ```
 
 ## Documentation

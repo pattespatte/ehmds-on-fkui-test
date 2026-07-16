@@ -382,6 +382,8 @@ watch(internalValue, (newValue) => {
 
 .ehm-text-field--focused :deep(input) {
   outline: none;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #000;
 }
 </style>

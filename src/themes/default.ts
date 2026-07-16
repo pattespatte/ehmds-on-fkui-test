@@ -30,18 +30,23 @@ export const defaultTheme: Theme = {
     accentDark: "#0f1a4a",
     accentContrast: "#ffffff",
 
-    // Semantic colors (EHMDS feedback)
-    success: "#10b981",
+    // Semantic colors (EHMDS feedback).
+    // The base values are darkened from Tailwind's 500 shades to the 600 shades
+    // so they meet WCAG 1.4.3 (4.5:1) text contrast on the page background
+    // (#f5f7fa, not pure white — which pushes borderline grays below threshold).
+    // These must match src/assets/global.css :root — the two are a shared source
+    // of truth for the theme.
+    success: "#059669",
     successLight: "#34d399",
-    successDark: "#059669",
+    successDark: "#047857",
 
-    warning: "#f59e0b",
+    warning: "#d97706",
     warningLight: "#fbbf24",
-    warningDark: "#d97706",
+    warningDark: "#b45309",
 
-    error: "#ef4444",
+    error: "#dc2626",
     errorLight: "#f87171",
-    errorDark: "#dc2626",
+    errorDark: "#b91c1c",
 
     // Neutral colors (cool blue-gray)
     neutral: {

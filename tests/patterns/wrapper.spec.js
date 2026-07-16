@@ -136,17 +136,28 @@ describe('Wrapper Pattern: EhmCard', () => {
     expect(wrapper.props('errorRef')).toBe(mockElement);
   });
 
-  it('validates variant prop', () => {
-    // Check if validator works
-    const validator = EhmCard.props?.variant?.validator;
+  it('maps each variant prop to its EHMDS CSS class', () => {
+    // `variant` is declared via a TS type with no runtime validator, so the old
+    // `props.variant.validator` assertion silently no-op'd. Assert on the real
+    // effect instead: each variant must produce its modifier class, and an
+    // unknown variant must not.
+    const cases = [
+      ['bordered', 'ehm-card--bordered'],
+      ['elevated', 'ehm-card--elevated'],
+      ['compact', 'ehm-card--compact'],
+    ];
 
-    if (validator) {
-      expect(validator('default')).toBe(true);
-      expect(validator('bordered')).toBe(true);
-      expect(validator('elevated')).toBe(true);
-      expect(validator('compact')).toBe(true);
-      expect(validator('invalid')).toBe(false);
+    for (const [variant, className] of cases) {
+      const wrapper = mount(EhmCard, { props: { variant } });
+      expect(wrapper.find('.ehm-card').classes()).toContain(className);
     }
+
+    // default variant adds no modifier class.
+    const def = mount(EhmCard, { props: { variant: 'default' } });
+    const defClasses = def.find('.ehm-card').classes();
+    expect(defClasses).not.toContain('ehm-card--bordered');
+    expect(defClasses).not.toContain('ehm-card--elevated');
+    expect(defClasses).not.toContain('ehm-card--compact');
   });
 
   it('does not render footer when slot not provided', () => {

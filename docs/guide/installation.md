@@ -32,7 +32,7 @@ Import and use EHMDS in your Vue 3 application:
 <!-- App.vue -->
 <template>
   <EhmCard title="Welcome to EHMDS">
-    <EhmBadge status="brand">Type-Safe</EhmBadge>
+    <EhmBadge status="default">Type-Safe</EhmBadge>
     <p>Build with TypeScript support!</p>
   </EhmCard>
 </template>

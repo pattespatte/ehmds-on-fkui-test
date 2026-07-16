@@ -1,6 +1,12 @@
 /**
  * Token Override Pattern Tests
- * Tests EhmBadge which uses CSS token override pattern
+ * Tests EhmBadge which uses the CSS token override pattern.
+ *
+ * The defining claim of this pattern is that EhmBadge adds NO API of its own —
+ * it declares no props and performs no transformation. Every attribute the
+ * consumer passes (status, inverted, ...) falls through to FBadge unchanged.
+ * The only thing EhmBadge contributes is a class hook for scoped CSS token
+ * overrides. These tests verify that claim.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -8,12 +14,11 @@ import { mount } from '@vue/test-utils';
 import EhmBadge from '@/components/token-override/EhmBadge.vue';
 
 describe('Token Override Pattern: EhmBadge', () => {
-  it('renders with EHMDS CSS wrapper class', () => {
+  it('renders with EHMDS CSS hook class', () => {
     const wrapper = mount(EhmBadge, {
       slots: { default: 'Test Badge' },
     });
 
-    // Root element should have ehm-badge class
     const root = wrapper.find('.ehm-badge');
     expect(root.exists()).toBe(true);
   });
@@ -26,7 +31,7 @@ describe('Token Override Pattern: EhmBadge', () => {
     expect(wrapper.text()).toBe('New Feature');
   });
 
-  it('accepts custom class via attrs', () => {
+  it('merges a consumer class onto the root', () => {
     const wrapper = mount(EhmBadge, {
       attrs: { class: 'custom-class' },
       slots: { default: 'Test' },
@@ -37,64 +42,54 @@ describe('Token Override Pattern: EhmBadge', () => {
     expect(badge.classes()).toContain('custom-class');
   });
 
-  it('renders FKUI FBadge component internally', () => {
-    const wrapper = mount(EhmBadge, {
-      slots: { default: 'Test Badge' },
-    });
-
-    // Should render something - we can't easily check FKUI classes
-    // but we can verify it renders without error
-    expect(wrapper.html()).toContain('Test Badge');
+  it('declares no props of its own (pure passthrough)', () => {
+    // The core Token Override claim: EhmBadge adds no API surface. status,
+    // inverted and every other attribute reach FBadge via fall-through, not via
+    // declared props. If this fails, the component has stopped being a pure
+    // token override and has drifted toward the Wrapper pattern.
+    expect(Object.keys(EhmBadge.props ?? {})).toEqual([]);
   });
 
-  it('passes inverted prop to FKUI', () => {
+  it('passes status through to FBadge unchanged (no mapping)', () => {
+    // EhmBadge must NOT remap statuses. Mounting status="success" should render
+    // FBadge's real `badge--success` class, proving the value arrived verbatim.
     const wrapper = mount(EhmBadge, {
-      props: { inverted: true },
+      attrs: { status: 'success' },
+      slots: { default: 'Ok' },
+    });
+
+    expect(wrapper.find('.badge--success').exists()).toBe(true);
+    // And it must not leak a remapped/invalid class.
+    expect(wrapper.find('.badge--default').exists()).toBe(false);
+  });
+
+  it('passes inverted through to FBadge unchanged', () => {
+    const wrapper = mount(EhmBadge, {
+      attrs: { status: 'success', inverted: true },
       slots: { default: 'Inverted' },
     });
 
-    // Component should render successfully
-    expect(wrapper.html()).toContain('Inverted');
+    expect(wrapper.find('.badge--success-inverted').exists()).toBe(true);
   });
 
-  it('validates status prop', () => {
-    // Check the validator works
-    const validator = EhmBadge.props?.status?.validator;
-
-    if (validator) {
-      // FKUI values (pass through)
-      expect(validator('default')).toBe(true);
-      expect(validator('warning')).toBe(true);
-      expect(validator('error')).toBe(true);
-      expect(validator('success')).toBe(true);
-      expect(validator('info')).toBe(true);
-
-      // EHMDS values (map to FKUI)
-      expect(validator('brand')).toBe(true);
-      expect(validator('neutral')).toBe(true);
-
-      // Invalid values
-      expect(validator('invalid')).toBe(false);
+  it('renders FBadge with valid native statuses without warnings', () => {
+    // Regression guard: the old EhmBadge invented non-FKUI statuses ("brand",
+    // "neutral") that failed FBadge's validator and logged Vue warnings. Valid
+    // FKUI statuses must pass through cleanly.
+    const validStatuses = ['default', 'info', 'success', 'warning', 'error'];
+    for (const status of validStatuses) {
+      const wrapper = mount(EhmBadge, {
+        attrs: { status },
+        slots: { default: status },
+      });
+      expect(wrapper.find(`.badge--${status}`).exists()).toBe(true);
     }
   });
 
-  it('demonstrates token override pattern with minimal code', () => {
-    // This test documents the pattern: uses FKUI component as-is
-    const wrapper = mount(EhmBadge, {
-      props: { status: 'brand' },
-      slots: { default: 'Brand' },
-    });
-
-    // Should render successfully
-    expect(wrapper.find('.ehm-badge').exists()).toBe(true);
-  });
-
-  it('is lightweight (no custom logic)', () => {
-    // Token override pattern should have very little logic
-    // This is a documentation test - verifies the pattern claim
+  it('is lightweight (no computed, no script logic beyond the import)', () => {
+    // Documentation test for the pattern claim. A token-override component
+    // should carry no reactive logic of its own.
     const wrapper = mount(EhmBadge);
-
-    // Component should render successfully
     expect(wrapper.html()).toBeTruthy();
   });
 });

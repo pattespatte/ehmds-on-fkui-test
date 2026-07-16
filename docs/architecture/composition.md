@@ -20,34 +20,73 @@ Use the Composition pattern when:
 
 ## Implementation: EhmSearchBox
 
-`EhmSearchBox` composes FKUI's `FTextField`, `FCrudButton`, and `FExpandablePanel`:
+`EhmSearchBox` composes four FKUI components — `FTextField`, two `FButton`
+instances (search + clear actions), and `FExpandablePanel` (the collapsible
+"advanced search" container):
 
 ```vue
 <template>
   <div class="ehm-search-box">
-    <FExpandablePanel v-if="expandable" v-model:expanded="isExpanded">
-      <FTextField
-        v-model="searchQuery"
-        :placeholder="placeholder"
-        @keyup.enter="handleSearch"
-      />
-      <FCrudButton
-        :action="'search'"
-        @click="handleSearch"
-      />
-      <FCrudButton
-        v-if="showClearButton"
-        :action="'delete'"
-        @click="handleClear"
-      />
+    <!-- FExpandablePanel renders its own a11y-correct toggle and manages
+         aria-expanded / aria-controls itself. We drive it via :expanded. -->
+    <FExpandablePanel
+      v-if="expandable"
+      :expanded="isExpanded"
+      header-tag="h3"
+      @toggle="toggleExpand"
+    >
+      <template #title>{{ placeholder || "Search" }}</template>
+
+      <!-- The composed search row -->
+      <div class="ehm-search-box__content">
+        <FTextField
+          v-model="searchQuery"
+          :placeholder="placeholder"
+          :disabled="disabled"
+          @keyup.enter="handleSearch"
+        />
+        <FButton
+          variant="primary"
+          size="small"
+          :disabled="isButtonDisabled"
+          @click="handleSearch"
+        >
+          <span v-if="showIcon" aria-hidden="true">🔍</span>
+          <template v-else>Sök</template>
+        </FButton>
+        <FButton
+          v-if="showClearButton"
+          variant="tertiary"
+          size="small"
+          aria-label="Rensa"
+          @click="handleClear"
+        >
+          <span aria-hidden="true">✕</span>
+        </FButton>
+      </div>
     </FExpandablePanel>
 
-    <div v-if="$slots.results" class="ehm-search-box__results">
+    <!-- Non-expandable variant composes the same row without FExpandablePanel -->
+    <div v-else class="ehm-search-box__content">
+      <!-- FTextField + FButton ×2, as above -->
+    </div>
+
+    <div v-if="$slots.results && hasSearched" class="ehm-search-box__results">
       <slot name="results" :query="searchQuery" :is-loading="isLoading" />
     </div>
   </div>
 </template>
+
+<script setup>
+import { FButton, FExpandablePanel, FTextField } from "@fkui/vue";
+</script>
 ```
+
+> **Note on `FButton` variants.** FKUI's `FButton` accepts `variant` of
+> `primary | secondary | tertiary` (there is **no** `discrete` variant). The
+> clear action uses `variant="tertiary"`. Do **not** reach for `FCrudButton`
+> here — it is deprecated and tied to a parent `FCrudDataset` with only
+> `delete`/`modify` actions.
 
 ## Architecture Diagram
 
@@ -55,9 +94,9 @@ Use the Composition pattern when:
 graph TD
     App[Application Code] -->|Uses| EHMDS[EhmSearchBox Component]
     EHMDS -->|Composes| FKUI1[FTextField - Input]
-    EHMDS -->|Composes| FKUI2[FCrudButton - Search]
-    EHMDS -->|Composes| FKUI3[FCrudButton - Clear]
-    EHMDS -->|Composes| FKUI4[FExpandablePanel - Panel]
+    EHMDS -->|Composes| FKUI2[FButton primary - Search]
+    EHMDS -->|Composes| FKUI3[FButton tertiary - Clear]
+    EHMDS -->|Composes| FKUI4[FExpandablePanel - Collapsible]
     EHMDS -->|Coordinates| State[Shared State]
     EHMDS -->|Orchestrates| Events[Event Flow]
 
@@ -87,7 +126,7 @@ sequenceDiagram
     participant App as Application
     participant EHMDS as EhmSearchBox
     participant FText as FTextField
-    participant FBtn as FCrudButton
+    participant FBtn as FButton
 
     App->>EHMDS: v-model="query"
     App->>EHMDS: @search="handleSearch"
@@ -132,9 +171,9 @@ const handleSearchInput = (value) => {
 | Component | Role | Props Used |
 |-----------|------|------------|
 | `FTextField` | Search input | v-model, placeholder, disabled |
-| `FCrudButton` | Search action | action="search", disabled state |
-| `FCrudButton` | Clear action | action="delete", conditional render |
-| `FExpandablePanel` | Expand/collapse | v-model:expanded |
+| `FButton` (`primary`) | Search action | variant, size, disabled |
+| `FButton` (`tertiary`) | Clear action | variant, size, conditional render |
+| `FExpandablePanel` | Expand/collapse container | `:expanded` (driven) + `@toggle` |
 
 ## Slots for Flexibility
 
@@ -171,6 +210,31 @@ const handleSearchInput = (value) => {
 - Less flexibility than direct FKUI usage
 - Must understand all composed components
 
+## Risks &amp; When NOT to Use
+
+**Update risk is amplified.** A composition depends on the public surface of
+*every* composed component. If FKUI changes `FButton`'s variant names,
+`FExpandablePanel`'s event contract, or `FTextField`'s slots, this component
+breaks in more places than a single-component pattern would. Budget for
+integration tests (the test suite asserts that each FKUI component is actually
+rendered) and re-verify on every FKUI upgrade.
+
+**Do not use Composition when:**
+
+- You are only restyling a single component — use **Token Override**.
+- You are simplifying one component's API — use **Wrapper/Facade**.
+- The "composition" would actually only wrap a single FKUI component — that is
+  a Wrapper, not a Composition. (Composing raw HTML elements alongside one FKUI
+  component is a weaker form; prefer to compose real FKUI components so the
+  a11y and behaviour of *each piece* come from the parent system.)
+- You need to migrate between two design systems — an **Adapter/Bridge** is a
+  better fit, because the goal is translation rather than orchestration.
+
+**Accessibility note.** Delegating a11y to the composed FKUI components is a
+strength of this pattern — `FExpandablePanel` manages `aria-expanded`/
+`aria-controls`, and `FButton` renders a real focusable `<button>`. Do not
+re-implement those behaviours around the composed components.
+
 ## Code Example
 
 ```vue
@@ -202,16 +266,19 @@ Without composition (application code would need):
 <template>
   <!-- Without composition - much more application code -->
   <div class="search-container">
-    <FExpandablePanel v-model:expanded="isExpanded">
+    <FExpandablePanel :expanded="isExpanded" @toggle="isExpanded = !isExpanded">
       <FTextField v-model="query" @keyup.enter="handleSearch" />
-      <FCrudButton
-        action="search"
+      <FButton
+        variant="primary"
+        size="small"
         :disabled="query.length < 2"
         @click="handleSearch"
       />
-      <FCrudButton
+      <FButton
         v-if="query"
-        action="delete"
+        variant="tertiary"
+        size="small"
+        aria-label="Rensa"
         @click="query = ''; handleClear()"
       />
       <!-- Plus: debounce logic, loading state, filter coordination... -->
@@ -249,4 +316,4 @@ The composition pattern shines when you find yourself repeatedly using the same 
 
 ## Industry Context: The "Recipe" Pattern
 
-As defined by Brad Frost, **Composition** is the act of combining "Atoms" (FKUI components) into "Recipes" or "Molecules" (EHMDS domain components). This is the most scalable way to build product-specific UI without bloating the base design system.
+As defined by Brad Frost, **Composition** is the act of combining "Atoms" (FKUI components) into "Recipes" or "Molecules" (EHMDS domain components). It is a scalable approach for building product-specific UI without bloating the base design system — though, as the risks above note, the coupling it introduces is its real cost.

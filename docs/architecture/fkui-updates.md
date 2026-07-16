@@ -27,7 +27,7 @@ npm outdated @fkui/vue @fkui/design @fkui/logic @fkui/date @fkui/theme-default
 
 | Pattern | Update Risk | Testing Required | Breaking Change Susceptibility |
 |---------|-------------|------------------|--------------------------------|
-| Token Override | ⭐ Low | Visual review only | Very Low |
+| Token Override | ⭐ Low | Visual review only | Low |
 | Wrapper | ⭐⭐ Low-Medium | API contract tests | Low (slot/prop changes) |
 | Extension | ⭐⭐⭐ Medium | Full test suite + behavior tests | Medium (internal changes) |
 | Composition | ⭐⭐⭐⭐ High | Integration tests | High (API changes affect coordination) |
@@ -192,6 +192,11 @@ git push origin main --tags
 
 ## Breaking Change Mitigation
 
+> **Note:** The examples below are illustrative of a hypothetical future major
+> upgrade (e.g. to FKUI 8.x); this repo currently targets FKUI `^6.39.0` (the
+> floor declared in `AGENTS.md`, with `6.52.1` installed). They show the *shape*
+> of a mitigation strategy, not a version this repo ships today.
+
 ### Pin to Minor Versions
 
 ```json
@@ -220,14 +225,16 @@ git push origin main --tags
 
 ### Compatibility Matrix
 
-Maintain a matrix of tested FKUI versions:
+Maintain a matrix of tested FKUI versions. The hypothetical matrix below
+illustrates the *format* of a future FKUI 8.x upgrade trail; this repo does not
+currently target 8.x:
 
 | EHMDS Version | FKUI Version | Status |
 |---------------|--------------|--------|
-| 1.0.0 | 8.0.0 | ✅ Tested |
-| 1.0.1 | 8.1.0 | ✅ Tested |
-| 1.1.0 | 8.2.0 | ✅ Tested |
-| 1.2.0 | 8.2.1 | ✅ Current |
+| 1.0.0 | 8.0.0 | ✅ Tested (hypothetical) |
+| 1.0.1 | 8.1.0 | ✅ Tested (hypothetical) |
+| 1.1.0 | 8.2.0 | ✅ Tested (hypothetical) |
+| 1.2.0 | 8.2.1 | ✅ Current (hypothetical) |
 
 ## Rollback Strategy
 
