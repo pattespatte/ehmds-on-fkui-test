@@ -71,6 +71,7 @@ const loadDocs = async () => {
   // Map page names to file paths
   const pageFiles = {
     overview: `${basePath}docs/architecture/overview.md`,
+    spectrum: `${basePath}docs/architecture/spectrum.md`,
     "architecture-theory": `${basePath}docs/architecture/architecture-theory.md`,
     "token-override": `${basePath}docs/architecture/token-override.md`,
     wrapper: `${basePath}docs/architecture/wrapper.md`,

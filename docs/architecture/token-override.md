@@ -20,29 +20,32 @@ Use the Token Override pattern when:
 
 ## Implementation: EhmBadge
 
-`EhmBadge` uses FKUI's `FBadge` with CSS token overrides:
+`EhmBadge` is a **pure Token Override**: it declares NO props of its own and
+adds NO behavior. It renders FKUI's `FBadge` as-is (all attributes fall through
+to `FBadge`) and attaches a single `.ehm-badge` class hook so CSS can override
+FKUI's design tokens on the real FKUI status classes:
 
 ```vue
 <template>
-  <!-- Use FBadge as-is, just override CSS variables -->
-  <FBadge
-    v-bind="$attrs"
-    :status="mappedStatus"
-    :inverted="inverted"
-    class="ehm-badge"
-  >
+  <!-- Pure Token Override: no props declared, all attrs fall through to FBadge -->
+  <FBadge class="ehm-badge">
     <slot />
   </FBadge>
 </template>
 
 <style scoped>
-/* Override FKUI's CSS variables with EHMDS tokens */
-.ehm-badge:deep(.c-badge--status-default) {
-  --fk-badge-background: var(--ehmds-color-primary, #2563eb) !important;
-  --fk-badge-color: var(--ehmds-color-primary-contrast, #ffffff) !important;
+/* Override FKUI's CSS variables on its REAL status classes. */
+.ehm-badge:deep(.badge--default) {
+  --fkds-color-feedback-background-neutral-strong: var(--ehmds-color-primary, #2563eb) !important;
+  --fkds-color-feedback-border-neutral-strong: var(--ehmds-color-primary, #2563eb) !important;
+  --fkds-color-text-inverted: var(--ehmds-color-primary-contrast, #ffffff) !important;
 }
 </style>
 ```
+
+There is no `status` prop, no `inverted` prop, no `BadgeStatus` type, and no
+status-name mapping in this component — callers pass the native `FBadge` status
+(`default`, `info`, `success`, `warning`, `error`) straight through.
 
 ## Architecture Diagram
 
@@ -80,10 +83,18 @@ graph LR
 
 ## CSS Token Mapping
 
-| FKUI Token | EHMDS Override | Status |
-|------------|----------------|--------|
-| `--fk-badge-background` | `var(--ehmds-color-primary)` | ✅ Mapped |
-| `--fk-badge-color` | `var(--ehmds-color-primary-contrast)` | ✅ Mapped |
+EhmBadge targets the real FKUI status classes (`badge--default`, `badge--info`,
+`badge--success`, `badge--warning`, `badge--error`, and their `*-inverted`
+variants) and overrides the real FKUI feedback tokens:
+
+| FKUI class | FKUI token overridden | EHMDS Override |
+|------------|-----------------------|----------------|
+| `.badge--default` | `--fkds-color-feedback-background-neutral-strong`, `--fkds-color-feedback-border-neutral-strong` | `var(--ehmds-color-primary)` |
+| `.badge--info` | `--fkds-color-feedback-background-info-strong` | EHMDS info token |
+| `.badge--success` | `--fkds-color-feedback-background-positive-strong` | EHMDS success token |
+| `.badge--warning` | `--fkds-color-feedback-background-warning-strong` | EHMDS warning token |
+| `.badge--error` | `--fkds-color-feedback-background-negative-strong` | EHMDS error token |
+| text color | `--fkds-color-text-primary` / `--fkds-color-text-inverted` | EHMDS text tokens |
 | Component behavior | Unchanged | ✅ Preserved |
 | Accessibility features | Unchanged | ✅ Preserved |
 
@@ -92,40 +103,26 @@ graph LR
 ```vue
 <!-- EhmBadge.vue -->
 <template>
-  <FBadge
-    v-bind="$attrs"  <!-- Pass all attrs through -->
-    :status="mappedStatus"
-    :inverted="inverted"
-    class="ehm-badge"
-  >
+  <!-- No props declared. All attrs (including native FBadge `status`) fall through. -->
+  <FBadge class="ehm-badge">
     <slot />
   </FBadge>
 </template>
 
 <script setup>
-import { computed } from "vue";
 import { FBadge } from "@fkui/vue";
-
-// Optional: Map EHMDS status names to FKUI status names
-const mappedStatus = computed(() => {
-  const statusMap = {
-    brand: "default",   // EHMDS "brand" → FKUI "default" with custom colors
-    neutral: "info",    // EHMDS "neutral" → FKUI "info" with custom colors
-  };
-  return statusMap[props.status] || props.status;
-});
 </script>
 
 <style scoped>
-/* Only override CSS variables - nothing else! */
-.ehm-badge:deep(.c-badge--status-default) {
-  --fk-badge-background: var(--ehmds-color-primary) !important;
-  --fk-badge-color: var(--ehmds-color-primary-contrast) !important;
+/* Only override FKUI's real feedback tokens on its real status classes. */
+.ehm-badge:deep(.badge--default) {
+  --fkds-color-feedback-background-neutral-strong: var(--ehmds-color-primary) !important;
+  --fkds-color-feedback-border-neutral-strong: var(--ehmds-color-primary) !important;
+  --fkds-color-text-inverted: var(--ehmds-color-primary-contrast) !important;
 }
 
-.ehm-badge:deep(.c-badge--status-info) {
-  --fk-badge-background: var(--ehmds-color-neutral-200) !important;
-  --fk-badge-color: var(--ehmds-color-text-primary) !important;
+.ehm-badge:deep(.badge--info) {
+  --fkds-color-feedback-background-info-strong: var(--ehmds-color-info) !important;
 }
 </style>
 ```
@@ -144,7 +141,7 @@ const mappedStatus = computed(() => {
 
 - Minimal code (just CSS overrides)
 - 100% FKUI API compatibility
-- Automatic FKUI updates work
+- Low effort on FKUI updates — visual review only
 - No behavioral changes to test
 - Low maintenance overhead
 
@@ -162,8 +159,8 @@ const mappedStatus = computed(() => {
 
 ```vue
 <template>
-  <!-- Simple! Just CSS overrides -->
-  <EhmBadge status="brand">New Feature</EhmBadge>
+  <!-- Simple! Just CSS overrides. `status` is FBadge's native prop, passed straight through. -->
+  <EhmBadge status="default">New Feature</EhmBadge>
 </template>
 
 <script setup>
@@ -216,7 +213,7 @@ const badgeClasses = computed(() => [
 
 | Pattern | Lines of Code | API Change | Behavior Change | Maintenance |
 |---------|---------------|------------|-----------------|-------------|
-| **Token Override** | ~10 | No | No | Very Low |
+| **Token Override** | ~10 | No | No | Low |
 | **Wrapper** | ~50 | Yes | Optional | Medium |
 | **Extension** | ~100 | No | Yes | Medium |
 | **Composition** | ~150 | Yes | Yes | High |
@@ -225,19 +222,24 @@ const badgeClasses = computed(() => [
 
 ```mermaid
 graph TD
-    FKUI_Update[FKUI Release] -->|Token Override| Auto[Works Automatically]
+    FKUI_Update[FKUI Release] -->|Token Override| Review[Low effort — visual review only]
     FKUI_Update -->|Wrapper Pattern| Test[Need Testing]
     FKUI_Update -->|Extension Pattern| Test
     FKUI_Update -->|Composition Pattern| Test
 
-    Auto -->|No changes needed| Success[✅ Compatible]
+    Review -->|Verify targeted class/token names still exist| Success[✅ Compatible]
     Test -->|May need updates| Failure[❌ Breaking Changes]
 
-    style Auto fill:#c8e6c9,stroke:#388e3c
+    style Review fill:#c8e6c9,stroke:#388e3c
     style Test fill:#fff3e0,stroke:#f57c00
     style Success fill:#c8e6c9,stroke:#388e3c
     style Failure fill:#ffcdd2,stroke:#c62828
 ```
+
+Caveat: overrides break if FKUI renames its internal classes (e.g. `badge--default`)
+or restructures its tokens (e.g. `--fkds-color-feedback-background-neutral-strong`),
+so after each upgrade verify that the targeted class/token names still exist before
+relying on the visual review.
 
 ## Best Practices
 

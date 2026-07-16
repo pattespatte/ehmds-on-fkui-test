@@ -11,7 +11,7 @@ EHMDS (EHM Design System) is a **proof-of-concept design system** that explores 
 3. **Extension** - Extends FKUI components with additional features
 4. **Composition** - Composes multiple FKUI components into domain components
 
-**Primary hypothesis:** A layered architecture is the most effective pattern for this relationship.
+**Primary hypothesis:** A layered architecture is an effective pattern for this relationship — this proof-of-concept explores where that holds and where it breaks down.
 
 **Repo:** https://github.com/pattespatte/ehmds-on-fkui-test
 
@@ -35,7 +35,7 @@ src/
 │   ├── extension/              # Extension pattern
 │   │   └── EhmTextField.vue    # Extends FTextField with features
 │   ├── composition/            # Composition pattern
-│   │   └── EhmSearchBox.vue    # Composes FTextField + FCrudButton + FExpandable
+│   │   └── EhmSearchBox.vue    # Composes FTextField + FCrudButton + FExpandablePanel
 │   └── token-override/         # Token Override pattern
 │       └── EhmBadge.vue        # FBadge with CSS token overrides
 ├── assets/
@@ -176,15 +176,15 @@ const props = defineProps({
 
 Combines multiple FKUI components into a domain-specific component.
 
-**Example:** `EhmSearchBox` composes `FTextField` + `FCrudButton` + `FExpandable`
+**Example:** `EhmSearchBox` composes `FTextField` + `FCrudButton` + `FExpandablePanel`
 ```vue
 <template>
   <div class="ehm-search-box">
-    <FExpandable v-model:is-open="isExpanded">
+    <FExpandablePanel v-model:is-open="isExpanded">
       <FTextField v-model="searchQuery" @keyup.enter="handleSearch" />
       <FCrudButton :action="'search'" @click="handleSearch" />
       <FCrudButton :action="'delete'" @click="handleClear" />
-    </FExpandable>
+    </FExpandablePanel>
     <slot name="results" :query="searchQuery" />
   </div>
 </template>
@@ -226,14 +226,14 @@ The plugin:
 | `EhmBadge` | Token Override | `FBadge` | `src/components/token-override/EhmBadge.vue` |
 | `EhmCard` | Wrapper | `FCard` | `src/components/wrapper/EhmCard.vue` |
 | `EhmTextField` | Extension | `FTextField` | `src/components/extension/EhmTextField.vue` |
-| `EhmSearchBox` | Composition | `FTextField` + `FCrudButton` + `FExpandable` | `src/components/composition/EhmSearchBox.vue` |
+| `EhmSearchBox` | Composition | `FTextField` + `FCrudButton` + `FExpandablePanel` | `src/components/composition/EhmSearchBox.vue` |
 
 ### FKUI Dependencies
 
 FKUI components are imported from `@fkui/vue`:
 
 ```javascript
-import { FCard, FTextField, FCrudButton, FExpandable, FBadge } from '@fkui/vue';
+import { FCard, FTextField, FCrudButton, FExpandablePanel, FBadge } from '@fkui/vue';
 ```
 
 **Important:** EHMDS components actually USE FKUI components at runtime. This is not just a CSS dependency - the FKUI Vue components are instantiated and rendered.

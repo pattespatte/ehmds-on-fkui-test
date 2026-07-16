@@ -26,7 +26,7 @@ npm install @ehmds/design-system
 <template>
   <div>
     <EhmCard variant="elevated" title="Welcome">
-      <EhmBadge status="brand">New</EhmBadge>
+      <EhmBadge status="default">New</EhmBadge>
       <p>Get started with EHMDS components!</p>
     </EhmCard>
   </div>

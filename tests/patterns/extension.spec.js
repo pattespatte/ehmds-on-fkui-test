@@ -250,30 +250,53 @@ describe('Extension Pattern: EhmTextField', () => {
     expect(wrapper.emitted('focus')).toBeTruthy();
   });
 
-  it('validates type prop', () => {
-    const validator = EhmTextField.props?.type?.validator;
-
-    if (validator) {
-      expect(validator('text')).toBe(true);
-      expect(validator('email')).toBe(true);
-      expect(validator('tel')).toBe(true);
-      expect(validator('url')).toBe(true);
-      expect(validator('password')).toBe(true);
-      expect(validator('number')).toBe(true);
-      expect(validator('search')).toBe(true);
-      expect(validator('invalid')).toBe(false);
+  it('passes type prop through to the underlying input', () => {
+    // `type` is declared via a TS type with no runtime validator, so the old
+    // `props.type.validator` assertion silently no-op'd. Assert on the real
+    // effect instead: the value reaches the <input type="...">.
+    const types = ['text', 'email', 'tel', 'url', 'password', 'number', 'search'];
+    for (const type of types) {
+      const wrapper = mount(EhmTextField, { props: { type } });
+      expect(wrapper.find('input').attributes('type')).toBe(type);
     }
   });
 
-  it('validates variant prop', () => {
-    const validator = EhmTextField.props?.variant?.validator;
+  it('renders variant modifier classes for success/warning', () => {
+    const wrapper = mount(EhmTextField, {
+      props: { variant: 'success' },
+    });
+    expect(wrapper.find('.ehm-text-field').classes()).toContain(
+      'ehm-text-field--success',
+    );
 
-    if (validator) {
-      expect(validator('default')).toBe(true);
-      expect(validator('success')).toBe(true);
-      expect(validator('warning')).toBe(true);
-      expect(validator('error')).toBe(true);
-      expect(validator('invalid')).toBe(false);
-    }
+    const warn = mount(EhmTextField, { props: { variant: 'warning' } });
+    expect(warn.find('.ehm-text-field').classes()).toContain(
+      'ehm-text-field--warning',
+    );
+  });
+
+  it('renders an accessible success status (✓ glyph + aria-live)', () => {
+    // AGENTS.md foregrounds this as the Extension pattern's accessibility
+    // contribution: success/warning variants must not rely on colour alone
+    // (WCAG 1.4.1) — they render a ✓/⚠ glyph inside an aria-live region.
+    const wrapper = mount(EhmTextField, {
+      props: { variant: 'success' },
+    });
+
+    const status = wrapper.find('.ehm-text-field__status');
+    expect(status.exists()).toBe(true);
+    expect(status.attributes('aria-live')).toBe('polite');
+    expect(status.text()).toContain('✓');
+  });
+
+  it('renders an accessible warning status (⚠ glyph + aria-live)', () => {
+    const wrapper = mount(EhmTextField, {
+      props: { variant: 'warning' },
+    });
+
+    const status = wrapper.find('.ehm-text-field__status');
+    expect(status.exists()).toBe(true);
+    expect(status.attributes('aria-live')).toBe('polite');
+    expect(status.text()).toContain('⚠');
   });
 });

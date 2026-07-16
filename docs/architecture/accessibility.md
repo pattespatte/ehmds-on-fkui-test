@@ -18,14 +18,9 @@ FKUI components provide:
 
 ### Token Override Pattern ✅
 
-**Accessibility Risk: Very Low**
+**Accessibility Risk: Low**
 
-Token override components use FKUI components as-is with only CSS changes. All FKUI accessibility features are preserved.
-
-```vue
-<!-- EhmBadge - No accessibility concerns -->
-<EhmBadge status="brand">New Feature</EhmBadge>
-```
+Token override components use FKUI components as-is with only CSS changes. All FKUI accessibility features are preserved. (Low rather than zero: a CSS override that suppresses a focus ring or drops text below 4.5:1 contrast would re-introduce risk — see the contrast rules in `AGENTS.md`.)
 
 **Testing Requirements:**
 

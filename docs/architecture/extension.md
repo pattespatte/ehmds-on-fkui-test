@@ -119,6 +119,35 @@ graph TD
 - Potential for prop naming conflicts
 - Must synchronize with FKUI updates
 
+## Risks & When NOT to Use
+
+**The name "Extension" carries OOP-inheritance baggage — beware the fragile base
+class.** Extending a component you do not own means upstream changes to
+`FTextField`'s internal behaviour can break your extension in subtle ways: a
+renamed internal ref, a changed lifecycle hook, or a restructured template can
+silently change what your extension renders or how it handles state. Unlike a
+wrapper (which depends on FKUI's *public* surface) or a token override (which
+depends on almost nothing), an extension often reaches into how the base
+component actually behaves, so it is the pattern most exposed to this class of
+bug.
+
+**"Preserves all FKUI functionality" is an ideal, not a guarantee.** The
+Pros list claims it, but if your extension suppresses any FKUI rendering it must
+be documented honestly. `EhmTextField` is a concrete example: it uses `:deep()`
+overrides to neutralise `FTextField`'s own label and renders its own label
+element instead. That is a deliberate, useful choice — but it means the
+extension does *not* pass through FTextField's label semantics untouched, and
+consumers should not be told it does. If your extension suppresses, replaces, or
+overrides any FKUI rendering, call it out explicitly rather than implying pure
+additive behaviour.
+
+**Do not use Extension when:**
+
+- You only want to restyle a component — use **Token Override**.
+- You want to simplify or reshape one component's API — use **Wrapper/Facade**,
+  which is designed to change the API surface.
+- You need to combine multiple components — use **Composition**.
+
 ## Code Example
 
 ```vue

@@ -2,13 +2,21 @@
 
 ## Overview
 
-EHMDS demonstrates four distinct architectural patterns for building on FKUI. Each pattern has different trade-offs and is suited for different use cases.
+EHMDS demonstrates four distinct architectural patterns for building on FKUI.
+Each pattern has different trade-offs and is suited for different use cases.
+
+> **These four are a slice, not the whole space.** They all instantiate FKUI at
+> runtime and therefore share its coupling. For the full decision space —
+> including lower-coupling options (headless split, token pipeline) and the
+> fork escape hatch — see [`spectrum.md`](./spectrum.md). Use this page to
+> choose *among the four implemented patterns*; use the spectrum to decide
+> whether one of the four is even the right family for your component.
 
 ## Quick Reference
 
 | Pattern | Complexity | Flexibility | Maintenance | Best For |
 |---------|------------|------------|-------------|----------|
-| **Token Override** | ⭐ Very Low | ⭐ Low | ⭐ Very Low | Visual changes only |
+| **Token Override** | ⭐ Low | ⭐ Low | ⭐ Low | Visual changes only |
 | **Wrapper** | ⭐⭐ Low-Medium | ⭐⭐⭐ High | ⭐⭐ Medium | API simplification |
 | **Extension** | ⭐⭐⭐ Medium-High | ⭐⭐ Medium | ⭐⭐ Medium | Adding features |
 | **Composition** | ⭐⭐⭐⭐ High | ⭐⭐⭐⭐ Very High | ⭐⭐⭐ High | Domain components |
@@ -59,12 +67,14 @@ graph TD
 
 ### Decision Criteria by Dimension
 
+> Bundle Size Impact values are qualitative estimates — not measured; verify with a build for your own configuration.
+
 | Pattern | TypeScript Support | Bundle Size Impact | FKUI Update Risk | Learning Curve | Testability |
 |---------|-------------------|-------------------|-----------------|----------------|-------------|
-| Token Override | ⭐⭐⭐ (passthrough) | +0KB | ⭐ Very Low | ⭐ Minimal | ⭐⭐ (CSS only) |
-| Wrapper | ⭐⭐⭐⭐ (custom types) | +2-5KB | ⭐⭐ Low | ⭐⭐ Low | ⭐⭐⭐⭐ High |
-| Extension | ⭐⭐⭐⭐⭐ (full control) | +5-10KB | ⭐⭐⭐ Medium | ⭐⭐⭐ Medium | ⭐⭐⭐ Medium |
-| Composition | ⭐⭐⭐⭐⭐ (full control) | +10-20KB | ⭐⭐⭐⭐ High | ⭐⭐⭐⭐ High | ⭐⭐⭐⭐⭐ Very High |
+| Token Override | ⭐⭐⭐ (passthrough) | Negligible | ⭐ Low | ⭐ Minimal | ⭐⭐ (CSS only) |
+| Wrapper | ⭐⭐⭐⭐ (custom types) | Small | ⭐⭐ Low | ⭐⭐ Low | ⭐⭐⭐⭐ High |
+| Extension | ⭐⭐⭐⭐⭐ (full control) | Medium | ⭐⭐⭐ Medium | ⭐⭐⭐ Medium | ⭐⭐⭐ Medium |
+| Composition | ⭐⭐⭐⭐⭐ (full control) | Largest | ⭐⭐⭐⭐ High | ⭐⭐⭐⭐ High | ⭐⭐⭐⭐⭐ Very High |
 
 ## Detailed Comparison
 
@@ -89,12 +99,12 @@ graph TD
 
 | Aspect | Details |
 |--------|---------|
-| **Code** | ~10 lines |
+| **Size** | Very small |
 | **JS Logic** | None |
 | **API Change** | None (passes through all props) |
 | **Behavior Change** | None |
-| **FKUI Updates** | Works automatically |
-| **Risk** | Very Low |
+| **FKUI Updates** | Low effort — visual review only |
+| **Risk** | Low |
 
 ### Wrapper/Facade Pattern
 
@@ -124,7 +134,7 @@ const props = defineProps({
 
 | Aspect | Details |
 |--------|---------|
-| **Code** | ~50 lines |
+| **Size** | Small |
 | **JS Logic** | Props transformation, slot mapping |
 | **API Change** | Yes (custom EHMDS API) |
 | **Behavior Change** | Optional |
@@ -162,7 +172,7 @@ const props = defineProps({
 
 | Aspect | Details |
 |--------|---------|
-| **Code** | ~100 lines |
+| **Size** | Medium |
 | **JS Logic** | State management, coordination |
 | **API Change** | No (extends FKUI API) |
 | **Behavior Change** | Yes (new features) |
@@ -171,16 +181,16 @@ const props = defineProps({
 
 ### Composition Pattern
 
-**Example:** `EhmSearchBox` composing `FTextField`, `FCrudButton`, `FExpandable`
+**Example:** `EhmSearchBox` composing `FTextField`, `FCrudButton`, `FExpandablePanel`
 
 ```vue
 <template>
   <div class="ehm-search-box">
-    <FExpandable v-model:is-open="isExpanded">
+    <FExpandablePanel v-model:is-open="isExpanded">
       <FTextField v-model="searchQuery" @keyup.enter="handleSearch" />
       <FCrudButton :action="'search'" @click="handleSearch" />
       <FCrudButton :action="'delete'" @click="handleClear" />
-    </FExpandable>
+    </FExpandablePanel>
     <slot name="results" :query="searchQuery" />
   </div>
 </template>
@@ -195,7 +205,7 @@ const handleSearch = () => emit("search", searchQuery.value);
 
 | Aspect | Details |
 |--------|---------|
-| **Code** | ~150 lines |
+| **Size** | Largest |
 | **JS Logic** | State orchestration, event coordination |
 | **API Change** | Yes (domain-specific API) |
 | **Behavior Change** | Yes (new behavior) |
@@ -227,7 +237,7 @@ graph LR
 
 - ✅ You only need to change colors, spacing, or fonts
 - ✅ You want 100% FKUI API compatibility
-- ✅ You want automatic FKUI updates
+- ✅ You want low-effort FKUI updates (visual review only)
 - ❌ You don't need behavior changes
 
 ### Use Wrapper When
@@ -287,7 +297,7 @@ You can evolve from simpler to more complex patterns:
 | `EhmBadge` | Token Override | `FBadge` | Only visual changes needed |
 | `EhmCard` | Wrapper | `FCard` | Simpler API, custom variants |
 | `EhmTextField` | Extension | `FTextField` | Add char count, helpers, errors |
-| `EhmSearchBox` | Composition | `FTextField`, `FCrudButton`, `FExpandable` | Domain-specific search pattern |
+| `EhmSearchBox` | Composition | `FTextField`, `FCrudButton`, `FExpandablePanel` | Domain-specific search pattern |
 
 ## Summary Checklist
 
