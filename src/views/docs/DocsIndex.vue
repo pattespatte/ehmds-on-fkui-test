@@ -53,10 +53,12 @@ import DocsLayout from "./DocsLayout.vue";
   margin-bottom: 1rem;
 }
 
+/*
 .docs-list {
   list-style: none;
   padding: 0;
 }
+*/
 
 .docs-list li {
   margin: 0.5rem 0;
