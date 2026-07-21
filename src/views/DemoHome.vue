@@ -522,9 +522,9 @@
           <tbody>
             <tr>
               <td><strong>Token Override</strong></td>
-              <td>⭐ Very Low</td>
               <td>⭐ Low</td>
-              <td>⭐ Very Low</td>
+              <td>⭐ Low</td>
+              <td>⭐ Low</td>
               <td>Visual changes only</td>
             </tr>
             <tr>
