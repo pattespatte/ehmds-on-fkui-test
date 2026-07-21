@@ -11,6 +11,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import EhmBadge from '@/components/token-override/EhmBadge.vue';
 
 describe('Token Override Pattern: EhmBadge', () => {
@@ -91,5 +93,60 @@ describe('Token Override Pattern: EhmBadge', () => {
     // should carry no reactive logic of its own.
     const wrapper = mount(EhmBadge);
     expect(wrapper.html()).toBeTruthy();
+  });
+
+  // Regression guard for the Token Override mechanism itself.
+  //
+  // The `.ehm-badge` class hook is passed to <FBadge>, which renders a
+  // single-root <span class="badge badge--{status} ehm-badge"> — the hook and
+  // the status class land on the SAME element. The scoped overrides must
+  // therefore use a COMPOUND selector (`.ehm-badge.badge--success`).
+  //
+  // An earlier version used `.ehm-badge :deep(.badge--success)` (and before
+  // that `.ehm-badge .badge--success`), both of which compile to a DESCENDANT
+  // combinator and never matched the element against itself — every EhmBadge
+  // was visually identical to FBadge. The override was a silent no-op.
+  //
+  // We can't catch this through jsdom because jsdom does not cascade CSS custom
+  // properties from <style> blocks, so the assertion reads the compiled SFC
+  // source directly and rejects any selector form with a combinator (space or
+  // :deep) between `.ehm-badge` and `.badge--X`.
+  // Strip CSS comments so the negative matches below don't fire on prose
+  // inside /* ... */ blocks (e.g. the explanation of WHY :deep() is wrong).
+  // We only want to catch actual selector usage.
+  const ehmBadgeSource = readFileSync(
+    resolve(process.cwd(), 'src/components/token-override/EhmBadge.vue'),
+    'utf8',
+  ).replace(/\/\*[\s\S]*?\*\//g, '');
+
+  it('uses COMPOUND selectors (never descendant or :deep) for status overrides', () => {
+    // Every status the component overrides must appear as `.ehm-badge.badge--X`
+    // — no whitespace, no `:deep(...)` wrapper. Either of those forms regresses
+    // to a no-op because FBadge's root element carries both classes at once.
+    const statuses = [
+      'default',
+      'info',
+      'error',
+      'success',
+      'warning',
+      'default-inverted',
+      'info-inverted',
+      'success-inverted',
+    ];
+
+    for (const status of statuses) {
+      // Compound form — required:
+      expect(ehmBadgeSource).toMatch(new RegExp(`\\.ehm-badge\\.badge--${status}\\b`));
+
+      // Descendant-with-whitespace form — must NOT appear:
+      expect(ehmBadgeSource).not.toMatch(
+        new RegExp(`\\.ehm-badge\\s+\\.badge--${status}\\b`),
+      );
+
+      // :deep() wrapper form — must NOT appear:
+      expect(ehmBadgeSource).not.toMatch(
+        new RegExp(`\\.ehm-badge\\s+:deep\\(\\.badge--${status}\\)`),
+      );
+    }
   });
 });

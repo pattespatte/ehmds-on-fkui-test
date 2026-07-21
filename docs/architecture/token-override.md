@@ -34,10 +34,16 @@ FKUI's design tokens on the real FKUI status classes:
 </template>
 
 <style scoped>
-/* Override FKUI's CSS variables on its REAL status classes. */
-.ehm-badge:deep(.badge--default) {
-  --fkds-color-feedback-background-neutral-strong: var(--ehmds-color-primary, #2563eb) !important;
-  --fkds-color-feedback-border-neutral-strong: var(--ehmds-color-primary, #2563eb) !important;
+/* Override FKUI's CSS variables on its REAL status classes.
+   IMPORTANT: use a COMPOUND selector (.ehm-badge.badge--default), NOT a
+   descendant or :deep() selector. FBadge renders a single-root
+   <span class="badge badge--default ehm-badge">, so the hook class and the
+   status class land on the SAME element. A descendant selector
+   (.ehm-badge .badge--default) or :deep wrapper (.ehm-badge :deep(.badge--default))
+   would never match and the override silently does nothing. */
+.ehm-badge.badge--default {
+  --fkds-color-feedback-background-neutral-strong: var(--ehmds-color-primary, #05264c) !important;
+  --fkds-color-feedback-border-neutral-strong: var(--ehmds-color-primary, #05264c) !important;
   --fkds-color-text-inverted: var(--ehmds-color-primary-contrast, #ffffff) !important;
 }
 </style>
@@ -114,15 +120,16 @@ import { FBadge } from "@fkui/vue";
 </script>
 
 <style scoped>
-/* Only override FKUI's real feedback tokens on its real status classes. */
-.ehm-badge:deep(.badge--default) {
+/* Compound selectors — see the callout above on why :deep()/descendant
+   selectors don't work for single-root FKUI components like FBadge. */
+.ehm-badge.badge--default {
   --fkds-color-feedback-background-neutral-strong: var(--ehmds-color-primary) !important;
   --fkds-color-feedback-border-neutral-strong: var(--ehmds-color-primary) !important;
   --fkds-color-text-inverted: var(--ehmds-color-primary-contrast) !important;
 }
 
-.ehm-badge:deep(.badge--info) {
-  --fkds-color-feedback-background-info-strong: var(--ehmds-color-info) !important;
+.ehm-badge.badge--info {
+  --fkds-color-feedback-background-info-strong: var(--ehmds-color-accent) !important;
 }
 </style>
 ```
@@ -130,7 +137,11 @@ import { FBadge } from "@fkui/vue";
 ## Token Override Principles
 
 1. **Use `!important`**: FKUI's styles may have higher specificity
-2. **Target deep**: Use `:deep()` to reach FKUI's internal classes
+2. **Match the FKUI root shape**: if the FKUI component has a single-root
+   element (like `FBadge` — one `<span>`), use a **compound** selector
+   (`.ehm-badge.badge--default`). Use `:deep()` only when the class you're
+   targeting is on a descendant element inside the FKUI component's DOM.
+   A descendant selector against a single-root component silently never matches.
 3. **Override only**: Don't add new CSS rules, just override variables
 4. **Test accessibility**: Ensure overrides don't break WCAG compliance
 5. **Document mappings**: Keep track of which tokens map to what

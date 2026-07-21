@@ -125,8 +125,8 @@ const cardClasses = computed(() => {
 }
 
 .ehm-card--error {
-  border-color: var(--ehmds-color-error, #ef4444);
-  box-shadow: 0 0 0 1px var(--ehmds-color-error, #ef4444);
+  border-color: var(--ehmds-color-error, #c7311a);
+  box-shadow: 0 0 0 1px var(--ehmds-color-error, #c7311a);
 }
 
 .ehm-card__footer {

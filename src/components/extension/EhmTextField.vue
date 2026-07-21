@@ -273,14 +273,14 @@ watch(internalValue, (newValue) => {
 .ehm-text-field__label {
   font-size: var(--ehmds-font-size-sm, 0.875rem);
   font-weight: var(--ehmds-font-weight-semibold, 600);
-  color: var(--ehmds-color-text-primary, #081130);
+  color: var(--ehmds-color-text-primary, #05264c);
   display: flex;
   align-items: center;
   gap: var(--ehmds-spacing-1, 0.25rem);
 }
 
 .ehm-text-field__required {
-  color: var(--ehmds-color-error, #ef4444);
+  color: var(--ehmds-color-error, #c7311a);
 }
 
 .ehm-text-field__input-wrapper {
@@ -334,7 +334,7 @@ watch(internalValue, (newValue) => {
 }
 
 .ehm-text-field__error {
-  color: var(--ehmds-color-error, #ef4444);
+  color: var(--ehmds-color-error, #c7311a);
 }
 
 /* Status (success/warning) — non-color cue so variant states pass WCAG 1.4.1 */
@@ -351,25 +351,28 @@ watch(internalValue, (newValue) => {
 }
 
 .ehm-text-field__status--success {
-  color: var(--ehmds-color-success, #10b981);
+  color: var(--ehmds-color-success, #217424);
 }
 
+/* Warning text uses warning-dark (EHM yellow-800 #943D0C) because the base
+   warning token (yellow-400 #FFC108) fails WCAG 1.4.3 as foreground on the
+   light input background. The ⚠ glyph provides the non-color cue (WCAG 1.4.1). */
 .ehm-text-field__status--warning {
-  color: var(--ehmds-color-warning, #f59e0b);
+  color: var(--ehmds-color-warning-dark, #943d0c);
 }
 
 /* Variant states */
 .ehm-text-field--error :deep(input) {
-  border-color: var(--ehmds-color-error, #ef4444);
-  box-shadow: 0 0 0 1px var(--ehmds-color-error, #ef4444);
+  border-color: var(--ehmds-color-error, #c7311a);
+  box-shadow: 0 0 0 1px var(--ehmds-color-error, #c7311a);
 }
 
 .ehm-text-field--success :deep(input) {
-  border-color: var(--ehmds-color-success, #10b981);
+  border-color: var(--ehmds-color-success, #217424);
 }
 
 .ehm-text-field--warning :deep(input) {
-  border-color: var(--ehmds-color-warning, #f59e0b);
+  border-color: var(--ehmds-color-warning-dark, #943d0c);
 }
 
 /* EHMDS input height + focus pattern */

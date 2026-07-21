@@ -18,10 +18,10 @@
    ============================================================================ */
 
 :root {
-  /* Colors - Primary Palette (EHMDS deep blue) */
-  --ehmds-color-primary: #081130;
-  --ehmds-color-primary-light: #1a2a6c;
-  --ehmds-color-primary-dark: #050a1f;
+  /* Colors - Primary Palette (EHM blue-950 — saturated navy, distinct from FKUI) */
+  --ehmds-color-primary: #05264c;
+  --ehmds-color-primary-light: #02478a;
+  --ehmds-color-primary-dark: #021a3a;
   --ehmds-color-primary-contrast: #ffffff;
 
   /* Colors - Secondary Palette (cool slate) */
@@ -30,24 +30,30 @@
   --ehmds-color-secondary-dark: #2d3748;
   --ehmds-color-secondary-contrast: #ffffff;
 
-  /* Colors - Accent Palette (action blue) */
-  --ehmds-color-accent: #1a2a6c;
-  --ehmds-color-accent-light: #2d4a9e;
-  --ehmds-color-accent-dark: #0f1a4a;
+  /* Colors - Accent Palette (EHM blue-700 — action blue) */
+  --ehmds-color-accent: #0053a7;
+  --ehmds-color-accent-light: #02478a;
+  --ehmds-color-accent-dark: #05264c;
   --ehmds-color-accent-contrast: #ffffff;
 
-  /* Colors - Semantic (EHMDS feedback colors) */
-  --ehmds-color-success: #059669;
-  --ehmds-color-success-light: #34d399;
-  --ehmds-color-success-dark: #047857;
+  /* Colors - Semantic (EHM functional palette — red/green/yellow families).
+     Base values picked so white-on-color AND color-on-page-bg (#f5f7fa) both
+     pass WCAG 1.4.3 (4.5:1), except `warning` (EHM yellow-400 #FFC108) which
+     is vivid and only passes as a background with white text — for warning
+     text/borders on light surfaces use `--ehmds-color-warning-dark` (yellow-800).
+     These must match src/themes/default.ts — the two are a shared source of
+     truth for the theme. */
+  --ehmds-color-success: #217424; /* EHM green-700 — 5.85:1 white, 5.45:1 on bg */
+  --ehmds-color-success-light: #34b339; /* EHM green-500 — 4.5:1 white */
+  --ehmds-color-success-dark: #1b4c1e; /* EHM green-900 */
 
-  --ehmds-color-warning: #d97706;
-  --ehmds-color-warning-light: #fbbf24;
-  --ehmds-color-warning-dark: #b45309;
+  --ehmds-color-warning: #ffc108; /* EHM yellow-400 — 4.5:1 white; NOT for text on light bg */
+  --ehmds-color-warning-light: #fff3c6; /* EHM yellow-100 */
+  --ehmds-color-warning-dark: #943d0c; /* EHM yellow-800 — 7.16:1 white, 6.67:1 on bg */
 
-  --ehmds-color-error: #dc2626;
-  --ehmds-color-error-light: #f87171;
-  --ehmds-color-error-dark: #b91c1c;
+  --ehmds-color-error: #c7311a; /* EHM red-700 — 5.4:1 white, 5.03:1 on bg */
+  --ehmds-color-error-light: #f35840; /* EHM red-500 — 4.5:1 white */
+  --ehmds-color-error-dark: #9c2a18; /* EHM red-800 */
 
   /* Colors - Neutral Scale (cool blue-gray) */
   --ehmds-color-neutral-50: #f8f9fc;
@@ -59,10 +65,10 @@
   --ehmds-color-neutral-600: #3d4663;
   --ehmds-color-neutral-700: #2a3150;
   --ehmds-color-neutral-800: #1a2040;
-  --ehmds-color-neutral-900: #081130;
+  --ehmds-color-neutral-900: #05264c;
 
   /* Colors - Special */
-  --ehmds-color-focus: #081130;
+  --ehmds-color-focus: #05264c;
 
   /* Colors - Background (cool white/gray) */
   --ehmds-color-background-primary: #ffffff;
@@ -70,7 +76,7 @@
   --ehmds-color-background-tertiary: #edf0f5;
 
   /* Colors - Text */
-  --ehmds-color-text-primary: #081130;
+  --ehmds-color-text-primary: #05264c;
   --ehmds-color-text-secondary: #3d4663;
   --ehmds-color-text-tertiary: #636e85;
   --ehmds-color-text-inverse: #ffffff;

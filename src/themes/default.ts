@@ -12,10 +12,10 @@ export const defaultTheme: Theme = {
   name: "ehmds-default",
 
   colors: {
-    // Primary brand color (EHMDS deep blue)
-    primary: "#081130",
-    primaryLight: "#1a2a6c",
-    primaryDark: "#050a1f",
+    // Primary brand color (EHM blue-950 — saturated navy, distinct from FKUI)
+    primary: "#05264C",
+    primaryLight: "#02478A",
+    primaryDark: "#021A3A",
     primaryContrast: "#ffffff",
 
     // Secondary brand color (cool slate)
@@ -24,29 +24,32 @@ export const defaultTheme: Theme = {
     secondaryDark: "#2d3748",
     secondaryContrast: "#ffffff",
 
-    // Accent color (action blue)
-    accent: "#1a2a6c",
-    accentLight: "#2d4a9e",
-    accentDark: "#0f1a4a",
+    // Accent color (EHM blue-700 — action blue)
+    accent: "#0053A7",
+    accentLight: "#02478A",
+    accentDark: "#05264C",
     accentContrast: "#ffffff",
 
-    // Semantic colors (EHMDS feedback).
-    // The base values are darkened from Tailwind's 500 shades to the 600 shades
-    // so they meet WCAG 1.4.3 (4.5:1) text contrast on the page background
-    // (#f5f7fa, not pure white — which pushes borderline grays below threshold).
+    // Semantic colors (EHM functional palette — red/green/yellow families).
+    // Base values are chosen so BOTH white-on-color AND color-on-page-bg
+    // (#f5f7fa, not pure white — which pushes borderline grays below threshold)
+    // pass WCAG 1.4.3 (4.5:1). The ONE exception is `warning` (EHM yellow-400
+    // #FFC108), which is vivid and only passes as a background with white text;
+    // for warning text/borders on light surfaces use `warningDark` (yellow-800
+    // #943D0C). Sources: green-700/500/900, yellow-400/100/800, red-700/500/800.
     // These must match src/assets/global.css :root — the two are a shared source
     // of truth for the theme.
-    success: "#059669",
-    successLight: "#34d399",
-    successDark: "#047857",
+    success: "#217424",
+    successLight: "#34B339",
+    successDark: "#1B4C1E",
 
-    warning: "#d97706",
-    warningLight: "#fbbf24",
-    warningDark: "#b45309",
+    warning: "#FFC108",
+    warningLight: "#FFF3C6",
+    warningDark: "#943D0C",
 
-    error: "#dc2626",
-    errorLight: "#f87171",
-    errorDark: "#b91c1c",
+    error: "#C7311A",
+    errorLight: "#F35840",
+    errorDark: "#9C2A18",
 
     // Neutral colors (cool blue-gray)
     neutral: {
@@ -59,11 +62,11 @@ export const defaultTheme: Theme = {
       600: "#3d4663",
       700: "#2a3150",
       800: "#1a2040",
-      900: "#081130",
+      900: "#05264C", // tracks primary
     },
 
     // Focus color for accessibility
-    focus: "#081130",
+    focus: "#05264C",
 
     // Background colors
     background: {
@@ -74,7 +77,7 @@ export const defaultTheme: Theme = {
 
     // Text colors
     text: {
-      primary: "#081130",
+      primary: "#05264C", // tracks primary
       secondary: "#3d4663",
       tertiary: "#636e85",
       inverse: "#ffffff",
