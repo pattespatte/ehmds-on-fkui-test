@@ -178,8 +178,16 @@ describe('Composition Pattern: EhmSearchBox', () => {
   });
 
   it('shows search icon by default', () => {
+    // The search button renders a crisp inline SVG magnifier (monochrome,
+    // currentColor) rather than the blurry 🔍 emoji it used to. Asserting on
+    // the SVG element + its label keeps this test honest about what is shown.
     const wrapper = mount(EhmSearchBox);
-    expect(wrapper.html()).toContain('🔍');
+    const button = wrapper.find('.ehm-search-box__button');
+    expect(button.exists()).toBe(true);
+    expect(button.find('svg').exists()).toBe(true);
+    expect(button.attributes('aria-label')).toBe('Sök');
+    // The icon is decorative; the button provides the accessible name.
+    expect(button.find('svg').attributes('aria-hidden')).toBe('true');
   });
 
   it('hides search icon when showIcon is false', () => {

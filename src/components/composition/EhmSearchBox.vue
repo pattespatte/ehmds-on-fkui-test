@@ -4,7 +4,11 @@
     single domain-specific search component.
 
     Composed FKUI components:
-      - FTextField        — the query input
+      - FTextField        — the query input. The action buttons are placed in
+                            FTextField's real `input-right` slot, so they live
+                            *inside* the field's own input-wrapper DOM and stay
+                            perfectly aligned with the input (Flowbite-style
+                            overlay) instead of being an unrelated flex sibling.
       - FButton (primary)  — the search action
       - FButton (tertiary) — the clear action
       - FExpandablePanel   — the collapsible "advanced search" container (when
@@ -25,7 +29,9 @@
 
       <!-- default slot = the expandable body -->
       <div class="ehm-search-box__content">
-        <!-- Composed: FTextField -->
+        <!-- Composed: FTextField — action buttons live in its real
+             `input-right` slot, so they share the field's input-wrapper DOM
+             and stay aligned (Flowbite-style overlay). -->
         <FTextField
           :id="searchInputId"
           v-model="searchQuery"
@@ -35,34 +41,38 @@
           class="ehm-search-box__input"
           @keyup.enter="handleSearch"
           @keyup.escape="handleClear"
-        />
-
-        <!-- Composed: FButton (search action) -->
-        <FButton
-          variant="primary"
-          size="small"
-          type="button"
-          class="ehm-search-box__button"
-          :disabled="isButtonDisabled"
-          :aria-label="showIcon ? 'Sök' : undefined"
-          @click="handleSearch"
         >
-          <span v-if="showIcon" aria-hidden="true">🔍</span>
-          <template v-else>Sök</template>
-        </FButton>
+          <template #input-right>
+            <div class="ehm-search-box__actions">
+              <!-- Composed: FButton (clear action) -->
+              <FButton
+                v-if="showClearButton"
+                variant="tertiary"
+                size="small"
+                type="button"
+                class="ehm-search-box__clear"
+                aria-label="Rensa"
+                @click="handleClear"
+              >
+                <span aria-hidden="true">✕</span>
+              </FButton>
 
-        <!-- Composed: FButton (clear action) -->
-        <FButton
-          v-if="showClearButton"
-          variant="tertiary"
-          size="small"
-          type="button"
-          class="ehm-search-box__clear"
-          aria-label="Rensa"
-          @click="handleClear"
-        >
-          <span aria-hidden="true">✕</span>
-        </FButton>
+              <!-- Composed: FButton (search action) -->
+              <FButton
+                variant="primary"
+                size="small"
+                type="button"
+                class="ehm-search-box__button"
+                :disabled="isButtonDisabled"
+                :aria-label="showIcon ? 'Sök' : undefined"
+                @click="handleSearch"
+              >
+                <EhmSearchIcon v-if="showIcon" />
+                <template v-else>Sök</template>
+              </FButton>
+            </div>
+          </template>
+        </FTextField>
       </div>
 
       <!-- Advanced filters slot -->
@@ -73,7 +83,6 @@
 
     <!-- Non-expandable variant -->
     <div v-else class="ehm-search-box__content">
-      <!-- Composed: FTextField -->
       <FTextField
         :id="searchInputId"
         v-model="searchQuery"
@@ -83,34 +92,36 @@
         class="ehm-search-box__input"
         @keyup.enter="handleSearch"
         @keyup.escape="handleClear"
-      />
-
-      <!-- Composed: FButton (search action) -->
-      <FButton
-        variant="primary"
-        size="small"
-        type="button"
-        class="ehm-search-box__button"
-        :disabled="isButtonDisabled"
-        :aria-label="showIcon ? 'Sök' : undefined"
-        @click="handleSearch"
       >
-        <span v-if="showIcon" aria-hidden="true">🔍</span>
-        <template v-else>Sök</template>
-      </FButton>
+        <template #input-right>
+          <div class="ehm-search-box__actions">
+            <FButton
+              v-if="showClearButton"
+              variant="tertiary"
+              size="small"
+              type="button"
+              class="ehm-search-box__clear"
+              aria-label="Rensa"
+              @click="handleClear"
+            >
+              <span aria-hidden="true">✕</span>
+            </FButton>
 
-      <!-- Composed: FButton (clear action) -->
-      <FButton
-        v-if="showClearButton"
-        variant="tertiary"
-        size="small"
-        type="button"
-        class="ehm-search-box__clear"
-        aria-label="Rensa"
-        @click="handleClear"
-      >
-        <span aria-hidden="true">✕</span>
-      </FButton>
+            <FButton
+              variant="primary"
+              size="small"
+              type="button"
+              class="ehm-search-box__button"
+              :disabled="isButtonDisabled"
+              :aria-label="showIcon ? 'Sök' : undefined"
+              @click="handleSearch"
+            >
+              <EhmSearchIcon v-if="showIcon" />
+              <template v-else>Sök</template>
+            </FButton>
+          </div>
+        </template>
+      </FTextField>
     </div>
 
     <!-- Search results slot (shown after a search, in both variants) -->
@@ -121,7 +132,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, type ComputedRef, type Ref } from "vue";
+import { computed, h, ref, type ComputedRef, type Ref } from "vue";
 import { FButton, FExpandablePanel, FTextField } from "@fkui/vue";
 
 /**
@@ -138,11 +149,44 @@ import { FButton, FExpandablePanel, FTextField } from "@fkui/vue";
  * - Coordinates: state and events between the composed components
  * - Use case: when the same set of FKUI components is used together repeatedly
  *
+ * The action buttons are placed in FTextField's real `input-right` slot so they
+ * render inside the field's own input-wrapper DOM. This keeps them perfectly
+ * aligned with the input (Flowbite-style overlay) instead of being an unrelated
+ * flex sibling that drifts vertically.
+ *
  * Accessibility is delegated to the composed FKUI components:
  * - FButton renders native <button> elements with FKUI's focus handling.
  * - FExpandablePanel renders its own toggle button and manages
  *   aria-expanded / aria-controls itself (we only drive `expanded`).
  */
+
+/*
+ * Crisp inline SVG magnifier for the search button. Uses `currentColor`, so on
+ * the primary (navy) button it renders white-on-navy — a monochrome icon with
+ * no emoji rasterisation/blur. `aria-hidden` because the button itself carries
+ * an accessible name via `aria-label`.
+ */
+const EhmSearchIcon = () =>
+  h(
+    "svg",
+    {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "16",
+      height: "16",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      "stroke-width": "2",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round",
+      "aria-hidden": "true",
+      focusable: "false",
+    },
+    [
+      h("circle", { cx: "11", cy: "11", r: "7" }),
+      h("line", { x1: "21", y1: "21", x2: "16.65", y2: "16.65" }),
+    ],
+  );
 defineOptions({
   name: "EhmSearchBox",
   inheritAttrs: false,
@@ -284,23 +328,21 @@ defineExpose({
 }
 
 .ehm-search-box__content {
-  display: flex;
-  align-items: stretch;
-  gap: var(--ehmds-spacing-2, 0.5rem);
   width: 100%;
-}
-
-.ehm-search-box__input {
-  flex: 1;
-  min-width: 0;
 }
 
 /*
  * The search field is used inline (no label). Neutralise FTextField's label and
  * spacing so it reads as a bare search input. These are token/layout overrides
  * only — FTextField's behaviour and a11y are preserved.
+ *
+ * Selector note: FKUI forwards our `ehm-search-box__input` class onto the inner
+ * <input> element itself (via $attrs), NOT onto an ancestor. So
+ * `.ehm-search-box__input :deep(.text-field)` would look for `.text-field` as a
+ * descendant of the <input> — which never matches. We anchor every :deep rule
+ * on the stable `.ehm-search-box__content` wrapper instead.
  */
-.ehm-search-box__input :deep(.text-field) {
+.ehm-search-box__content :deep(.text-field) {
   --f-border-width-medium: 1px;
   --fkds-color-border-primary: var(--ehmds-color-neutral-300, #b0b8c9);
   --f-border-radius-medium: var(--ehmds-border-radius-medium, 8px);
@@ -311,8 +353,9 @@ defineExpose({
   background: transparent;
 }
 
-.ehm-search-box__input :deep(.text-field__input-wrapper),
-.ehm-search-box__input :deep(.text-field__wrapper) {
+.ehm-search-box__content :deep(.text-field__input-wrapper),
+.ehm-search-box__content :deep(.text-field__wrapper) {
+  position: relative; /* anchor for the absolutely-positioned action overlay */
   border: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -324,27 +367,84 @@ defineExpose({
   border-radius: var(--ehmds-border-radius-medium, 8px) !important;
   box-shadow: none !important;
   height: 40px;
+  /* Room for the overlay action group on the right edge */
+  padding-right: calc(
+    var(--ehm-search-actions-width, 96px) + var(--ehmds-spacing-2, 0.5rem)
+  );
   background: transparent;
 }
 
-.ehm-search-box__input :deep(.label) {
+.ehm-search-box__content :deep(.label) {
   display: none;
 }
 
-.ehm-search-box__input :deep(.text-field > :first-child) {
+.ehm-search-box__content :deep(.text-field > :first-child) {
   height: 0;
   overflow: hidden;
 }
 
 /*
+ * Action overlay — the clear + search buttons live inside FTextField's real
+ * `input-right` slot, absolutely positioned over the input's right edge
+ * (Flowbite search-input pattern). Because they are in the slot, they share
+ * the field's DOM and cannot drift out of vertical alignment with the input.
+ *
+ * `top: 0; bottom: 0` pins the overlay to the input-wrapper's exact height
+ * (Flowbite `inset-y-0`). This is more robust than `top: 50%` + translateY:
+ * FButton renders internal spinner spans that inflate the action box's
+ * shrink-to-fit height, which would otherwise mis-center the button.
+ */
+.ehm-search-box__actions {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: var(--ehmds-spacing-1, 0.25rem);
+  display: flex;
+  align-items: center;
+  gap: var(--ehmds-spacing-1, 0.25rem);
+  z-index: 1;
+}
+
+/*
  * Composed FButton components keep FKUI's own focus handling, so we do NOT
  * override their :focus-visible — preserving FKUI's accessibility behaviour is
- * a project rule. We only align the button height with the input row.
+ * a project rule. We only constrain sizing so the icon button centres reliably
+ * inside the 40px input row:
+ *  - fixed height + `align-self: center` so the button is vertically centred
+ *    by the flex container regardless of FKUI's intrinsic button height;
+ *  - zero FKUI's button margins (`margin: 0`). FKUI's .button carries a large
+ *    bottom margin (24px); in a centred flex item that margin is part of the
+ *    margin box and shifts the button's visual centre upward, breaking
+ *    alignment with the input;
+ *  - neutralise the always-rendered spinner spans so they don't inflate the
+ *    content line box around the icon.
  */
-.ehm-search-box__button,
+.ehm-search-box__button {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  min-width: 32px;
+  margin: 0;
+  padding-inline: var(--ehmds-spacing-2, 0.5rem);
+  line-height: 1;
+}
+
+.ehm-search-box__button :deep(.spinner--before),
+.ehm-search-box__button :deep(.spinner--after) {
+  display: none;
+}
+
 .ehm-search-box__clear {
-  flex-shrink: 0;
-  height: 40px;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  min-width: 28px;
+  margin: 0;
+  line-height: 1;
 }
 
 .ehm-search-box__filters {
@@ -370,21 +470,11 @@ defineExpose({
 }
 
 @media (max-width: 640px) {
-  .ehm-search-box__content {
-    flex-wrap: wrap;
-  }
-
-  .ehm-search-box__input {
-    width: 100%;
-    order: 1;
-  }
-
-  .ehm-search-box__button {
-    order: 2;
-  }
-
-  .ehm-search-box__clear {
-    order: 3;
+  /* On small screens give the search action a little more breathing room. */
+  .ehm-search-box__content :deep(.text-field__input) {
+    padding-right: calc(
+      var(--ehm-search-actions-width, 96px) + var(--ehmds-spacing-2, 0.5rem)
+    );
   }
 }
 </style>
